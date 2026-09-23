@@ -10,5 +10,5 @@
 - [x] Replace Photography with premium Brand Strategy & Market Insights service
 - [x] Restructure homepage into funnel flow: hero, problem, solution, proof, about, final contact form
 - [x] Add Instagram placeholder link
-- [ ] Enable direct contact-form email sending
-  - Blocker: a verified sender domain is required before app emails can be sent automatically.
+- [x] Enable direct contact-form email sending
+  - Note: notify.chrizosmedia.com is still verifying DNS; deliveries start after verification completes.
