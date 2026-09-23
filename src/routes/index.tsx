@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import {
+  BookingFlow,
   ContentFlow,
   GrowthFlow,
   ProblemFlow,
@@ -237,7 +238,7 @@ function Index() {
           href="#work-with-us"
           className="relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
         >
-          Work With Us
+          Book Your Free Brand Audit
         </a>
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
@@ -444,33 +445,38 @@ function Index() {
         </div>
       </section>
 
-      {/* ============ Work With Us ============ */}
+      {/* ============ Final CTA: booking first ============ */}
       <section id="work-with-us" className="scroll-mt-24 bg-card px-6 py-24 sm:py-32">
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
-              Contact
+              Book a call
             </p>
             <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Work With Us
+              Book Your Free 15-Minute Brand Audit
             </h2>
-            <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-               Tell us what you want to improve: sales, leads, positioning, content, or recognition. Then
-              Chrizos Media will review the best next step.
+            <p className="mt-5 leading-7 text-foreground/80">
+              A quick, honest read on your positioning, brand and website, plus the one change most likely
+              to lift enquiries. No pitch, no obligation.
             </p>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-8 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
-            >
-               <InstagramIcon className="h-5 w-5" />
-              Instagram placeholder
-            </a>
           </Reveal>
+        </div>
 
-          <Reveal delay={120}>
-            <form onSubmit={handleInquirySubmit} className="grid gap-4 rounded-2xl border border-border bg-background/20 p-5 sm:p-7">
+        <div className="mx-auto mt-12 max-w-3xl">
+          <Reveal delay={100}>
+            <BookingFlow />
+            <p className="mt-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/45">
+              Placeholder: calendar booking widget goes here
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mx-auto mt-20 max-w-xl border-t border-border pt-12">
+          <Reveal delay={160}>
+            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
+              Not ready to book? Send an enquiry instead
+            </p>
+            <form onSubmit={handleInquirySubmit} className="mt-6 grid gap-4 rounded-2xl border border-border bg-background/20 p-5">
               <div className="grid gap-2">
                 <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
                   Name
@@ -526,13 +532,18 @@ function Index() {
                   name="inquiry"
                   required
                   minLength={10}
-                  rows={6}
-                  className="min-h-36 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                  rows={4}
+                  className="min-h-24 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
                   placeholder="Tell us what you want to grow or improve."
                 />
               </div>
 
-              <Button type="submit" size="lg" disabled={inquiryStatus === "sending"} className="min-h-12 w-full font-semibold">
+              <Button
+                type="submit"
+                variant="outline"
+                disabled={inquiryStatus === "sending"}
+                className="min-h-11 w-full font-semibold"
+              >
                 {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
               </Button>
 
@@ -548,9 +559,20 @@ function Index() {
           </Reveal>
         </div>
 
-        <p className="mt-16 text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
-          © {new Date().getFullYear()} Chrizos Media
-        </p>
+        <div className="mt-16 flex flex-col items-center gap-4">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
+          >
+            <InstagramIcon className="h-5 w-5" />
+            Instagram placeholder
+          </a>
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
+            © {new Date().getFullYear()} Chrizos Media
+          </p>
+        </div>
       </section>
     </main>
   );
