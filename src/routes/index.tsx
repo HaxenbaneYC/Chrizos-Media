@@ -10,12 +10,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chrizos Media is a marketing and advertising agency. Something electric is coming soon.",
+          "Chrizos Media creates brand identities, advertising campaigns, and social media content for ambitious businesses.",
       },
       { property: "og:title", content: "Chrizos Media — Marketing & Advertising Agency" },
       {
         property: "og:description",
-        content: "Chrizos Media is a marketing and advertising agency. Something electric is coming soon.",
+        content:
+          "Brand identities, advertising campaigns, and social media content for ambitious businesses.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://graphics-gleam-lab.lovable.app/" },
