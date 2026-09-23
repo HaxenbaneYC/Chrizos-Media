@@ -44,21 +44,29 @@ type Service = {
 const services: Service[] = [
   {
     number: "01",
-    title: "Content Strategy",
-    tagline: "Feeds people can't scroll past.",
+    title: "Paid Advertising",
+    tagline: "Turn ad spend into sales.",
     description:
-      "We plan, create, and run social media content that builds a brand people actually follow. From content calendars to campaign storytelling, every post has a job to do.",
-    points: ["Social media marketing", "Content calendars & planning", "Brand storytelling & copywriting"],
-    visual: "content" as const,
+      "High-return campaigns across Meta (Instagram & Facebook), Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly — so every dirham spent comes back with more sales attached.",
+    points: [
+      "Instagram, Facebook, Google & TikTok ads",
+      "Sales funnel optimization",
+      "Conversion tracking & revenue reporting",
+    ],
+    visual: "growth" as const,
   },
   {
     number: "02",
-    title: "Paid Advertising",
-    tagline: "Ad spend that pays for itself.",
+    title: "Content Strategy",
+    tagline: "Attention that turns into customers.",
     description:
-      "High-return campaigns across Meta, Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly so your ad spend comes back with company.",
-    points: ["Meta, Google & TikTok ads", "Sales funnel optimization", "Conversion tracking & reporting"],
-    visual: "growth" as const,
+      "We plan, create, and run social media content that builds a brand people follow — and buy from. From content calendars to campaign storytelling, every post has a job to do.",
+    points: [
+      "Social media marketing on Instagram & Facebook",
+      "Content calendars & planning",
+      "Brand storytelling & copywriting",
+    ],
+    visual: "content" as const,
   },
   {
     number: "03",
@@ -72,6 +80,7 @@ const services: Service[] = [
     alt: "Product photography studio with sneaker and bottle on blue backdrop",
   },
 ];
+
 
 function Index() {
   return (
