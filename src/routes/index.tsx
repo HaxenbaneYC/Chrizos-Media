@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { Instagram } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.png";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import { sendContactInquiry } from "@/lib/contact.functions";
 import {
   ContentFlow,
   GrowthFlow,
@@ -111,9 +113,11 @@ const proofCards = [
 ];
 
 function Index() {
-  const [inquiryStatus, setInquiryStatus] = useState<"idle" | "ready">("idle");
+  const submitContactInquiry = useServerFn(sendContactInquiry);
+  const [inquiryStatus, setInquiryStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
+  const [inquiryMessage, setInquiryMessage] = useState("");
 
-  function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -123,21 +127,37 @@ function Index() {
     const phone = String(formData.get("phone") ?? "").trim();
     const inquiry = String(formData.get("inquiry") ?? "").trim();
 
-    const subject = `Chrizos Media inquiry${name ? ` — ${name}` : ""}`;
-    const body = [
-      "New Chrizos Media inquiry",
-      "",
-      `Name: ${name || "Not provided"}`,
-      `Email: ${email || "Not provided"}`,
-      `Phone Number: ${phone || "Not provided"}`,
-      "",
-      "Inquiry / Service Needed:",
-      inquiry || "Not provided",
-    ].join("\n");
+    setInquiryStatus("sending");
+    setInquiryMessage("");
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setInquiryStatus("ready");
-    form.reset();
+    try {
+      const result = await submitContactInquiry({
+        data: {
+          submissionId: crypto.randomUUID(),
+          name,
+          email,
+          phone,
+          inquiry,
+        },
+      });
+
+      if (result.status === "sent") {
+        setInquiryStatus("sent");
+        setInquiryMessage("Thanks — your inquiry has been sent to Chrizos Media.");
+        form.reset();
+        return;
+      }
+
+      setInquiryStatus("not_sent");
+      setInquiryMessage(
+        result.reason === "rate_limited"
+          ? `Please wait a little before sending another inquiry, or email ${CONTACT_EMAIL}.`
+          : `Email sending is still being verified. Please email ${CONTACT_EMAIL} if this is urgent.`,
+      );
+    } catch {
+      setInquiryStatus("not_sent");
+      setInquiryMessage(`Something stopped the form from sending. Please email ${CONTACT_EMAIL}.`);
+    }
   }
 
   return (
@@ -482,19 +502,23 @@ function Index() {
                   id="inquiry"
                   name="inquiry"
                   required
+                  minLength={10}
                   rows={6}
                   className="min-h-36 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
                   placeholder="Tell us what you want to grow or improve."
                 />
               </div>
 
-              <Button type="submit" size="lg" className="min-h-12 w-full font-semibold">
-                Send Inquiry
+              <Button type="submit" size="lg" disabled={inquiryStatus === "sending"} className="min-h-12 w-full font-semibold">
+                {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
               </Button>
 
-              {inquiryStatus === "ready" ? (
-                <p className="text-sm font-semibold leading-6 text-foreground/70">
-                  Your email app should open with the details ready to send.
+              {inquiryMessage ? (
+                <p
+                  className="text-sm font-semibold leading-6 text-foreground/70"
+                  role={inquiryStatus === "not_sent" ? "alert" : "status"}
+                >
+                  {inquiryMessage}
                 </p>
               ) : null}
             </form>
