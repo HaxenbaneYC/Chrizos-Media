@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -107,26 +107,36 @@ const services: Service[] = [
 
 const proofCards = [
   {
-    label: "Placeholder result",
-    value: "+61% qualified enquiries",
-    detail: "Replace with a real client win once available.",
-  },
-  {
-    label: "Placeholder proof",
-    value: "4.8x campaign return",
-    detail: "Use a verified number from future campaign reporting.",
-  },
-  {
-    label: "Placeholder quote",
-    value: "\u201cSharper strategy, better leads.\u201d",
-    detail: "Swap for an approved testimonial.",
+    label: "Client result",
+    value: "Break-even in 3 months",
+    detail: "A single-product brand reached break-even within three months of launch.",
   },
 ];
+
 
 function Index() {
   const submitContactInquiry = useServerFn(sendContactInquiry);
   const [inquiryStatus, setInquiryStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [inquiryMessage, setInquiryMessage] = useState("");
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        setScrollY(window.scrollY);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
 
   async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -173,7 +183,14 @@ function Index() {
 
   return (
     <main className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+          scrollY > 12
+            ? "glass-panel rounded-none border-x-0 border-t-0"
+            : "border-b border-border bg-background/95"
+        }`}
+      >
+
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
@@ -222,8 +239,10 @@ function Index() {
           height={431}
           fetchPriority="high"
           decoding="async"
-          className="relative z-10 w-full max-w-md"
+          className="parallax-layer relative z-10 w-full max-w-md"
+          style={{ transform: `translate3d(0, ${scrollY * 0.12}px, 0)` }}
         />
+
 
         <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
           More sales. More revenue. More recognition.
@@ -236,17 +255,19 @@ function Index() {
 
         <a
           href="#work-with-us"
-          className="relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          className="lift relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
         >
           Book Your Free Brand Audit
         </a>
 
+
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
-            <div key={claim} className="border-y border-border py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground/70">
+            <div key={claim} className="glass-soft lift px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground/75">
               {claim}
             </div>
           ))}
+
         </div>
 
         <a
@@ -287,7 +308,7 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div className="glass-panel overflow-hidden">
               <ProblemFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -325,18 +346,16 @@ function Index() {
             </p>
           </Reveal>
 
-          <Reveal>
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {["More sales", "More revenue per campaign", "More brand recognition"].map((claim) => (
-                <div
-                  key={claim}
-                  className="rounded-2xl border border-border bg-card px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
-                >
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {["More sales", "More revenue per campaign", "More brand recognition"].map((claim, index) => (
+              <Reveal key={claim} delay={index * 100}>
+                <div className="glass-soft lift px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]">
                   {claim}
                 </div>
-              ))}
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
+          </div>
+
 
           <div className="mt-16 space-y-20 sm:mt-24 sm:space-y-28">
             {services.map((service, index) => (
@@ -365,7 +384,8 @@ function Index() {
                     </ul>
                   </div>
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                    <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+                    <div className="glass-panel lift overflow-hidden">
+
                       <div className="aspect-[4/3] w-full">
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
@@ -392,15 +412,15 @@ function Index() {
               Social proof
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Placeholder proof, ready for real wins.
+              Early results we can stand behind.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              This section is structured for testimonials, client logos, and verified campaign results once
-              approved proof is ready to publish.
+              We are new, so we only publish results we have actually delivered. Here is where we are so far.
             </p>
+
             <div className="mt-8 grid gap-3">
               {proofCards.map((card) => (
-                <div key={card.value} className="rounded-2xl border border-border bg-background/20 p-5">
+                <div key={card.value} className="glass-soft lift p-5">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
                     {card.label}
                   </span>
@@ -412,7 +432,8 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div className="glass-panel overflow-hidden">
+
               <ProofFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -428,7 +449,7 @@ function Index() {
             </p>
             <div className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-                A boutique marketing partner for sharper growth decisions.
+                Not a big agency. That is the point.
               </h2>
               <div className="space-y-5 leading-7 text-foreground/80">
                 <p>
@@ -436,10 +457,11 @@ function Index() {
                   execution, from strategy and content to paid campaigns that are easier to track and improve.
                 </p>
                 <p>
-                  Placeholder bio: add the founder story, key credentials, client categories, and strongest
-                  proof points here when ready.
+                  We are deliberately small: our entire focus right now is on our first five clients, so each
+                  one gets senior attention instead of being passed down a team.
                 </p>
               </div>
+
             </div>
           </Reveal>
         </div>
@@ -476,7 +498,7 @@ function Index() {
             <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
               Not ready to book? Send an enquiry instead
             </p>
-            <form onSubmit={handleInquirySubmit} className="mt-6 grid gap-4 rounded-2xl border border-border bg-background/20 p-5">
+            <form onSubmit={handleInquirySubmit} className="glass-soft mt-6 grid gap-4 p-5">
               <div className="grid gap-2">
                 <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
                   Name
@@ -542,7 +564,8 @@ function Index() {
                 type="submit"
                 variant="outline"
                 disabled={inquiryStatus === "sending"}
-                className="min-h-11 w-full font-semibold"
+                className="lift min-h-11 w-full font-semibold"
+
               >
                 {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
               </Button>
@@ -567,7 +590,8 @@ function Index() {
             className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
           >
             <InstagramIcon className="h-5 w-5" />
-            Instagram placeholder
+            Instagram
+
           </a>
           <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
             © {new Date().getFullYear()} Chrizos Media

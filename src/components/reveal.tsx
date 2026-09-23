@@ -20,13 +20,23 @@ export function Reveal({
     if (!el) return;
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
+        // Fire at 20% visibility, or as soon as a taller-than-viewport block
+        // has entered the lower part of the screen.
+        if (
+          entries.some(
+            (entry) =>
+              entry.isIntersecting &&
+              (entry.intersectionRatio >= 0.2 ||
+                entry.boundingClientRect.height > window.innerHeight * 0.8),
+          )
+        ) {
           setVisible(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: [0, 0.2] },
     );
+
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
