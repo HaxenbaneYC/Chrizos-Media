@@ -30,7 +30,18 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const services = [
+type Service = {
+  number: string;
+  title: string;
+  tagline: string;
+  description: string;
+  points: string[];
+  visual: "content" | "growth" | "photo";
+  image?: string;
+  alt?: string;
+};
+
+const services: Service[] = [
   {
     number: "01",
     title: "Content Strategy",

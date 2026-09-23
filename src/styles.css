@@ -191,3 +191,23 @@
     animation: none;
   }
 }
+
+/* Fluid illustration drift */
+@keyframes fluid-drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-14px, 10px);
+  }
+}
+
+.fluid-drift {
+  animation: fluid-drift 14s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fluid-drift {
+    animation: none;
+  }
+}
