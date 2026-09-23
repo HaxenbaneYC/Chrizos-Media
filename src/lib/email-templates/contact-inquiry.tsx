@@ -150,7 +150,7 @@ export const template = {
   component: ContactInquiryEmail,
   displayName: 'Contact inquiry',
   subject: (data) => {
-    const name = typeof data.name === 'string' ? data.name.trim() : ''
+    const name = typeof data['name'] === 'string' ? data['name'].trim() : ''
     return `New Chrizos Media inquiry${name ? ` — ${name}` : ''}`
   },
   previewData: {

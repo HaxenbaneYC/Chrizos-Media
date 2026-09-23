@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from '@react-email/render'
-import { EmailAPIError, sendLovableEmail } from '@lovable.dev/email-js'
+import { EmailAPIError, sendLovableEmail, type EmailSendRequest } from '@lovable.dev/email-js'
 import { TEMPLATES } from './registry'
 
 // Server-only: reads LOVABLE_API_KEY. Never import from client components.
@@ -65,22 +65,24 @@ export async function sendTemplateEmail(
       ? template.subject(templateData)
       : template.subject
 
+  const payload: EmailSendRequest = {
+    to: recipient,
+    from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
+    sender_domain: SENDER_DOMAIN,
+    subject,
+    html,
+    text,
+    purpose: 'transactional',
+    label: templateName,
+    idempotency_key: options.idempotencyKey || crypto.randomUUID(),
+  }
+
+  if (options.replyTo) {
+    payload.reply_to = options.replyTo
+  }
+
   try {
-    await sendLovableEmail(
-      {
-        to: recipient,
-        from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-        sender_domain: SENDER_DOMAIN,
-        subject,
-        html,
-        text,
-        purpose: 'transactional',
-        label: templateName,
-        idempotency_key: options.idempotencyKey || crypto.randomUUID(),
-        reply_to: options.replyTo,
-      },
-      { apiKey, sendUrl: process.env['LOVABLE_SEND_URL'] }
-    )
+    await sendLovableEmail(payload, { apiKey, sendUrl: process.env['LOVABLE_SEND_URL'] })
   } catch (error) {
     if (error instanceof EmailAPIError && error.code === 'recipient_suppressed') {
       return { sent: false, reason: 'recipient_suppressed' }

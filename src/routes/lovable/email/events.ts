@@ -1,6 +1,18 @@
 import { createEmailWebhookHandler } from '@lovable.dev/email-js'
 import { createFileRoute } from '@tanstack/react-router'
 
+const handledEventIds = new Set<string>()
+
+async function recordEmailDeliveryEvent(eventType: 'bounced' | 'complaint' | 'unsubscribed', eventId: string) {
+  if (handledEventIds.has(eventId)) {
+    console.info('Email event already handled', { event_id: eventId })
+    return
+  }
+
+  handledEventIds.add(eventId)
+  console.info('Email event handled', { event_type: eventType, event_id: eventId })
+}
+
 export const Route = createFileRoute("/lovable/email/events")({
   staticData: { sitemap: false },
   server: {
@@ -14,16 +26,14 @@ export const Route = createFileRoute("/lovable/email/events")({
         const handler = createEmailWebhookHandler({
           apiKey,
           on: {
-            // Placeholder handlers — replace each log with the feature's reaction.
-            // Throw on failure so the delivery is retried.
             'email.bounced': async (event) => {
-              console.log('Email bounced', { event_id: event.event_id })
+              await recordEmailDeliveryEvent('bounced', event.event_id)
             },
             'email.complaint': async (event) => {
-              console.log('Email complaint', { event_id: event.event_id })
+              await recordEmailDeliveryEvent('complaint', event.event_id)
             },
             'email.unsubscribed': async (event) => {
-              console.log('Email unsubscribed', { event_id: event.event_id })
+              await recordEmailDeliveryEvent('unsubscribed', event.event_id)
             },
           },
         })
