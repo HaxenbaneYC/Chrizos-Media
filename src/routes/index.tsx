@@ -3,7 +3,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Instagram } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
-import logoWhite from "../assets/chrizos-logo-white.png";
+import logoWhite from "../assets/chrizos-logo-white.webp";
+import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
@@ -165,7 +166,14 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
-            <img src={logoWhite} alt="Chrizos Media" className="h-auto w-24 sm:w-28" />
+            <img
+              src={logoWhiteSmall}
+              alt="Chrizos Media"
+              width={488}
+              height={216}
+              decoding="async"
+              className="h-auto w-24 sm:w-28"
+            />
           </a>
 
           <nav aria-label="Primary navigation" className="flex items-center gap-1 overflow-x-auto">
@@ -202,7 +210,15 @@ function Index() {
           className="pointer-events-none absolute left-1/2 top-1/2 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-2/3 rounded-full bg-primary/25 blur-[120px]"
         />
 
-        <img src={logoWhite} alt="Chrizos Media" className="relative z-10 w-full max-w-md" />
+        <img
+          src={logoWhite}
+          alt="Chrizos Media"
+          width={975}
+          height={431}
+          fetchPriority="high"
+          decoding="async"
+          className="relative z-10 w-full max-w-md"
+        />
 
         <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
           More sales. More revenue. More recognition.
