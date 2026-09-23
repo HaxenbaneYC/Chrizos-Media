@@ -532,13 +532,18 @@ function Index() {
                   name="inquiry"
                   required
                   minLength={10}
-                  rows={6}
-                  className="min-h-36 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                  rows={4}
+                  className="min-h-24 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
                   placeholder="Tell us what you want to grow or improve."
                 />
               </div>
 
-              <Button type="submit" size="lg" disabled={inquiryStatus === "sending"} className="min-h-12 w-full font-semibold">
+              <Button
+                type="submit"
+                variant="outline"
+                disabled={inquiryStatus === "sending"}
+                className="min-h-11 w-full font-semibold"
+              >
                 {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
               </Button>
 
@@ -554,9 +559,20 @@ function Index() {
           </Reveal>
         </div>
 
-        <p className="mt-16 text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
-          © {new Date().getFullYear()} Chrizos Media
-        </p>
+        <div className="mt-16 flex flex-col items-center gap-4">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
+          >
+            <InstagramIcon className="h-5 w-5" />
+            Instagram placeholder
+          </a>
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
+            © {new Date().getFullYear()} Chrizos Media
+          </p>
+        </div>
       </section>
     </main>
   );
