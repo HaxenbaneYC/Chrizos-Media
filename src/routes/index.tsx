@@ -166,7 +166,14 @@ function Index() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
-            <img src={logoWhite} alt="Chrizos Media" className="h-auto w-24 sm:w-28" />
+            <img
+              src={logoWhiteSmall}
+              alt="Chrizos Media"
+              width={488}
+              height={216}
+              decoding="async"
+              className="h-auto w-24 sm:w-28"
+            />
           </a>
 
           <nav aria-label="Primary navigation" className="flex items-center gap-1 overflow-x-auto">
