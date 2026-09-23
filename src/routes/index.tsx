@@ -56,6 +56,7 @@ const services = [
     description:
       "Studio-grade photography that makes your products the hero — clean e-commerce shots, scroll-stopping lifestyle imagery, and content ready for every channel.",
     points: ["Product & e-commerce photography", "Lifestyle & brand shoots", "Content ready for every platform"],
+    visual: "photo" as const,
     image: photographyImg,
     alt: "Product photography studio with sneaker and bottle on blue backdrop",
   },
