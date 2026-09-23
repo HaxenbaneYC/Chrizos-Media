@@ -156,7 +156,27 @@ function Index() {
             <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
               Three ways we turn attention into sales.
             </h2>
+            <p className="mt-5 max-w-xl leading-7 text-foreground/80">
+              More sales. More revenue. More recognition. Marketing only counts when it shows up
+              in your numbers.
+            </p>
           </Reveal>
+
+          <Reveal>
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              {["More product sales", "More revenue per campaign", "More brand recognition"].map(
+                (claim) => (
+                  <div
+                    key={claim}
+                    className="rounded-2xl border border-border bg-card px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
+                  >
+                    {claim}
+                  </div>
+                ),
+              )}
+            </div>
+          </Reveal>
+
 
           <div className="mt-16 space-y-20 sm:mt-24 sm:space-y-28">
             {services.map((service, index) => (
