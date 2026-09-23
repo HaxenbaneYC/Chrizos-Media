@@ -151,16 +151,16 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
 
             <div className="mt-auto flex h-24 items-end gap-2">
               {bars.map((h, i) => (
-                <div key={i} className="flex-1">
-                  <div
-                    style={{ height: `${h}%` }}
-                    className={`w-full rounded-t-md ${
-                      i === bars.length - 1 ? "bg-primary" : "bg-white/35"
-                    }`}
-                  />
-                </div>
+                <div
+                  key={i}
+                  style={{ height: `${h}%` }}
+                  className={`flex-1 rounded-t-md ${
+                    i === bars.length - 1 ? "bg-primary" : "bg-white/35"
+                  }`}
+                />
               ))}
             </div>
+
             <div className="mt-2 h-px w-full bg-white/20" />
           </Glass>
         </div>
