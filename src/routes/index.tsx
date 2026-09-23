@@ -47,8 +47,7 @@ const services = [
     description:
       "High-return campaigns across Meta, Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly so your ad spend comes back with company.",
     points: ["Meta, Google & TikTok ads", "Sales funnel optimization", "Conversion tracking & reporting"],
-    image: paidAdsImg,
-    alt: "Smartphone showing a rising performance chart",
+    visual: "growth" as const,
   },
   {
     number: "03",
