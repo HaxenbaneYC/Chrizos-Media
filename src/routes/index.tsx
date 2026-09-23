@@ -107,21 +107,12 @@ const services: Service[] = [
 
 const proofCards = [
   {
-    label: "Placeholder result",
-    value: "+61% qualified enquiries",
-    detail: "Replace with a real client win once available.",
-  },
-  {
-    label: "Placeholder proof",
-    value: "4.8x campaign return",
-    detail: "Use a verified number from future campaign reporting.",
-  },
-  {
-    label: "Placeholder quote",
-    value: "\u201cSharper strategy, better leads.\u201d",
-    detail: "Swap for an approved testimonial.",
+    label: "Client result",
+    value: "Break-even in 3 months",
+    detail: "A single-product brand reached break-even within three months of launch.",
   },
 ];
+
 
 function Index() {
   const submitContactInquiry = useServerFn(sendContactInquiry);
