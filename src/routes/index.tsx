@@ -346,19 +346,16 @@ function Index() {
             </p>
           </Reveal>
 
-          <Reveal>
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {["More sales", "More revenue per campaign", "More brand recognition"].map((claim) => (
-                <div
-                  key={claim}
-                  className="glass-soft lift px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
-                >
-
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {["More sales", "More revenue per campaign", "More brand recognition"].map((claim, index) => (
+              <Reveal key={claim} delay={index * 100}>
+                <div className="glass-soft lift px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]">
                   {claim}
                 </div>
-              ))}
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
+          </div>
+
 
           <div className="mt-16 space-y-20 sm:mt-24 sm:space-y-28">
             {services.map((service, index) => (
