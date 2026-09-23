@@ -238,7 +238,7 @@ function Index() {
           href="#work-with-us"
           className="relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
         >
-          Work With Us
+          Book Your Free Brand Audit
         </a>
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
