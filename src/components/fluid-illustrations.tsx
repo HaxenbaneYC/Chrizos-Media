@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
  * Service and funnel illustrations built as Apple-style interface mockups:
- * frosted panels, precise information hierarchy, and clean line/UI details.
+ * frosted glass panels, precise information hierarchy, and clean line/UI details.
  */
 function Panel({ children }: { children: ReactNode }) {
   return (
@@ -19,13 +19,7 @@ function Glass({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <div
-      className={`rounded-2xl border border-foreground/15 bg-foreground/10 shadow-xl ${className}`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`glass-panel ${className}`}>{children}</div>;
 }
 
 const faintLine = "h-2 rounded-full bg-foreground/20";
@@ -33,7 +27,34 @@ const strongLine = "h-2.5 rounded-full bg-foreground/80";
 
 /** 01 — Paid Advertising: a live campaign performance dashboard. */
 export function GrowthFlow({ className = "" }: { className?: string }) {
-  const bars = ["h-[38%]", "h-[52%]", "h-[44%]", "h-[66%]", "h-[58%]", "h-[82%]", "h-[95%]"];
+  const bars = [
+    { height: "38%", value: "1.6x" },
+    { height: "52%", value: "2.2x" },
+    { height: "44%", value: "1.9x" },
+    { height: "66%", value: "2.9x" },
+    { height: "58%", value: "2.5x" },
+    { height: "82%", value: "3.7x" },
+    { height: "95%", value: "4.8x" },
+  ];
+
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [grown, setGrown] = useState(false);
+
+  useEffect(() => {
+    const el = chartRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setGrown(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className={className} aria-label="Campaign performance dashboard" role="img">
@@ -45,7 +66,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
               { k: "CPA", v: "-32%" },
               { k: "Leads", v: "+61%" },
             ].map((m) => (
-              <Glass key={m.k} className="fluid-drift p-3">
+              <Glass key={m.k} className="fluid-drift lift p-3">
                 <span className="block text-[9px] font-bold uppercase tracking-[0.15em] text-foreground/55">
                   {m.k}
                 </span>
@@ -67,15 +88,29 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
               </span>
             </div>
 
-            <div className="mt-5 flex flex-1 items-end gap-2">
-              {bars.map((heightClass, index) => (
-                <div
-                  key={heightClass}
-                  className={`min-h-4 flex-1 rounded-t-md ${heightClass} ${
-                    index === bars.length - 1 ? "bg-background" : "bg-foreground/35"
-                  }`}
-                />
-              ))}
+            <div ref={chartRef} className="mt-5 flex flex-1 items-end gap-2">
+              {bars.map((bar, index) => {
+                const isLast = index === bars.length - 1;
+                return (
+                  <div
+                    key={bar.value + index}
+                    className="bar-col group relative flex h-full flex-1 items-end"
+                  >
+                    <span className="pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 rounded-md bg-foreground px-1.5 py-0.5 text-[9px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                      {bar.value}
+                    </span>
+                    <div
+                      className={`bar-grow ${grown ? "is-grown" : ""} min-h-4 w-full rounded-t-md ${
+                        isLast ? `bg-background ${grown ? "bar-glow" : ""}` : "bg-foreground/35"
+                      }`}
+                      style={{
+                        height: bar.height,
+                        transitionDelay: `${index * 80}ms`,
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
 
             <div className="mt-3 grid grid-cols-3 gap-2">
@@ -95,6 +130,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
     </div>
   );
 }
+
 
 /** 02 — Content Strategy: a content calendar and scheduled post card. */
 export function ContentFlow({ className = "" }: { className?: string }) {
