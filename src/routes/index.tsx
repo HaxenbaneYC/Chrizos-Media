@@ -1,11 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { Instagram } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import {
@@ -23,13 +21,13 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Chrizos Media — Marketing & Advertising Agency" },
+      { title: "Chrizos Media | Marketing & Advertising Agency" },
       {
         name: "description",
         content:
           "Chrizos Media helps ambitious businesses turn attention into sales, revenue, and recognition through paid advertising, content strategy, and brand consulting.",
       },
-      { property: "og:title", content: "Chrizos Media — Marketing & Advertising Agency" },
+      { property: "og:title", content: "Chrizos Media | Marketing & Advertising Agency" },
       {
         property: "og:description",
         content:
@@ -59,7 +57,7 @@ const services: Service[] = [
     title: "Paid Advertising",
     tagline: "Turn ad spend into sales, leads, and measurable momentum.",
     description:
-      "Campaign strategy and management across Meta (Instagram & Facebook), Google, and TikTok — built around sharper tracking, stronger offers, and better conversion paths so spend has a clear commercial job.",
+      "Campaign strategy and management across Meta (Instagram & Facebook), Google, and TikTok, built around sharper tracking, stronger offers, and better conversion paths so spend has a clear commercial job.",
     points: [
       "Meta (Instagram & Facebook), Google & TikTok ads",
       "Sales funnel optimization",
@@ -72,7 +70,7 @@ const services: Service[] = [
     title: "Content Strategy",
     tagline: "Attention that builds trust before the sale.",
     description:
-      "We plan the themes, angles, calendars, and campaign stories that make your brand easier to understand, remember, and choose — across social media, launch moments, and always-on content.",
+      "We plan the themes, angles, calendars, and campaign stories that make your brand easier to understand, remember, and choose across social media, launch moments, and always-on content.",
     points: [
       "Instagram & Facebook content planning",
       "Content calendars & campaign ideas",
@@ -85,7 +83,7 @@ const services: Service[] = [
     title: "Brand Strategy & Market Insights",
     tagline: "Know what to say, who to say it to, and why it will move them.",
     description:
-      "Premium strategy consulting for businesses that need clarity before scaling. We study the market, customer motivations, competitors, positioning, and offer structure — then turn the findings into sharper messaging and smarter growth decisions.",
+      "Premium strategy consulting for businesses that need clarity before scaling. We study the market, customer motivations, competitors, positioning, and offer structure, then turn the findings into sharper messaging and smarter growth decisions.",
     points: [
       "Audience, competitor & category research",
       "Positioning, offers & messaging strategy",
@@ -144,7 +142,7 @@ function Index() {
 
       if (result.status === "sent") {
         setInquiryStatus("sent");
-        setInquiryMessage("Thanks — your inquiry has been sent to Chrizos Media.");
+        setInquiryMessage("Thanks. Your inquiry has been sent to Chrizos Media.");
         form.reset();
         return;
       }
@@ -197,7 +195,7 @@ function Index() {
               aria-label="Chrizos Media Instagram placeholder"
               className="ml-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground/75 transition-colors hover:text-foreground"
             >
-              <Instagram className="h-4 w-4" aria-hidden="true" />
+              <InstagramIcon className="h-4 w-4" />
             </a>
           </nav>
         </div>
@@ -229,9 +227,12 @@ function Index() {
           sharper campaigns, and growth that shows up in the numbers.
         </p>
 
-        <Button asChild size="lg" className="relative z-10 mt-8 min-h-11 px-7 font-semibold">
-          <a href="#work-with-us">Work With Us</a>
-        </Button>
+        <a
+          href="#work-with-us"
+          className="relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+        >
+          Work With Us
+        </a>
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
@@ -425,7 +426,7 @@ function Index() {
               <div className="space-y-5 leading-7 text-foreground/80">
                 <p>
                   Chrizos Media helps ambitious businesses connect brand clarity with measurable marketing
-                  execution — from strategy and content to paid campaigns that are easier to track and improve.
+                  execution, from strategy and content to paid campaigns that are easier to track and improve.
                 </p>
                 <p>
                   Placeholder bio: add the founder story, key credentials, client categories, and strongest
@@ -448,7 +449,7 @@ function Index() {
               Work With Us
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              Tell us what you want to improve — sales, leads, positioning, content, or recognition — and
+               Tell us what you want to improve: sales, leads, positioning, content, or recognition. Then
               Chrizos Media will review the best next step.
             </p>
             <a
@@ -457,7 +458,7 @@ function Index() {
               rel="noreferrer"
               className="mt-8 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
             >
-              <Instagram className="h-5 w-5" aria-hidden="true" />
+               <InstagramIcon className="h-5 w-5" />
               Instagram placeholder
             </a>
           </Reveal>
