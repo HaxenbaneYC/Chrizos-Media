@@ -81,7 +81,7 @@
   --card-foreground: oklch(1 0 0);
   --popover: oklch(0.29 0.113 261.1);
   --popover-foreground: oklch(1 0 0);
-  --primary: oklch(1 0 0);                      /* white — stands out on blue */
+  --primary: oklch(1 0 0);                      /* white stands out on blue */
   --primary-foreground: oklch(0.456 0.31 265.9);
   --secondary: oklch(0.29 0.113 261.1);         /* deep navy */
   --secondary-foreground: oklch(1 0 0);
@@ -158,6 +158,11 @@
     color: var(--color-foreground);
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   }
+}
+
+main > section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* Scroll-reveal */
