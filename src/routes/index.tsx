@@ -383,12 +383,12 @@ function Index() {
               Social proof
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Placeholder proof, ready for real wins.
+              Early results we can stand behind.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              This section is structured for testimonials, client logos, and verified campaign results once
-              approved proof is ready to publish.
+              We are new, so we only publish results we have actually delivered. Here is where we are so far.
             </p>
+
             <div className="mt-8 grid gap-3">
               {proofCards.map((card) => (
                 <div key={card.value} className="rounded-2xl border border-border bg-background/20 p-5">
@@ -419,7 +419,7 @@ function Index() {
             </p>
             <div className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <h2 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-                A boutique marketing partner for sharper growth decisions.
+                Not a big agency. That is the point.
               </h2>
               <div className="space-y-5 leading-7 text-foreground/80">
                 <p>
@@ -427,10 +427,11 @@ function Index() {
                   execution, from strategy and content to paid campaigns that are easier to track and improve.
                 </p>
                 <p>
-                  Placeholder bio: add the founder story, key credentials, client categories, and strongest
-                  proof points here when ready.
+                  We are deliberately small: our entire focus right now is on our first five clients, so each
+                  one gets senior attention instead of being passed down a team.
                 </p>
               </div>
+
             </div>
           </Reveal>
         </div>
