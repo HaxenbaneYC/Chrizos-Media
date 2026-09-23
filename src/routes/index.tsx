@@ -3,7 +3,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Instagram } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
-import logoWhite from "../assets/chrizos-logo-white.png";
+import logoWhite from "../assets/chrizos-logo-white.webp";
+import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
