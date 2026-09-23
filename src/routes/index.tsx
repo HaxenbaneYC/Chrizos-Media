@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import {
@@ -16,6 +17,16 @@ import {
 
 const CONTACT_EMAIL = "chrizosmedia@gmail.com";
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
+
+function InstagramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
@@ -161,7 +172,7 @@ function Index() {
 
   return (
     <main className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
@@ -203,11 +214,6 @@ function Index() {
 
       {/* ============ Hero ============ */}
       <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-2/3 rounded-full bg-primary/25 blur-[120px]"
-        />
-
         <img
           src={logoWhite}
           alt="Chrizos Media"

@@ -7,14 +7,6 @@ import type { ReactNode } from "react";
 function Panel({ children }: { children: ReactNode }) {
   return (
     <div className="relative aspect-[4/3] w-full overflow-hidden bg-card">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-16 -top-20 h-64 w-64 rounded-full bg-background/50 blur-[90px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 -right-10 h-64 w-64 rounded-full bg-background/35 blur-[100px]"
-      />
       <div className="relative h-full w-full p-5 sm:p-7">{children}</div>
     </div>
   );
@@ -29,7 +21,7 @@ function Glass({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-foreground/15 bg-foreground/10 shadow-xl backdrop-blur-md ${className}`}
+      className={`rounded-2xl border border-foreground/15 bg-foreground/10 shadow-xl ${className}`}
     >
       {children}
     </div>
