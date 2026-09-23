@@ -65,6 +65,8 @@
 :root {
   --radius: 0.625rem;
   /* Chrizos Media brand: electric blue surface, white lettering */
+  --brand-electric: oklch(0.456 0.31 265.9);    /* #1700FF electric blue */
+  --brand-navy: oklch(0.29 0.113 261.1);        /* #052662 deep navy */
   --background: oklch(0.456 0.31 265.9);        /* #1700FF electric blue */
   --foreground: oklch(1 0 0);                   /* white lettering */
   --card: oklch(0.29 0.113 261.1);              /* #052662 deep navy */
@@ -139,9 +141,73 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Marquee strip */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Fluid illustration drift */
+@keyframes fluid-drift {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-14px, 10px);
+  }
+}
+
+.fluid-drift {
+  animation: fluid-drift 14s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fluid-drift {
+    animation: none;
   }
 }
