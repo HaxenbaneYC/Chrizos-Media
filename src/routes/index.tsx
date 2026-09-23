@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import logoWhite from "../assets/chrizos-logo-white.png";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Chrizos Media — Marketing & Advertising Agency" },
@@ -16,8 +18,10 @@ export const Route = createFileRoute("/")({
         content: "Chrizos Media is a marketing and advertising agency. Something electric is coming soon.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://graphics-gleam-lab.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://graphics-gleam-lab.lovable.app/" }],
   }),
   component: Index,
 });
@@ -38,20 +42,17 @@ function Index() {
       />
 
       <h1 className="relative z-10 mt-10 text-center text-3xl font-extrabold tracking-tight sm:text-4xl">
-        We're building something electric.
+        Chrizos Media — Marketing &amp; Advertising Agency
       </h1>
 
-      <p className="relative z-10 mt-6 inline-flex items-center gap-2.5 rounded-full border border-foreground/20 px-5 py-2 text-sm font-semibold uppercase tracking-[0.2em]">
-        <span className="relative flex h-2.5 w-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-foreground opacity-60" />
-          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-foreground" />
-        </span>
-        Coming soon
+      <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
+        We create brand identities, advertising campaigns, and social media content that help
+        ambitious businesses stand out and connect with the right audience.
       </p>
 
-      <p className="relative z-10 mt-14 text-center text-sm text-foreground/70">
-        Marketing &amp; Advertising — launching shortly
-      </p>
+      <Button asChild size="lg" className="relative z-10 mt-8 min-h-11 px-7 font-semibold">
+        <a href="mailto:chrizosmedia@gmail.com?subject=Project%20enquiry">Start a project</a>
+      </Button>
     </main>
   );
 }
