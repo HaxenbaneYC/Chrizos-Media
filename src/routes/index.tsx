@@ -140,7 +140,7 @@ function Index() {
               aria-hidden={copy === 1}
               className="px-6 text-sm font-semibold uppercase tracking-[0.35em] text-foreground/60"
             >
-              Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Social Media&nbsp;&nbsp;✦&nbsp;&nbsp;Photography&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Identity&nbsp;&nbsp;✦&nbsp;&nbsp;
+              Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Instagram &amp; Facebook Ads&nbsp;&nbsp;✦&nbsp;&nbsp;Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;Photography&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Identity&nbsp;&nbsp;✦&nbsp;&nbsp;
             </span>
           ))}
         </div>
@@ -154,7 +154,7 @@ function Index() {
               What we do
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Three ways we make brands impossible to ignore.
+              Three ways we turn attention into sales.
             </h2>
           </Reveal>
 
