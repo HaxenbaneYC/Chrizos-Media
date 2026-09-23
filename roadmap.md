@@ -12,3 +12,10 @@
 - [x] Add Instagram placeholder link
 - [x] Enable direct contact-form email sending
   - Note: notify.chrizosmedia.com is still verifying DNS; deliveries start after verification completes.
+- [x] Replace placeholder social proof copy with the real break-even client result
+- [x] Replace placeholder About bio with honest "first five clients" positioning
+- [x] Hide the "Edit with Lovable" badge
+- [x] Glassmorphism panels (services, graphics, proof cards, contact form, nav on scroll)
+- [x] Animated campaign-return bar chart (staggered grow, pulse glow, hover tooltip)
+- [x] Site motion pass (reveal stagger, hover/press feedback, hero parallax)
+- [ ] Real scheduling embed in the booking section — ON HOLD per user until further instructions
