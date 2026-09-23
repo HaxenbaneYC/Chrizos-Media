@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import {
+  BookingFlow,
   ContentFlow,
   GrowthFlow,
   ProblemFlow,
