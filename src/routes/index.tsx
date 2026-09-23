@@ -10,13 +10,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Chrizos Media creates brand identities, advertising campaigns, and social media content for ambitious businesses.",
+          "Chrizos Media is a boutique digital marketing agency specializing in high-ROI strategies — social media marketing, sales funnel optimization, and online advertising.",
       },
       { property: "og:title", content: "Chrizos Media — Marketing & Advertising Agency" },
       {
         property: "og:description",
         content:
-          "Brand identities, advertising campaigns, and social media content for ambitious businesses.",
+          "A boutique digital marketing agency specializing in high-ROI strategies — social media, sales funnels, and online advertising.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://graphics-gleam-lab.lovable.app/" },
@@ -47,8 +47,8 @@ function Index() {
       </h1>
 
       <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
-        We create brand identities, advertising campaigns, and social media content that help
-        ambitious businesses stand out and connect with the right audience.
+        Chrizos Media is a boutique digital marketing agency specializing in high-return-on-investment
+        strategies — social media marketing, sales funnel optimization, and online advertising.
       </p>
 
       <Button asChild size="lg" className="relative z-10 mt-8 min-h-11 px-7 font-semibold">
