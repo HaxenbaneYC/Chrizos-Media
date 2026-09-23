@@ -71,10 +71,10 @@ const services: Service[] = [
   {
     number: "03",
     title: "Photography",
-    tagline: "Products that look worth buying.",
+    tagline: "Make your business look worth choosing.",
     description:
-      "Studio-grade photography that makes your products the hero — clean e-commerce shots, scroll-stopping lifestyle imagery, and content ready for every channel.",
-    points: ["Product & e-commerce photography", "Lifestyle & brand shoots", "Content ready for every platform"],
+      "Studio-grade photography that makes your brand the hero — product and e-commerce shots, imagery that sells your services, and content ready for every channel.",
+    points: ["Product & service photography", "Lifestyle & brand shoots", "Content ready for every platform"],
     visual: "photo" as const,
     image: photographyImg,
     alt: "Product photography studio with sneaker and bottle on blue backdrop",
@@ -164,7 +164,7 @@ function Index() {
 
           <Reveal>
             <div className="mt-10 grid gap-3 sm:grid-cols-3">
-              {["More product sales", "More revenue per campaign", "More brand recognition"].map(
+              {["More sales", "More revenue per campaign", "More brand recognition"].map(
                 (claim) => (
                   <div
                     key={claim}
