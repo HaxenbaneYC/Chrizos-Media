@@ -278,7 +278,7 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div className="glass-panel overflow-hidden">
               <ProblemFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -321,8 +321,9 @@ function Index() {
               {["More sales", "More revenue per campaign", "More brand recognition"].map((claim) => (
                 <div
                   key={claim}
-                  className="rounded-2xl border border-border bg-card px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
+                  className="glass-soft lift px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
                 >
+
                   {claim}
                 </div>
               ))}
@@ -356,7 +357,8 @@ function Index() {
                     </ul>
                   </div>
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                    <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+                    <div className="glass-panel lift overflow-hidden">
+
                       <div className="aspect-[4/3] w-full">
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
@@ -391,7 +393,7 @@ function Index() {
 
             <div className="mt-8 grid gap-3">
               {proofCards.map((card) => (
-                <div key={card.value} className="rounded-2xl border border-border bg-background/20 p-5">
+                <div key={card.value} className="glass-soft lift p-5">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
                     {card.label}
                   </span>
@@ -403,7 +405,8 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="overflow-hidden rounded-2xl border border-border shadow-2xl">
+            <div className="glass-panel overflow-hidden">
+
               <ProofFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -468,7 +471,7 @@ function Index() {
             <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
               Not ready to book? Send an enquiry instead
             </p>
-            <form onSubmit={handleInquirySubmit} className="mt-6 grid gap-4 rounded-2xl border border-border bg-background/20 p-5">
+            <form onSubmit={handleInquirySubmit} className="glass-soft mt-6 grid gap-4 p-5">
               <div className="grid gap-2">
                 <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
                   Name
@@ -534,7 +537,8 @@ function Index() {
                 type="submit"
                 variant="outline"
                 disabled={inquiryStatus === "sending"}
-                className="min-h-11 w-full font-semibold"
+                className="lift min-h-11 w-full font-semibold"
+
               >
                 {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
               </Button>
@@ -559,7 +563,8 @@ function Index() {
             className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
           >
             <InstagramIcon className="h-5 w-5" />
-            Instagram placeholder
+            Instagram
+
           </a>
           <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
             © {new Date().getFullYear()} Chrizos Media
