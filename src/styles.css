@@ -65,6 +65,8 @@
 :root {
   --radius: 0.625rem;
   /* Chrizos Media brand: electric blue surface, white lettering */
+  --brand-electric: oklch(0.456 0.31 265.9);    /* #1700FF electric blue */
+  --brand-navy: oklch(0.29 0.113 261.1);        /* #052662 deep navy */
   --background: oklch(0.456 0.31 265.9);        /* #1700FF electric blue */
   --foreground: oklch(1 0 0);                   /* white lettering */
   --card: oklch(0.29 0.113 261.1);              /* #052662 deep navy */
