@@ -38,8 +38,7 @@ const services = [
     description:
       "We plan, create, and run social media content that builds a brand people actually follow. From content calendars to campaign storytelling, every post has a job to do.",
     points: ["Social media marketing", "Content calendars & planning", "Brand storytelling & copywriting"],
-    image: contentStrategyImg,
-    alt: "Content calendar and planning materials on a navy desk",
+    visual: "content" as const,
   },
   {
     number: "02",
