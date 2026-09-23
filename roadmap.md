@@ -1,6 +1,7 @@
 # Roadmap
 
 - [x] Scroll-down services page (hero, marquee, 3 services, CTA)
-- [ ] Replace section images with fluid illustrations in some areas (Content Strategy, Paid Advertising); keep photography photo
-- [ ] Logo: stack "Media" below "Chrizos" (hero + assets)
+- [x] Replace section images with fluid illustrations in some areas (Content Strategy, Paid Advertising); keep photography photo
+- [x] Logo: stack "Media" below "Chrizos" (hero + assets)
+
 
