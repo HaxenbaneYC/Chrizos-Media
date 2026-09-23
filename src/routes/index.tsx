@@ -45,7 +45,7 @@ const services = [
   {
     number: "02",
     title: "Paid Advertising",
-    tagline: "Every dirham accounted for.",
+    tagline: "Ad spend that pays for itself.",
     description:
       "High-return campaigns across Meta, Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly so your ad spend comes back with company.",
     points: ["Meta, Google & TikTok ads", "Sales funnel optimization", "Conversion tracking & reporting"],
