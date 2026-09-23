@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import logoWhite from "../assets/chrizos-logo-white.png";
-import contentStrategyImg from "../assets/services-content-strategy.jpg";
-import paidAdsImg from "../assets/services-paid-ads.jpg";
 import photographyImg from "../assets/services-photography.jpg";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
+import { ContentFlow, GrowthFlow } from "@/components/fluid-illustrations";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
