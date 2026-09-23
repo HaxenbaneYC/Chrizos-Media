@@ -166,14 +166,24 @@ function Index() {
                   </div>
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                     <div className="overflow-hidden rounded-2xl border border-border shadow-2xl shadow-black/30">
-                      <img
-                        src={service.image}
-                        alt={service.alt}
-                        loading="lazy"
-                        width={1200}
-                        height={912}
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
+                      {service.visual === "content" ? (
+                        <div className="aspect-[4/3] w-full">
+                          <ContentFlow className="h-full w-full" />
+                        </div>
+                      ) : service.visual === "growth" ? (
+                        <div className="aspect-[4/3] w-full">
+                          <GrowthFlow className="h-full w-full" />
+                        </div>
+                      ) : (
+                        <img
+                          src={service.image}
+                          alt={service.alt}
+                          loading="lazy"
+                          width={1200}
+                          height={912}
+                          className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                      )}
                     </div>
                   </div>
                 </article>
