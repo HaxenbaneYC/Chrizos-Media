@@ -168,9 +168,10 @@ main > section:not(:first-of-type) {
 /* Scroll-reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(24px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
 }
+
 
 .reveal.is-visible {
   opacity: 1;
