@@ -192,19 +192,28 @@
   }
 }
 
-/* Fluid illustration drift */
+/* Interface mockup float */
 @keyframes fluid-drift {
   from {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
   to {
-    transform: translate(-14px, 10px);
+    transform: translateY(-6px);
   }
 }
 
 .fluid-drift {
-  animation: fluid-drift 14s ease-in-out infinite alternate;
+  animation: fluid-drift 6s ease-in-out infinite alternate;
 }
+
+.fluid-drift:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.fluid-drift:nth-child(3) {
+  animation-delay: 2.4s;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   .fluid-drift {

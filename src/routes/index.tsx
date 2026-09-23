@@ -44,21 +44,29 @@ type Service = {
 const services: Service[] = [
   {
     number: "01",
-    title: "Content Strategy",
-    tagline: "Feeds people can't scroll past.",
+    title: "Paid Advertising",
+    tagline: "Turn ad spend into sales.",
     description:
-      "We plan, create, and run social media content that builds a brand people actually follow. From content calendars to campaign storytelling, every post has a job to do.",
-    points: ["Social media marketing", "Content calendars & planning", "Brand storytelling & copywriting"],
-    visual: "content" as const,
+      "High-return campaigns across Meta (Instagram & Facebook), Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly — so every dirham spent comes back with more sales attached.",
+    points: [
+      "Instagram, Facebook, Google & TikTok ads",
+      "Sales funnel optimization",
+      "Conversion tracking & revenue reporting",
+    ],
+    visual: "growth" as const,
   },
   {
     number: "02",
-    title: "Paid Advertising",
-    tagline: "Ad spend that pays for itself.",
+    title: "Content Strategy",
+    tagline: "Attention that turns into customers.",
     description:
-      "High-return campaigns across Meta, Google, and TikTok. We build the funnels, run the tests, and optimize relentlessly so your ad spend comes back with company.",
-    points: ["Meta, Google & TikTok ads", "Sales funnel optimization", "Conversion tracking & reporting"],
-    visual: "growth" as const,
+      "We plan, create, and run social media content that builds a brand people follow — and buy from. From content calendars to campaign storytelling, every post has a job to do.",
+    points: [
+      "Social media marketing on Instagram & Facebook",
+      "Content calendars & planning",
+      "Brand storytelling & copywriting",
+    ],
+    visual: "content" as const,
   },
   {
     number: "03",
@@ -72,6 +80,7 @@ const services: Service[] = [
     alt: "Product photography studio with sneaker and bottle on blue backdrop",
   },
 ];
+
 
 function Index() {
   return (
@@ -131,7 +140,7 @@ function Index() {
               aria-hidden={copy === 1}
               className="px-6 text-sm font-semibold uppercase tracking-[0.35em] text-foreground/60"
             >
-              Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Social Media&nbsp;&nbsp;✦&nbsp;&nbsp;Photography&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Identity&nbsp;&nbsp;✦&nbsp;&nbsp;
+              Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Instagram &amp; Facebook Ads&nbsp;&nbsp;✦&nbsp;&nbsp;Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;Photography&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Identity&nbsp;&nbsp;✦&nbsp;&nbsp;
             </span>
           ))}
         </div>
@@ -145,9 +154,29 @@ function Index() {
               What we do
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Three ways we make brands impossible to ignore.
+              Three ways we turn attention into sales.
             </h2>
+            <p className="mt-5 max-w-xl leading-7 text-foreground/80">
+              More sales. More revenue. More recognition. Marketing only counts when it shows up
+              in your numbers.
+            </p>
           </Reveal>
+
+          <Reveal>
+            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+              {["More product sales", "More revenue per campaign", "More brand recognition"].map(
+                (claim) => (
+                  <div
+                    key={claim}
+                    className="rounded-2xl border border-border bg-card px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]"
+                  >
+                    {claim}
+                  </div>
+                ),
+              )}
+            </div>
+          </Reveal>
+
 
           <div className="mt-16 space-y-20 sm:mt-24 sm:space-y-28">
             {services.map((service, index) => (
