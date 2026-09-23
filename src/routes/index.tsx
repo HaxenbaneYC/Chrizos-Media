@@ -210,7 +210,15 @@ function Index() {
           className="pointer-events-none absolute left-1/2 top-1/2 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-2/3 rounded-full bg-primary/25 blur-[120px]"
         />
 
-        <img src={logoWhite} alt="Chrizos Media" className="relative z-10 w-full max-w-md" />
+        <img
+          src={logoWhite}
+          alt="Chrizos Media"
+          width={975}
+          height={431}
+          fetchPriority="high"
+          decoding="async"
+          className="relative z-10 w-full max-w-md"
+        />
 
         <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
           More sales. More revenue. More recognition.
