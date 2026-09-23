@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -118,6 +118,25 @@ function Index() {
   const submitContactInquiry = useServerFn(sendContactInquiry);
   const [inquiryStatus, setInquiryStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [inquiryMessage, setInquiryMessage] = useState("");
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        setScrollY(window.scrollY);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
 
   async function handleInquirySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -164,7 +183,14 @@ function Index() {
 
   return (
     <main className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95">
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+          scrollY > 12
+            ? "glass-panel rounded-none border-x-0 border-t-0"
+            : "border-b border-border bg-background/95"
+        }`}
+      >
+
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
@@ -213,8 +239,10 @@ function Index() {
           height={431}
           fetchPriority="high"
           decoding="async"
-          className="relative z-10 w-full max-w-md"
+          className="parallax-layer relative z-10 w-full max-w-md"
+          style={{ transform: `translate3d(0, ${scrollY * 0.12}px, 0)` }}
         />
+
 
         <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
           More sales. More revenue. More recognition.
@@ -227,17 +255,19 @@ function Index() {
 
         <a
           href="#work-with-us"
-          className="relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-md bg-primary px-7 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+          className="lift relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
         >
           Book Your Free Brand Audit
         </a>
 
+
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
-            <div key={claim} className="border-y border-border py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground/70">
+            <div key={claim} className="glass-soft lift px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground/75">
               {claim}
             </div>
           ))}
+
         </div>
 
         <a
