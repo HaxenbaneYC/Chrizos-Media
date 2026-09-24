@@ -442,7 +442,7 @@ function Index() {
         <a
           href="#problem"
           aria-label="Scroll down to see the strategy"
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-foreground/70 transition-colors hover:text-foreground"
+          className="relative z-10 mt-8 text-foreground/70 transition-colors hover:text-foreground sm:absolute sm:bottom-8 sm:left-1/2 sm:mt-0 sm:-translate-x-1/2"
         >
           <span className="mb-2 block text-center text-[11px] font-semibold uppercase tracking-[0.3em]">
             Scroll
@@ -461,7 +461,7 @@ function Index() {
       </section>
 
       {/* ============ Problem ============ */}
-      <section id="problem" className="scroll-mt-20 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
+      <section id="problem" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -500,7 +500,7 @@ function Index() {
       </div>
 
       {/* ============ Services ============ */}
-      <section id="services" className="scroll-mt-24 px-4 py-20 sm:px-6 sm:py-32">
+      <section id="services" className="scroll-mt-28 px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -604,7 +604,7 @@ function Index() {
       <section className="bg-section-navy px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="checklist-title">
         <Reveal>
             <div className="glass-panel mx-auto max-w-4xl p-5 sm:p-10">
-            <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr]">
+            <div className="grid items-start gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free Dubai marketing checklist</p>
                 <h2 id="checklist-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -667,7 +667,7 @@ function Index() {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
             <Reveal className="h-full">
-              <figure className="glass-panel relative h-full min-h-[420px] overflow-hidden sm:min-h-[680px] lg:min-h-0">
+              <figure className="glass-panel relative aspect-[4/5] overflow-hidden sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0">
                 <img
                   src={glauciaCampaign.url}
                   alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
@@ -725,7 +725,7 @@ function Index() {
       </section>
 
       {/* ============ About ============ */}
-      <section id="about" className="scroll-mt-20 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
+      <section id="about" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -808,7 +808,7 @@ function Index() {
                   <br />
                   TOUCH.
                 </h2>
-                <p className="mt-6 max-w-sm text-lg leading-7 text-foreground/80">
+                <p className="mt-6 max-w-none text-lg leading-7 text-foreground/80 lg:max-w-sm">
                   Tell us what you&apos;re building. We&apos;ll come back with a route and a
                   timeline &mdash; we reply to every brief within 6&ndash;12 hours.
                 </p>

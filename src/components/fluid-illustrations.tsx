@@ -91,7 +91,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
                 return (
                   <div
                     key={bar.value + index}
-                    className="bar-col group relative flex h-full flex-1 items-end"
+                    className="bar-col group relative flex h-full min-w-1.5 flex-1 items-end"
                   >
                     <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-1.5 py-0.5 text-[8px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       {bar.value}
