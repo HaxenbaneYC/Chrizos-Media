@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 function Panel({ children }: { children: ReactNode }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-card">
-      <div className="relative h-full w-full p-5 sm:p-7">{children}</div>
+      <div className="relative h-full w-full p-4 sm:p-7">{children}</div>
     </div>
   );
 }
