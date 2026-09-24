@@ -257,19 +257,19 @@ export function ProblemFlow({ className = "" }: { className?: string }) {
   return (
     <div className={className} aria-label="Marketing funnel problem map" role="img">
       <Panel>
-        <div className="flex h-full flex-col justify-between gap-3">
+        <div className="flex h-full flex-col justify-center gap-4">
           {[
             { label: "Attention", goal: "Built for measurable reach growth", width: "w-full" },
             { label: "Trust", goal: "Designed to lift engagement", width: "w-[92%]" },
             { label: "Enquiries", goal: "Focused on qualified leads, not just clicks", width: "w-[84%]" },
             { label: "Revenue", goal: "Every campaign tied to a revenue target", width: "w-[76%]" },
           ].map((step, index) => (
-            <Glass key={step.label} className={`fluid-drift ${step.width} p-3`}>
+            <Glass key={step.label} className={`fluid-drift ${step.width} p-4`}>
               <div className="flex items-center gap-3">
                 <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${index === 3 ? "bg-background" : "bg-foreground/35"}`} />
                 <div className="min-w-0">
                   <span className="graphic-kicker block">{step.label}</span>
-                  <span className="mt-1 block text-[clamp(0.58rem,2.2vw,0.72rem)] font-extrabold leading-tight text-foreground">
+                  <span className="mt-1.5 block text-[clamp(0.58rem,2.2vw,0.72rem)] font-extrabold leading-snug text-foreground">
                     {step.goal}
                   </span>
                 </div>
