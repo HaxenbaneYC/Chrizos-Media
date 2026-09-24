@@ -57,7 +57,7 @@ export function CalendlyBooking() {
           </p>
         </div>
       ) : (
-        <div className="relative min-h-[680px] bg-foreground">
+        <div className="relative min-h-[720px] bg-foreground sm:min-h-[680px]">
           {!loaded && !timedOut ? (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-card px-6 text-center" role="status">
               <p className="text-sm font-bold text-foreground/75">Loading available times…</p>
@@ -81,7 +81,7 @@ export function CalendlyBooking() {
           <iframe
             src={`${CALENDLY_URL}?embed_domain=chrizosmedia.com&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=052662&primary_color=1700ff`}
             title="Book a free brand audit with Chrizos Media"
-            className="h-[680px] w-full border-0"
+            className="h-[720px] w-full border-0 sm:h-[680px]"
             loading="lazy"
             onLoad={handleLoad}
           />

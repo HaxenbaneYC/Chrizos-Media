@@ -488,14 +488,14 @@ function Index() {
       </section>
 
       {/* ============ Final CTA: booking first ============ */}
-      <section id="work-with-us" className="scroll-mt-24 bg-card px-6 py-24 sm:py-32">
+      <section id="work-with-us" className="scroll-mt-20 bg-card px-6 py-24 sm:scroll-mt-24 sm:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
               Book a call
             </p>
             <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Book Your Free 15-Minute Brand Audit
+              Book Your Free 30-Minute Brand Audit
             </h2>
             <p className="mt-5 leading-7 text-foreground/80">
               A quick, honest read on your positioning, brand and website, plus the one change most likely
