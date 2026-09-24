@@ -417,7 +417,7 @@ function Index() {
           </div>
 
 
-          <div className="mt-16 grid items-stretch gap-6 sm:mt-24 lg:auto-rows-fr lg:grid-cols-2">
+          <div className="mt-16 grid auto-rows-fr items-stretch gap-6 sm:mt-24 lg:grid-cols-2">
             {services.map((service, index) => (
               <Reveal key={service.number} delay={(index % 2) * 100} className="h-full">
                 <article className="glass-soft lift flex h-full flex-col overflow-hidden p-5 sm:p-7">
