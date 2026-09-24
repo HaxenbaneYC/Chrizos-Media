@@ -22,3 +22,8 @@
 - [x] Link the Chrizos Media Calendly account to the project
 - [x] Add the real Calendly scheduler with confirmation and direct-link fallback messaging
 - [x] Add a prominent post-services booking call to action
+- [x] Replace the browser tab logo with the standalone lightning symbol
+- [x] Alternate electric-blue and deep-navy section surfaces for visual rhythm
+- [x] Remove obsolete placeholder labels and calendar illustration
+- [x] Add WhatsApp as a contact option using the verified business number
+- [x] Add service selection to the enquiry form and email notification

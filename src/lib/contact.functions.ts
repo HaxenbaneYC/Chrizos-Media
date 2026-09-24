@@ -15,7 +15,13 @@ const contactInquiryInput = z.object({
   name: z.string().trim().min(1).max(120),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
   phone: z.string().trim().max(50).optional().default(''),
-  inquiry: z.string().trim().min(10).max(3000),
+  service: z.enum([
+    'Paid Advertising',
+    'Content Strategy',
+    'Brand Strategy & Market Insights',
+    'General Enquiry',
+  ]),
+  message: z.string().trim().min(10).max(3000),
 })
 
 export type ContactInquiryResult =
@@ -59,7 +65,8 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
           name: data.name,
           email: data.email,
           phone: data.phone,
-          inquiry: data.inquiry,
+          service: data.service,
+          message: data.message,
           submittedAt: formatSubmittedAt(),
         },
       })

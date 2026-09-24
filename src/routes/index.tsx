@@ -18,6 +18,7 @@ import {
 
 const CONTACT_EMAIL = "chrizosmedia@gmail.com";
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
+const WHATSAPP_URL = "https://wa.me/971504254366?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
 
 function InstagramIcon({ className = "" }: { className?: string }) {
   return (
@@ -25,6 +26,15 @@ function InstagramIcon({ className = "" }: { className?: string }) {
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.4-4.2A8.5 8.5 0 1 1 20.5 11.7Z" />
+      <path d="M8.2 7.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.8 2c.1.3 0 .5-.1.7l-.6.7c-.2.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.2.6 0l.8-1c.2-.2.4-.3.7-.2l2 .9c.3.1.4.3.4.5 0 .4-.2 1.6-.8 2.1-.6.5-1.4.8-2.3.7-1-.1-2.4-.5-4.1-1.9-2-1.7-3.3-3.8-3.4-4-.1-.2-.8-1.1-.8-2.2 0-1 .5-1.6.7-1.9Z" />
     </svg>
   );
 }
@@ -146,7 +156,12 @@ function Index() {
     const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const phone = String(formData.get("phone") ?? "").trim();
-    const inquiry = String(formData.get("inquiry") ?? "").trim();
+    const service = String(formData.get("service") ?? "General Enquiry") as
+      | "Paid Advertising"
+      | "Content Strategy"
+      | "Brand Strategy & Market Insights"
+      | "General Enquiry";
+    const message = String(formData.get("message") ?? "").trim();
 
     setInquiryStatus("sending");
     setInquiryMessage("");
@@ -158,7 +173,8 @@ function Index() {
           name,
           email,
           phone,
-          inquiry,
+          service,
+          message,
         },
       });
 
@@ -221,7 +237,7 @@ function Index() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noreferrer"
-              aria-label="Chrizos Media Instagram placeholder"
+              aria-label="Chrizos Media on Instagram"
               className="ml-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground/75 transition-colors hover:text-foreground"
             >
               <InstagramIcon className="h-4 w-4" />
@@ -292,7 +308,7 @@ function Index() {
       </section>
 
       {/* ============ Problem ============ */}
-      <section id="problem" className="scroll-mt-24 px-6 py-24 sm:py-32">
+      <section id="problem" className="scroll-mt-24 bg-section-navy px-6 py-24 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -405,7 +421,7 @@ function Index() {
       </section>
 
       {/* ============ Post-services booking CTA ============ */}
-      <section className="border-y border-border bg-card px-6 py-16 sm:py-20" aria-labelledby="services-booking-title">
+      <section className="border-y border-border bg-section-electric px-6 py-16 sm:py-20" aria-labelledby="services-booking-title">
         <Reveal>
           <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 sm:flex-row sm:items-center">
             <div className="max-w-2xl">
@@ -425,7 +441,7 @@ function Index() {
       </section>
 
       {/* ============ Social Proof ============ */}
-      <section id="proof" className="bg-card px-6 py-24 sm:py-32">
+      <section id="proof" className="bg-section-navy px-6 py-24 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -461,7 +477,7 @@ function Index() {
       </section>
 
       {/* ============ About ============ */}
-      <section id="about" className="scroll-mt-24 px-6 py-24 sm:py-32">
+      <section id="about" className="scroll-mt-24 bg-section-navy px-6 py-24 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -488,11 +504,11 @@ function Index() {
       </section>
 
       {/* ============ Final CTA: booking first ============ */}
-      <section id="work-with-us" className="scroll-mt-20 bg-card px-6 py-24 sm:scroll-mt-24 sm:py-32">
+      <section id="work-with-us" className="scroll-mt-20 bg-section-electric px-6 py-24 sm:scroll-mt-24 sm:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
-              Book a call
+              Contact
             </p>
             <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
               Book Your Free 30-Minute Brand Audit
@@ -501,6 +517,15 @@ function Index() {
               A quick, honest read on your positioning, brand and website, plus the one change most likely
               to lift enquiries. No pitch, no obligation.
             </p>
+            <p className="mt-3 text-sm font-semibold leading-6 text-foreground/65">
+              Book below, ask a quick question on WhatsApp, or send a written enquiry.
+            </p>
+            <Button asChild variant="outline" className="lift mt-7 min-h-12 border-whatsapp px-6 font-extrabold text-foreground hover:bg-whatsapp/20">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="Message Chrizos Media on WhatsApp">
+                <WhatsAppIcon className="mr-2 h-5 w-5 text-whatsapp" />
+                Ask on WhatsApp
+              </a>
+            </Button>
           </Reveal>
         </div>
 
@@ -563,12 +588,30 @@ function Index() {
               </div>
 
               <div className="grid gap-2">
-                <label htmlFor="inquiry" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                  Inquiry / Service Needed
+                <label htmlFor="service" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                  Service Needed
+                </label>
+                <select
+                  id="service"
+                  name="service"
+                  required
+                  defaultValue="General Enquiry"
+                  className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors focus:border-foreground"
+                >
+                  <option>Paid Advertising</option>
+                  <option>Content Strategy</option>
+                  <option>Brand Strategy &amp; Market Insights</option>
+                  <option>General Enquiry</option>
+                </select>
+              </div>
+
+              <div className="grid gap-2">
+                <label htmlFor="message" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                  Message
                 </label>
                 <textarea
-                  id="inquiry"
-                  name="inquiry"
+                  id="message"
+                  name="message"
                   required
                   minLength={10}
                   rows={4}
