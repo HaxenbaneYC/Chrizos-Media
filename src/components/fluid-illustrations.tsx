@@ -19,7 +19,7 @@ function Glass({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={`glass-panel ${className}`}>{children}</div>;
+  return <div className={`graphic-glass ${className}`}>{children}</div>;
 }
 
 const faintLine = "h-2 rounded-full bg-foreground/20";
@@ -28,13 +28,13 @@ const strongLine = "h-2.5 rounded-full bg-foreground/80";
 /** 01 — Paid Advertising: a live campaign performance dashboard. */
 export function GrowthFlow({ className = "" }: { className?: string }) {
   const bars = [
-    { height: "38%", value: "1.6x" },
-    { height: "52%", value: "2.2x" },
-    { height: "44%", value: "1.9x" },
-    { height: "66%", value: "2.9x" },
-    { height: "58%", value: "2.5x" },
-    { height: "82%", value: "3.7x" },
-    { height: "95%", value: "4.8x" },
+    { height: "38%", value: "Example 1.6x" },
+    { height: "52%", value: "Example 2.2x" },
+    { height: "44%", value: "Example 1.9x" },
+    { height: "66%", value: "Example 2.9x" },
+    { height: "58%", value: "Example 2.5x" },
+    { height: "82%", value: "Target 3.7x" },
+    { height: "95%", value: "Target 4.8x" },
   ];
 
   const chartRef = useRef<HTMLDivElement>(null);
@@ -62,15 +62,15 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
         <div className="flex h-full flex-col gap-3">
           <div className="grid grid-cols-3 gap-2">
             {[
-              { k: "ROAS", v: "4.8x" },
-              { k: "CPA", v: "-32%" },
-              { k: "Leads", v: "+61%" },
+              { k: "ROAS", v: "Target 3–5x" },
+              { k: "CPA", v: "Lower by design" },
+              { k: "Leads", v: "Weekly reports" },
             ].map((m) => (
-              <Glass key={m.k} className="fluid-drift lift p-3">
-                <span className="block text-[9px] font-bold uppercase tracking-[0.15em] text-foreground/55">
+              <Glass key={m.k} className="fluid-drift lift min-w-0 p-3">
+                <span className="graphic-kicker block">
                   {m.k}
                 </span>
-                <span className="mt-1 block text-lg font-extrabold leading-none text-foreground">
+                <span className="mt-1.5 block text-[clamp(0.62rem,2.5vw,0.9rem)] font-extrabold leading-tight text-foreground">
                   {m.v}
                 </span>
               </Glass>
@@ -78,13 +78,13 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
           </div>
 
           <Glass className="fluid-drift flex flex-1 flex-col p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70">
-                Campaign return
+            <div className="flex items-start justify-between gap-3">
+              <span className="graphic-headline max-w-[75%]">
+                Example target: 3–5x ROAS
               </span>
-              <span className="flex items-center gap-1.5 text-[10px] font-bold text-foreground/80">
+              <span className="flex shrink-0 items-center gap-1.5 text-[9px] font-bold uppercase text-foreground/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-background" />
-                Live
+                Illustrative
               </span>
             </div>
 
@@ -96,7 +96,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
                     key={bar.value + index}
                     className="bar-col group relative flex h-full flex-1 items-end"
                   >
-                    <span className="pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 rounded-md bg-foreground px-1.5 py-0.5 text-[9px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                    <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-1.5 py-0.5 text-[8px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       {bar.value}
                     </span>
                     <div
@@ -113,16 +113,8 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
               })}
             </div>
 
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              {[
-                "Spend",
-                "Revenue",
-                "Scale",
-              ].map((label) => (
-                <span key={label} className="rounded-full bg-foreground/10 px-2 py-1 text-center text-[9px] font-bold uppercase tracking-wider text-foreground/70">
-                  {label}
-                </span>
-              ))}
+            <div className="mt-3 rounded-lg bg-foreground/10 px-3 py-2 text-[9px] font-bold leading-4 text-foreground/80">
+              Conversion tracking from day one. Leads reported weekly.
             </div>
           </Glass>
         </div>
@@ -149,11 +141,11 @@ export function ContentFlow({ className = "" }: { className?: string }) {
         <div className="flex h-full flex-col gap-3">
           <Glass className="fluid-drift p-4">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70">
+              <span className="graphic-headline">
                 Content calendar
               </span>
-              <span className="rounded-full bg-foreground px-2.5 py-1 text-[10px] font-bold text-primary-foreground">
-                Week 12
+              <span className="rounded-full bg-foreground px-2.5 py-1 text-[9px] font-bold uppercase text-primary-foreground">
+                Monthly plan
               </span>
             </div>
 
@@ -183,9 +175,10 @@ export function ContentFlow({ className = "" }: { className?: string }) {
           <Glass className="fluid-drift flex flex-1 items-center gap-3 p-4">
             <div className="h-full min-h-14 w-12 shrink-0 rounded-xl bg-foreground/80" />
             <div className="min-w-0 flex-1 space-y-2">
-              <div className={`${strongLine} w-3/4`} />
-              <div className={`${faintLine} w-full`} />
-              <div className={`${faintLine} w-2/3`} />
+              <p className="graphic-headline">Structured weekly cadence</p>
+              <p className="text-[9px] font-semibold leading-4 text-foreground/70">
+                Hook, story, CTA, planned a month at a time.
+              </p>
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {["Hook", "Story", "CTA"].map((tag) => (
                   <span
@@ -211,7 +204,7 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
       <Panel>
         <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-3">
           <Glass className="fluid-drift flex flex-col gap-3 p-4">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70">
+            <span className="graphic-headline">
               Market map
             </span>
             <div className="relative flex-1 rounded-xl border border-foreground/15 bg-foreground/10">
@@ -231,18 +224,16 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
           <div className="flex flex-col gap-3">
             <Glass className="fluid-drift p-4">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70">
-                  Positioning
+                <span className="graphic-headline">
+                  Research first
                 </span>
                 <span className="rounded-full bg-background px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-foreground">
                   Focus
                 </span>
               </div>
-              <div className="mt-4 space-y-2">
-                <div className={`${strongLine} w-11/12`} />
-                <div className={`${faintLine} w-full`} />
-                <div className={`${faintLine} w-3/5`} />
-              </div>
+              <p className="mt-3 text-[9px] font-semibold leading-4 text-foreground/70">
+                Real competitor and audience research before a single ad runs.
+              </p>
             </Glass>
 
             <Glass className="fluid-drift flex flex-1 flex-col justify-center gap-2 p-4">
@@ -268,17 +259,20 @@ export function ProblemFlow({ className = "" }: { className?: string }) {
       <Panel>
         <div className="flex h-full flex-col justify-between gap-3">
           {[
-            { label: "Attention", width: "w-full" },
-            { label: "Trust", width: "w-4/5" },
-            { label: "Enquiries", width: "w-3/5" },
-            { label: "Revenue", width: "w-2/5" },
+            { label: "Attention", goal: "Built for measurable reach growth", width: "w-full" },
+            { label: "Trust", goal: "Designed to lift engagement", width: "w-[92%]" },
+            { label: "Enquiries", goal: "Focused on qualified leads, not just clicks", width: "w-[84%]" },
+            { label: "Revenue", goal: "Every campaign tied to a revenue target", width: "w-[76%]" },
           ].map((step, index) => (
             <Glass key={step.label} className={`fluid-drift ${step.width} p-3`}>
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/75">
-                  {step.label}
-                </span>
-                <span className={`h-2.5 w-2.5 rounded-full ${index === 3 ? "bg-background" : "bg-foreground/35"}`} />
+              <div className="flex items-center gap-3">
+                <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${index === 3 ? "bg-background" : "bg-foreground/35"}`} />
+                <div className="min-w-0">
+                  <span className="graphic-kicker block">{step.label}</span>
+                  <span className="mt-1 block text-[clamp(0.58rem,2.2vw,0.72rem)] font-extrabold leading-tight text-foreground">
+                    {step.goal}
+                  </span>
+                </div>
               </div>
             </Glass>
           ))}

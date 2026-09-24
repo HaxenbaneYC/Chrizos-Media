@@ -252,6 +252,45 @@ main > section:not(:first-of-type) {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
+/* High-contrast glass used inside the scroll-in dashboard illustrations. */
+.graphic-glass {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.graphic-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0 14% auto;
+  height: 1px;
+  background: var(--color-background);
+  box-shadow: 0 0 10px var(--color-background);
+  opacity: 0.9;
+}
+
+.graphic-kicker {
+  font-size: 0.55rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-foreground) 62%, transparent);
+}
+
+.graphic-headline {
+  font-size: clamp(0.68rem, 2.7vw, 0.88rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--color-foreground);
+}
+
 /* Snappy hover / press feedback */
 .lift {
   transition: transform 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out;
