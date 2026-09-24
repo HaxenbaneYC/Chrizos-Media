@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ApiPublicChecklistDownloadRouteImport } from './routes/api/public/checklist-download'
 import { Route as LovableEmailEventsRouteImport } from './routes/lovable/email/events'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
@@ -24,6 +25,12 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicChecklistDownloadRoute =
+  ApiPublicChecklistDownloadRouteImport.update({
+    id: '/api/public/checklist-download',
+    path: '/api/public/checklist-download',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailEventsRoute = LovableEmailEventsRouteImport.update({
   id: '/lovable/email/events',
   path: '/lovable/email/events',
@@ -39,12 +46,14 @@ const LovableEmailTransactionalPreviewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -52,6 +61,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
   '/lovable/email/events': typeof LovableEmailEventsRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -60,18 +70,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/sitemap.xml'
+    | '/api/public/checklist-download'
     | '/lovable/email/events'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/sitemap.xml'
+    | '/api/public/checklist-download'
     | '/lovable/email/events'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
     | '/sitemap.xml'
+    | '/api/public/checklist-download'
     | '/lovable/email/events'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
@@ -79,6 +92,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicChecklistDownloadRoute: typeof ApiPublicChecklistDownloadRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
@@ -97,6 +111,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/checklist-download': {
+      id: '/api/public/checklist-download'
+      path: '/api/public/checklist-download'
+      fullPath: '/api/public/checklist-download'
+      preLoaderRoute: typeof ApiPublicChecklistDownloadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/events': {
@@ -119,6 +140,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicChecklistDownloadRoute: ApiPublicChecklistDownloadRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
