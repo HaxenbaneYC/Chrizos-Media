@@ -539,7 +539,7 @@ function Index() {
                   Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/75 sm:text-base">
-                  The exact issues we see most often in local businesses&apos; ads, content, and positioning: see if you&apos;re making any of them.
+                  The exact issues we see most often in local businesses&apos; ads, content, and how they stand out: see if you&apos;re making any of them.
                 </p>
               </div>
               <form onSubmit={handleChecklistSubmit} className="grid gap-3">
@@ -550,7 +550,7 @@ function Index() {
                   type="email"
                   required
                   autoComplete="email"
-                  placeholder="Enter your email — we'll send it instantly"
+                  placeholder="Enter your email — get it when it's ready"
                   className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
                 />
                 <Button type="submit" disabled={checklistStatus === "sending"} className="lift min-h-12 w-full font-extrabold">
