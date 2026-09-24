@@ -653,12 +653,20 @@ function Index() {
                 <div className="glass-soft p-6 sm:p-8">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">Verified result</span>
                   <p className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Break-even in 3 months.</p>
-                  <div className="relative mt-6 grid grid-cols-3 gap-2 text-center">
-                    <div aria-hidden className="absolute left-[16.67%] right-[16.67%] top-3 h-px bg-foreground/25" />
-                    {["Launch", "Month 2", "Break-even"].map((step, index) => (
-                      <div key={step} className="relative min-w-0">
-                        <span className={`relative z-10 mx-auto block rounded-full border border-border ${index === 2 ? "h-7 w-7 bg-primary" : "h-6 w-6 bg-card"}`} />
-                        <span className="mt-2 block text-[10px] font-bold leading-tight sm:text-xs">{step}</span>
+                  <div className="result-tracker mt-7" aria-label="Glaucia's journey to break-even">
+                    <div aria-hidden className="result-track">
+                      <span className="result-track-fill" />
+                    </div>
+                    {[
+                      { label: "Brand built", detail: "Identity" },
+                      { label: "Content ready", detail: "Production" },
+                      { label: "Campaign live", detail: "Publishing" },
+                      { label: "Break-even", detail: "Month 3" },
+                    ].map((step, index) => (
+                      <div key={step.label} className="result-step min-w-0 text-center">
+                        <span aria-hidden className="result-dot" />
+                        <span className="mt-3 block text-[10px] font-extrabold leading-tight sm:text-xs">{step.label}</span>
+                        <span className="mt-1 block text-[9px] font-semibold leading-tight text-foreground/55 sm:text-[10px]">{step.detail}</span>
                       </div>
                     ))}
                   </div>
