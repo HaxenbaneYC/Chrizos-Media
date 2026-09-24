@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "/fonts/montserrat-var.woff2",
         crossOrigin: "anonymous",
       },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "icon", type: "image/png", href: "/favicon-lightning.png?v=2" },
     ],
   }),
   shellComponent: RootShell,

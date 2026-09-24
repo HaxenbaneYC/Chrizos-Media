@@ -253,6 +253,58 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
   );
 }
 
+/** 04 — SEO: illustrative organic visibility and keyword movement. */
+export function SearchFlow({ className = "" }: { className?: string }) {
+  const rankingRows = [
+    { keyword: "Service keyword", position: "18 → 9" },
+    { keyword: "Local search", position: "24 → 12" },
+    { keyword: "Buyer question", position: "31 → 16" },
+  ];
+
+  return (
+    <div className={className} aria-label="Illustrative search performance dashboard" role="img">
+      <Panel>
+        <div className="flex h-full flex-col gap-3">
+          <Glass className="fluid-drift flex min-h-0 flex-[1.05] flex-col p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <span className="graphic-kicker block">Organic Traffic</span>
+                <span className="graphic-headline mt-1.5 block">Target: top 10 ranking</span>
+              </div>
+              <span className="rounded-full bg-background px-2 py-1 text-[9px] font-bold uppercase text-foreground">
+                Illustrative
+              </span>
+            </div>
+            <div className="relative mt-4 min-h-16 flex-1 overflow-hidden rounded-xl border border-foreground/15 bg-foreground/5">
+              <div className="absolute inset-x-3 bottom-3 top-3 flex items-end gap-1.5">
+                {[22, 30, 27, 42, 48, 61, 72, 86].map((height, index) => (
+                  <span
+                    key={`${height}-${index}`}
+                    className={`flex-1 rounded-t-sm ${index === 7 ? "bg-background" : "bg-foreground/25"}`}
+                    style={{ height: `${height}%` }}
+                  />
+                ))}
+              </div>
+            </div>
+          </Glass>
+
+          <Glass className="fluid-drift flex flex-1 flex-col p-4">
+            <span className="graphic-headline">Keyword Rankings</span>
+            <div className="mt-3 grid gap-2">
+              {rankingRows.map((row) => (
+                <div key={row.keyword} className="flex items-center justify-between gap-3 rounded-lg bg-foreground/10 px-3 py-2">
+                  <span className="truncate text-[9px] font-bold text-foreground/75">{row.keyword}</span>
+                  <span className="shrink-0 text-[9px] font-extrabold text-foreground">↑ {row.position}</span>
+                </div>
+              ))}
+            </div>
+          </Glass>
+        </div>
+      </Panel>
+    </div>
+  );
+}
+
 export function ProblemFlow({ className = "" }: { className?: string }) {
   return (
     <div className={className} aria-label="Marketing funnel problem map" role="img">

@@ -13,6 +13,7 @@ import {
   GrowthFlow,
   ProblemFlow,
   ProofFlow,
+  SearchFlow,
   StrategyFlow,
 } from "@/components/fluid-illustrations";
 
@@ -56,10 +57,10 @@ export const Route = createFileRoute("/")({
           "A boutique digital marketing agency for paid advertising, content strategy, and brand consulting that turns attention into measurable growth.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://graphics-gleam-lab.lovable.app/" },
+      { property: "og:url", content: "https://chrizosmedia.com/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://graphics-gleam-lab.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://chrizosmedia.com/" }],
   }),
   component: Index,
 });
@@ -70,7 +71,7 @@ type Service = {
   tagline: string;
   description: string;
   points: string[];
-  visual: "growth" | "content" | "strategy";
+  visual: "growth" | "content" | "strategy" | "search";
 };
 
 const services: Service[] = [
@@ -112,6 +113,19 @@ const services: Service[] = [
       "Actionable growth roadmap for campaigns and content",
     ],
     visual: "strategy",
+  },
+  {
+    number: "04",
+    title: "SEO",
+    tagline: "Get found by people already looking for what you sell.",
+    description:
+      "Technical, on-page, and content SEO built to grow organic visibility and search rankings over time, so you're not paying for every single lead.",
+    points: [
+      "Technical SEO audits & fixes (site speed, indexing, structure)",
+      "On-page optimization & keyword strategy",
+      "Content built to rank, not just to post",
+    ],
+    visual: "search",
   },
 ];
 
@@ -160,6 +174,7 @@ function Index() {
       | "Paid Advertising"
       | "Content Strategy"
       | "Brand Strategy & Market Insights"
+      | "SEO"
       | "General Enquiry";
     const message = String(formData.get("message") ?? "").trim();
 
@@ -340,7 +355,7 @@ function Index() {
               aria-hidden={copy === 1}
               className="px-6 text-sm font-semibold uppercase tracking-[0.35em] text-foreground/60"
             >
-              Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Meta (Instagram &amp; Facebook) Ads&nbsp;&nbsp;✦&nbsp;&nbsp;Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Market Insights&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;
+              Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Meta (Instagram &amp; Facebook) Ads&nbsp;&nbsp;✦&nbsp;&nbsp;Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Market Insights&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;SEO&nbsp;&nbsp;✦&nbsp;&nbsp;
             </span>
           ))}
         </div>
@@ -407,8 +422,10 @@ function Index() {
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
                           <ContentFlow className="h-full w-full" />
-                        ) : (
+                        ) : service.visual === "strategy" ? (
                           <StrategyFlow className="h-full w-full" />
+                        ) : (
+                          <SearchFlow className="h-full w-full" />
                         )}
                       </div>
                     </div>
@@ -601,6 +618,7 @@ function Index() {
                   <option>Paid Advertising</option>
                   <option>Content Strategy</option>
                   <option>Brand Strategy &amp; Market Insights</option>
+                  <option>SEO</option>
                   <option>General Enquiry</option>
                 </select>
               </div>
