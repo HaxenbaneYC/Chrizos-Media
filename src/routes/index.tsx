@@ -258,7 +258,7 @@ function Index() {
 
       if (result.status === "sent") {
         setChecklistStatus("sent");
-        setChecklistMessage("You're on the list. We'll email the checklist as soon as it is ready.");
+        setChecklistMessage("Sent! Your checklist is on its way to your inbox — or grab it right now:");
         form.reset();
         return;
       }
@@ -560,6 +560,15 @@ function Index() {
                   <p className="text-sm font-semibold leading-6 text-foreground/75" role={checklistStatus === "not_sent" ? "alert" : "status"}>
                     {checklistMessage}
                   </p>
+                ) : null}
+                {checklistStatus === "sent" ? (
+                  <a
+                    href="/downloads/chrizos-media-dubai-marketing-checklist.pdf"
+                    download
+                    className="lift min-h-12 inline-flex w-full items-center justify-center rounded-xl bg-foreground px-4 font-extrabold text-background"
+                  >
+                    Download the Checklist (PDF)
+                  </a>
                 ) : null}
               </form>
             </div>
