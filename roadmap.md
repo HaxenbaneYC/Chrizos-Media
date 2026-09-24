@@ -20,4 +20,5 @@
 - [x] Site motion pass (reveal stagger, hover/press feedback, hero parallax)
 - [x] Strengthen dashboard graphics with target, example, and process-led framing
 - [x] Link the Chrizos Media Calendly account to the project
-- [ ] Real scheduling embed in the booking section — ON HOLD per user until further instructions
+- [x] Add the real Calendly scheduler with confirmation and direct-link fallback messaging
+- [x] Add a prominent post-services booking call to action
