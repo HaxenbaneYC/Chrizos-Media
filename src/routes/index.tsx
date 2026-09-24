@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -53,6 +53,75 @@ function formatWhatsAppDisplay(raw: string) {
   return `+${digits}`;
 }
 
+const RESULT_STAGES = [
+  { label: "Brand built", detail: "Identity" },
+  { label: "Content ready", detail: "Production" },
+  { label: "Campaign live", detail: "Publishing" },
+  { label: "Break-even", detail: "Month 3" },
+];
+
+function ResultTracker() {
+  const trackerRef = useRef<HTMLDivElement>(null);
+  const [activeStage, setActiveStage] = useState(-1);
+
+  useEffect(() => {
+    const tracker = trackerRef.current;
+    if (!tracker) return;
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let currentStage = -1;
+    const advance = () => {
+      if (currentStage === RESULT_STAGES.length - 1) {
+        timer = setTimeout(() => {
+          currentStage = -1;
+          setActiveStage(-1);
+          timer = setTimeout(advance, 1200);
+        }, 1800);
+        return;
+      }
+      currentStage += 1;
+      setActiveStage(currentStage);
+      timer = setTimeout(advance, 1200);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || timer) return;
+        setActiveStage(-1);
+        timer = setTimeout(advance, 1800);
+      },
+      { threshold: 0.6 },
+    );
+
+    observer.observe(tracker);
+    return () => {
+      observer.disconnect();
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={trackerRef}
+      className="result-tracker mt-7"
+      data-active={activeStage}
+      aria-label="Glaucia's journey to break-even"
+    >
+      <div aria-hidden className="result-track">
+        <span className="result-track-fill" />
+      </div>
+      {RESULT_STAGES.map((step, index) => (
+        <div key={step.label} className="result-step min-w-0 text-center">
+          <span aria-hidden className={`result-dot ${index <= activeStage ? "is-lit" : ""}`} />
+          <span className={`mt-3 block text-[10px] font-extrabold leading-tight transition-opacity duration-500 sm:text-xs ${index <= activeStage ? "opacity-100" : "opacity-55"}`}>
+            {step.label}
+          </span>
+          <span className="mt-1 block text-[9px] font-semibold leading-tight text-foreground/55 sm:text-[10px]">{step.detail}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   loader: () => getSiteSettings(),
@@ -75,6 +144,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: SOCIAL_SHARE_IMAGE_URL },
       { name: "twitter:image:alt", content: "Chrizos Media logo on an electric blue background" },
+      { name: "google-site-verification", content: "uzzj9R9Aahmkmf3VYqislFgiWItzv8dwuVJ5lUHZKc0" },
     ],
     links: [{ rel: "canonical", href: "https://chrizosmedia.com/" }],
     scripts: [
@@ -653,23 +723,7 @@ function Index() {
                 <div className="glass-soft p-6 sm:p-8">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">Verified result</span>
                   <p className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Break-even in 3 months.</p>
-                  <div className="result-tracker mt-7" aria-label="Glaucia's journey to break-even">
-                    <div aria-hidden className="result-track">
-                      <span className="result-track-fill" />
-                    </div>
-                    {[
-                      { label: "Brand built", detail: "Identity" },
-                      { label: "Content ready", detail: "Production" },
-                      { label: "Campaign live", detail: "Publishing" },
-                      { label: "Break-even", detail: "Month 3" },
-                    ].map((step, index) => (
-                      <div key={step.label} className="result-step min-w-0 text-center">
-                        <span aria-hidden className="result-dot" />
-                        <span className="mt-3 block text-[10px] font-extrabold leading-tight sm:text-xs">{step.label}</span>
-                        <span className="mt-1 block text-[9px] font-semibold leading-tight text-foreground/55 sm:text-[10px]">{step.detail}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <ResultTracker />
                 </div>
               </div>
             </Reveal>
