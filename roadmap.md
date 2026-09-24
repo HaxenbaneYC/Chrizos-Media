@@ -45,3 +45,4 @@
 - [x] Focus hero, metadata, and About copy on Dubai local businesses
 - [x] Translate marketing jargon in service copy and visual panels into plain language
 - [x] Write the “5 Marketing Mistakes Costing Dubai Businesses Clients” PDF and enable automatic delivery
+- [x] Replace the generic proof area with a full Glaucia case study using the real shoot, logo, delivered work, and break-even result
