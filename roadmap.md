@@ -36,3 +36,7 @@
 - [x] Add a branded social share image with matching image descriptions
 - [x] Add Dubai ProfessionalService structured data for the four services and Instagram
 - [x] Keep the one-page sitemap as-is; include future public pages when they are added
+- [ ] Replace the social-proof mockup with an honest three-point break-even timeline
+- [ ] Confirm SEO remains in the scrolling services marquee
+- [ ] Rework the four services into an even desktop grid and clean mobile stack
+- [ ] Verify proof and service layouts on desktop and mobile
