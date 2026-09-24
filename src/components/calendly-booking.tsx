@@ -2,13 +2,16 @@ import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-const CALENDLY_URL = "https://calendly.com/chrizosmedia/youssef";
+const DEFAULT_CALENDLY_URL = "https://calendly.com/chrizosmedia/youssef";
 
 type CalendlyMessage = {
   event?: string;
 };
 
-export function CalendlyBooking() {
+export function CalendlyBooking({ url, onBooked }: { url?: string; onBooked?: () => void } = {}) {
+  const CALENDLY_URL = url || DEFAULT_CALENDLY_URL;
+  const bookedRef = useRef(onBooked);
+  bookedRef.current = onBooked;
   const [loaded, setLoaded] = useState(false);
   const [timedOut, setTimedOut] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -21,6 +24,7 @@ export function CalendlyBooking() {
       if (message.origin !== "https://calendly.com") return;
       if (message.data?.event === "calendly.event_scheduled") {
         setConfirmed(true);
+        bookedRef.current?.();
       }
     };
 
