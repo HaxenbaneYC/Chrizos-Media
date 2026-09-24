@@ -44,6 +44,14 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
   );
 }
 
+function formatWhatsAppDisplay(raw: string) {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 12 && digits.startsWith("971")) {
+    return `+971 ${digits.slice(3, 5)} ${digits.slice(5, 8)} ${digits.slice(8)}`;
+  }
+  return `+${digits}`;
+}
+
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   loader: () => getSiteSettings(),
@@ -723,7 +731,7 @@ function Index() {
                       <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-base font-extrabold">+{settings.whatsapp_number}</span>
+                      <span className="block truncate text-base font-extrabold">{formatWhatsAppDisplay(settings.whatsapp_number)}</span>
                       <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
                         WhatsApp &middot; Fastest reply
                       </span>
