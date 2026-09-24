@@ -477,7 +477,7 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="glass-panel overflow-hidden">
+            <div className="glass-panel aspect-[4/3] overflow-hidden">
               <ProblemFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -556,7 +556,7 @@ function Index() {
                   </div>
                   <div className="mt-8">
                     <div className="glass-panel overflow-hidden">
-                      <div className="aspect-[4/3] w-full">
+                      <div className="aspect-square w-full sm:aspect-[4/3]">
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
