@@ -10,6 +10,11 @@ const MAX_SUBMISSIONS_PER_WINDOW = 3
 
 const recentSubmissions = new Map<string, number[]>()
 
+const checklistRequestInput = z.object({
+  submissionId: z.string().uuid(),
+  email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
+})
+
 const contactInquiryInput = z.object({
   submissionId: z.string().uuid(),
   name: z.string().trim().min(1).max(120),
@@ -28,6 +33,8 @@ const contactInquiryInput = z.object({
 export type ContactInquiryResult =
   | { status: 'sent' }
   | { status: 'not_sent'; reason: 'recipient_suppressed' | 'email_unavailable' | 'rate_limited' }
+
+export type ChecklistRequestResult = ContactInquiryResult
 
 function isWithinRateLimit(key: string) {
   const now = Date.now()
@@ -68,6 +75,37 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
           phone: data.phone,
           service: data.service,
           message: data.message,
+          submittedAt: formatSubmittedAt(),
+        },
+      })
+
+      if (!result.sent) {
+        return { status: 'not_sent', reason: 'recipient_suppressed' }
+      }
+
+      return { status: 'sent' }
+    } catch (error) {
+      if (error instanceof EmailAPIError) {
+        return { status: 'not_sent', reason: 'email_unavailable' }
+      }
+
+      throw error
+    }
+  })
+
+export const sendChecklistRequest = createServerFn({ method: 'POST' })
+  .inputValidator((data) => checklistRequestInput.parse(data))
+  .handler(async ({ data }): Promise<ChecklistRequestResult> => {
+    if (!isWithinRateLimit(`checklist:${data.email}`)) {
+      return { status: 'not_sent', reason: 'rate_limited' }
+    }
+
+    try {
+      const result = await sendTemplateEmail('checklist-request', CONTACT_EMAIL, {
+        idempotencyKey: `checklist-request-${data.submissionId}`,
+        replyTo: data.email,
+        templateData: {
+          email: data.email,
           submittedAt: formatSubmittedAt(),
         },
       })

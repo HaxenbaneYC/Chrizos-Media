@@ -40,3 +40,8 @@
 - [x] Confirm SEO remains in the scrolling services marquee
 - [x] Rework the four services into an even desktop grid and clean mobile stack
 - [x] Verify proof and service layouts on desktop and mobile
+- [x] Add one-field email capture for the Dubai marketing checklist
+- [x] Add the audit guarantee, written summary bonus, and honest first-five-clients scarcity near key calls to action
+- [x] Focus hero, metadata, and About copy on Dubai local businesses
+- [x] Translate marketing jargon in service copy and visual panels into plain language
+- [ ] Write the “5 Marketing Mistakes Costing Dubai Businesses Clients” PDF and enable automatic delivery
