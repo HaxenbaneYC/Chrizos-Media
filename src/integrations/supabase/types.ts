@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_config: {
+        Row: {
+          id: number
+          panel_password_hash: string
+          panel_password_salt: string
+          sessions_valid_after: string
+        }
+        Insert: {
+          id?: number
+          panel_password_hash: string
+          panel_password_salt: string
+          sessions_valid_after?: string
+        }
+        Update: {
+          id?: number
+          panel_password_hash?: string
+          panel_password_salt?: string
+          sessions_valid_after?: string
+        }
+        Relationships: []
+      }
       checklist_events: {
         Row: {
           created_at: string
@@ -32,6 +53,84 @@ export type Database = {
           event_type?: string
           id?: never
           source?: string
+        }
+        Relationships: []
+      }
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+          service: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone?: string
+          service: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          service?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          announcement_text: string
+          calendly_url: string
+          checklist_enabled: boolean
+          contact_email: string
+          hero_headline: string
+          hero_subheading: string
+          id: number
+          instagram_url: string
+          scarcity_enabled: boolean
+          scarcity_text: string
+          updated_at: string
+          whatsapp_number: string
+        }
+        Insert: {
+          announcement_text?: string
+          calendly_url?: string
+          checklist_enabled?: boolean
+          contact_email?: string
+          hero_headline?: string
+          hero_subheading?: string
+          id?: number
+          instagram_url?: string
+          scarcity_enabled?: boolean
+          scarcity_text?: string
+          updated_at?: string
+          whatsapp_number?: string
+        }
+        Update: {
+          announcement_text?: string
+          calendly_url?: string
+          checklist_enabled?: boolean
+          contact_email?: string
+          hero_headline?: string
+          hero_subheading?: string
+          id?: number
+          instagram_url?: string
+          scarcity_enabled?: boolean
+          scarcity_text?: string
+          updated_at?: string
+          whatsapp_number?: string
         }
         Relationships: []
       }
@@ -67,7 +166,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -195,7 +294,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "viewer"],
     },
   },
 } as const

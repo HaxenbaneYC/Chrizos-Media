@@ -7,6 +7,7 @@ import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { CalendlyBooking } from "@/components/calendly-booking";
+import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { Reveal } from "@/components/reveal";
 import { sendChecklistRequest, sendContactInquiry } from "@/lib/contact.functions";
 import {
@@ -18,9 +19,8 @@ import {
   StrategyFlow,
 } from "@/components/fluid-illustrations";
 
-const CONTACT_EMAIL = "chrizosmedia@gmail.com";
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
-const WHATSAPP_URL = "https://wa.me/971504254366?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
+const WHATSAPP_TEXT = "?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
 const SITE_DESCRIPTION =
   "Chrizos Media helps Dubai local businesses turn attention into paying customers through market-aware strategy, paid advertising, content, brand consulting, and SEO.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
@@ -46,6 +46,7 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
+  loader: () => getSiteSettings(),
   head: () => ({
     meta: [
       { title: "Chrizos Media | Dubai Marketing & Advertising Agency" },
@@ -167,6 +168,11 @@ const proofCards = [
 
 
 function Index() {
+  const settings = Route.useLoaderData() ?? DEFAULT_SETTINGS;
+  const CONTACT_EMAIL = settings.contact_email;
+  const WHATSAPP_URL = `https://wa.me/${settings.whatsapp_number}${WHATSAPP_TEXT}`;
+  const IG_URL = settings.instagram_url;
+  const logBooking = useServerFn(trackBookingClick);
   const submitContactInquiry = useServerFn(sendContactInquiry);
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [inquiryStatus, setInquiryStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
@@ -277,8 +283,11 @@ function Index() {
 
   return (
     <main className="bg-background text-foreground">
+      {settings.announcement_text ? (
+        <div className="fixed inset-x-0 top-0 z-[60] bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:text-sm">{settings.announcement_text}</div>
+      ) : null}
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-200 ${
+        className={`fixed inset-x-0 ${settings.announcement_text ? "top-8 sm:top-9" : "top-0"} z-50 transition-colors duration-200 ${
           scrollY > 12
             ? "glass-panel rounded-none border-x-0 border-t-0"
             : "border-b border-border bg-background/95"
@@ -312,7 +321,7 @@ function Index() {
               </a>
             ))}
             <a
-              href={INSTAGRAM_URL}
+              href={IG_URL}
               target="_blank"
               rel="noreferrer"
               aria-label="Chrizos Media on Instagram"
@@ -339,12 +348,11 @@ function Index() {
 
 
         <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
-          More sales. More revenue. More recognition.
+          {settings.hero_headline}
         </h1>
 
         <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
-          Chrizos Media helps Dubai businesses turn attention into paying customers, with strategy,
-          campaigns, and content built around your local market, not generic playbooks.
+          {settings.hero_subheading}
         </p>
 
         <a
@@ -354,9 +362,9 @@ function Index() {
           Book Your Free Brand Audit
         </a>
 
-        <p className="relative z-10 mt-4 max-w-xl text-center text-sm font-semibold leading-6 text-foreground/75">
-          We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
-        </p>
+        {settings.scarcity_enabled && settings.scarcity_text ? (
+<p className="relative z-10 mt-4 max-w-xl text-center text-sm font-semibold leading-6 text-foreground/75">{settings.scarcity_text}</p>
+) : null}
 
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
@@ -517,9 +525,9 @@ function Index() {
               <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/75 sm:text-base">
                 Get an honest read on how your brand compares, how clearly it communicates, and how well your website turns interest into enquiries.
               </p>
-              <p className="mt-3 text-sm font-bold leading-6 text-foreground/85">
-                We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
-              </p>
+              {settings.scarcity_enabled && settings.scarcity_text ? (
+<p className="mt-3 text-sm font-bold leading-6 text-foreground/85">{settings.scarcity_text}</p>
+) : null}
             </div>
             <Button asChild size="lg" className="lift min-h-12 shrink-0 rounded-xl px-7 font-extrabold">
               <a href="#work-with-us">See Live Availability</a>
@@ -529,6 +537,7 @@ function Index() {
       </section>
 
       {/* ============ Lead magnet ============ */}
+      {settings.checklist_enabled ? (
       <section className="bg-section-navy px-6 py-20 sm:py-24" aria-labelledby="checklist-title">
         <Reveal>
           <div className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
@@ -574,6 +583,7 @@ function Index() {
           </div>
         </Reveal>
       </section>
+      ) : null}
 
       {/* ============ Social Proof ============ */}
       <section id="proof" className="bg-section-navy px-6 py-24 sm:py-32">
@@ -661,15 +671,15 @@ function Index() {
                <p className="text-sm font-semibold leading-6 text-foreground/75">
                  You&apos;ll also get a written 1-page summary of the audit: yours to keep and act on, whether we work together or not.
                </p>
-               <p className="text-sm font-semibold leading-6 text-foreground/75">
-                 We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
-               </p>
+               {settings.scarcity_enabled && settings.scarcity_text ? (
+<p className="text-sm font-semibold leading-6 text-foreground/75">{settings.scarcity_text}</p>
+) : null}
              </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-foreground/65">
               Book below, ask a quick question on WhatsApp, or send a written enquiry.
             </p>
             <Button asChild variant="outline" className="lift mt-7 min-h-12 border-whatsapp px-6 font-extrabold text-foreground hover:bg-whatsapp/20">
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" aria-label="Message Chrizos Media on WhatsApp">
+              <a href={WHATSAPP_URL} onClick={() => { void logBooking({ data: { source: "whatsapp" } }); }} target="_blank" rel="noreferrer" aria-label="Message Chrizos Media on WhatsApp">
                 <WhatsAppIcon className="mr-2 h-5 w-5 text-whatsapp" />
                 Ask on WhatsApp
               </a>
@@ -679,7 +689,7 @@ function Index() {
 
         <div className="mx-auto mt-12 max-w-3xl">
           <Reveal delay={100}>
-            <CalendlyBooking />
+            <CalendlyBooking url={settings.calendly_url} onBooked={() => { void logBooking({ data: { source: "calendly" } }); }} />
           </Reveal>
         </div>
 
@@ -793,7 +803,7 @@ function Index() {
 
         <div className="mt-16 flex flex-col items-center gap-4">
           <a
-            href={INSTAGRAM_URL}
+            href={IG_URL}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
