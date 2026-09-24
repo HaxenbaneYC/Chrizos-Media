@@ -128,7 +128,7 @@ function Panel({ role }: { role: "owner" | "viewer" }) {
   const isOwner = role === "owner";
   return (
     <Tabs defaultValue="overview" className="space-y-6">
-      <TabsList className="flex h-auto flex-wrap">
+      <TabsList className="flex h-auto flex-wrap justify-start gap-1 bg-background/40 p-1 text-foreground/70">
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="inquiries">Inquiries</TabsTrigger>
         <TabsTrigger value="team">Team &amp; Access</TabsTrigger>
