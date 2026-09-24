@@ -398,6 +398,7 @@ main > section:not(:first-of-type) {
   background: var(--primary);
   transform: scaleX(0);
   transform-origin: left;
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .result-dot {
@@ -410,51 +411,33 @@ main > section:not(:first-of-type) {
   border: 2px solid color-mix(in oklab, var(--foreground) 40%, transparent);
   border-radius: 999px;
   background: var(--card);
+  box-shadow: 0 0 0 0 transparent;
+  transform: scale(0.88);
+  transition: background-color 600ms ease, border-color 600ms ease, box-shadow 600ms ease, transform 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.reveal.is-visible .result-track-fill {
-  animation: tracker-fill 2.4s cubic-bezier(0.22, 1, 0.36, 1) 250ms both;
+.result-tracker[data-active="0"] .result-track-fill {
+  transform: scaleX(0.01);
 }
 
-.reveal.is-visible .result-dot {
-  animation: tracker-light 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 250ms both;
+.result-tracker[data-active="1"] .result-track-fill {
+  transform: scaleX(0.333);
 }
 
-.reveal.is-visible .result-step:nth-child(3) .result-dot {
-  animation-delay: 900ms;
+.result-tracker[data-active="2"] .result-track-fill {
+  transform: scaleX(0.667);
 }
 
-.reveal.is-visible .result-step:nth-child(4) .result-dot {
-  animation-delay: 1550ms;
+.result-tracker[data-active="3"],
+.result-tracker[data-active="4"] .result-track-fill {
+  transform: scaleX(1);
 }
 
-.reveal.is-visible .result-step:nth-child(5) .result-dot {
-  animation-delay: 2200ms;
-}
-
-@keyframes tracker-fill {
-  to { transform: scaleX(1); }
-}
-
-@keyframes tracker-light {
-  0% {
-    background: var(--card);
-    border-color: color-mix(in oklab, var(--foreground) 40%, transparent);
-    box-shadow: 0 0 0 0 transparent;
-    transform: scale(0.85);
-  }
-  70% {
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 0 0 0 0.4rem color-mix(in oklab, var(--primary) 18%, transparent), 0 0 1.25rem color-mix(in oklab, var(--primary) 65%, transparent);
-    transform: scale(1.18);
-  }
-  100% {
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 0 0 0 0.2rem color-mix(in oklab, var(--primary) 14%, transparent), 0 0 0.75rem color-mix(in oklab, var(--primary) 45%, transparent);
-    transform: scale(1);
-  }
+.result-dot.is-lit {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 0.2rem color-mix(in oklab, var(--primary) 14%, transparent), 0 0 0.9rem color-mix(in oklab, var(--primary) 55%, transparent);
+  transform: scale(1);
 }
 
 /* Hero parallax layer */
@@ -475,11 +458,9 @@ main > section:not(:first-of-type) {
     animation: none;
   }
   .result-track-fill {
-    transform: none;
+    transition: none;
   }
   .result-dot {
-    background: var(--primary);
-    border-color: var(--primary);
-    animation: none;
+    transition: none;
   }
 }
