@@ -4,6 +4,8 @@ import { useEffect, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
+import glauciaCampaign from "../assets/glaucia-campaign-shoot.png.asset.json";
+import glauciaLogo from "../assets/glaucia-logo.jpg.asset.json";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { CalendlyBooking } from "@/components/calendly-booking";
@@ -14,7 +16,6 @@ import {
   ContentFlow,
   GrowthFlow,
   ProblemFlow,
-  ProofFlow,
   SearchFlow,
   StrategyFlow,
 } from "@/components/fluid-illustrations";
@@ -165,15 +166,6 @@ const services: Service[] = [
     visual: "search",
   },
 ];
-
-const proofCards = [
-  {
-    label: "Client result",
-    value: "Break-even in 3 months",
-    detail: "A single-product brand reached break-even within three months of launch.",
-  },
-];
-
 
 function Index() {
   const settings = Route.useLoaderData() ?? DEFAULT_SETTINGS;
@@ -593,39 +585,87 @@ function Index() {
       </section>
       ) : null}
 
-      {/* ============ Social Proof ============ */}
-      <section id="proof" className="bg-section-navy px-6 py-24 sm:py-32">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+      {/* ============ Glaucia Case Study ============ */}
+      <section id="proof" className="bg-section-navy px-6 py-24 sm:py-32" aria-labelledby="glaucia-case-study-title">
+        <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
-              Social proof
-            </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-              Early results we can stand behind.
-            </h2>
-            <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              We are new, so we only publish results we have actually delivered. Here is where we are so far.
-            </p>
+            <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">Client case study</p>
+                <h2 id="glaucia-case-study-title" className="mt-4 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+                  Building Glaucia from brand to market.
+                </h2>
+              </div>
+              <p className="max-w-sm text-sm leading-6 text-foreground/70 sm:text-right">
+                Fashion brand launch · Full creative and paid campaign delivery
+              </p>
+            </div>
+          </Reveal>
 
-            <div className="mt-8 grid gap-3">
-              {proofCards.map((card) => (
-                <div key={card.value} className="glass-soft lift p-5">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
-                    {card.label}
-                  </span>
-                  <p className="mt-2 text-xl font-extrabold tracking-tight">{card.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-foreground/70">{card.detail}</p>
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+            <Reveal className="h-full">
+              <figure className="glass-panel relative h-full min-h-[520px] overflow-hidden sm:min-h-[680px] lg:min-h-0">
+                <img
+                  src={glauciaCampaign.url}
+                  alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-card via-card/80 to-transparent px-6 pb-6 pt-24 sm:px-8 sm:pb-8">
+                  <figcaption className="max-w-md text-sm font-semibold leading-6 text-foreground/85">
+                    One of the campaign images created as part of Glaucia&apos;s complete product launch.
+                  </figcaption>
                 </div>
-              ))}
-            </div>
-          </Reveal>
+              </figure>
+            </Reveal>
 
-          <Reveal delay={120}>
-            <div className="glass-panel overflow-hidden">
+            <Reveal delay={120} className="h-full">
+              <div className="flex h-full flex-col gap-4">
+                <div className="glass-soft flex min-h-28 items-center gap-5 p-5 sm:p-6">
+                  <img
+                    src={glauciaLogo.url}
+                    alt="Glaucia logo"
+                    className="h-20 w-20 shrink-0 rounded-lg object-cover"
+                    loading="lazy"
+                  />
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The client</span>
+                    <p className="mt-1 text-2xl font-extrabold">Glaucia</p>
+                    <p className="mt-1 text-sm leading-6 text-foreground/70">A single-product fashion brand prepared for its first campaign.</p>
+                  </div>
+                </div>
 
-              <ProofFlow className="h-full w-full" />
-            </div>
-          </Reveal>
+                <div className="glass-soft flex-1 p-6 sm:p-8">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">What we delivered</span>
+                  <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                    {["Full brand identity", "Product production", "Campaign photography", "Product images", "Social reels", "Paid marketing"].map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6">
+                        <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-7 border-t border-border pt-6 text-sm leading-7 text-foreground/75">
+                    We developed the visual identity, produced the product and launch content, then carried the same creative direction into the paid campaign.
+                  </p>
+                </div>
+
+                <div className="glass-soft p-6 sm:p-8">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">Verified result</span>
+                  <p className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Break-even in 3 months.</p>
+                  <div className="relative mt-6 grid grid-cols-3 gap-2 text-center">
+                    <div aria-hidden className="absolute left-[16.67%] right-[16.67%] top-3 h-px bg-foreground/25" />
+                    {["Launch", "Month 2", "Break-even"].map((step, index) => (
+                      <div key={step} className="relative min-w-0">
+                        <span className={`relative z-10 mx-auto block rounded-full border border-border ${index === 2 ? "h-7 w-7 bg-primary" : "h-6 w-6 bg-card"}`} />
+                        <span className="mt-2 block text-[10px] font-bold leading-tight sm:text-xs">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
