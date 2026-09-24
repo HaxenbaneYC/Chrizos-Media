@@ -19,6 +19,7 @@ const contactInquiryInput = z.object({
     'Paid Advertising',
     'Content Strategy',
     'Brand Strategy & Market Insights',
+    'SEO',
     'General Enquiry',
   ]),
   message: z.string().trim().min(10).max(3000),

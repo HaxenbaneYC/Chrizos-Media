@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://graphics-gleam-lab.lovable.app/sitemap.xml
+Sitemap: https://chrizosmedia.com/sitemap.xml
