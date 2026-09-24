@@ -57,7 +57,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <div className={className} aria-label="Campaign performance dashboard" role="img">
+    <div className={className} aria-label="Illustrative paid advertising dashboard showing ROAS and CPA targets, weekly lead reporting, and a rising campaign return chart" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <div className="grid grid-cols-3 gap-2">
@@ -136,7 +136,7 @@ export function ContentFlow({ className = "" }: { className?: string }) {
   ];
 
   return (
-    <div className={className} aria-label="Content calendar interface" role="img">
+    <div className={className} aria-label="Content strategy calendar showing a structured weekly cadence for hooks, stories, and calls to action" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <Glass className="fluid-drift p-4">
@@ -200,7 +200,7 @@ export function ContentFlow({ className = "" }: { className?: string }) {
 /** 03 — Brand Strategy & Market Insights: research, positioning and action plan. */
 export function StrategyFlow({ className = "" }: { className?: string }) {
   return (
-    <div className={className} aria-label="Brand strategy and market insights workspace" role="img">
+    <div className={className} aria-label="Brand strategy workspace showing a competitor market map and audience, offer, and message research priorities" role="img">
       <Panel>
         <div className="grid h-full grid-cols-[0.9fr_1.1fr] gap-3">
           <Glass className="fluid-drift flex flex-col gap-3 p-4">
@@ -253,8 +253,45 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
   );
 }
 
-/** 04 — SEO: illustrative organic visibility and keyword movement. */
+function SeoIcon({ type }: { type: "audit" | "keyword" | "content" }) {
+  if (type === "audit") {
+    return (
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-10 w-10">
+        <rect x="6" y="9" width="27" height="22" rx="3" stroke="currentColor" strokeWidth="2" />
+        <path d="M6 15h27M11 12h.1M15 12h.1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="31" cy="30" r="8" stroke="currentColor" strokeWidth="2.5" />
+        <path d="m37 36 6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      </svg>
+    );
+  }
+
+  if (type === "keyword") {
+    return (
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-10 w-10">
+        <path d="M11 5h19l8 8v30H11V5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M30 5v9h8M17 21h14M17 27h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="30" cy="31" r="5" stroke="currentColor" strokeWidth="2" />
+        <circle cx="30" cy="31" r="1.5" fill="currentColor" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" className="h-10 w-10">
+      <path d="M9 6h24l6 6v30H9V6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M33 6v7h6M15 33l13-13 4 4-13 13-6 2 2-6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="m29 35 5-5 4 4 5-7M39 27h4v4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** 04 — SEO: three core workstreams and illustrative keyword movement. */
 export function SearchFlow({ className = "" }: { className?: string }) {
+  const workstreams = [
+    { type: "audit" as const, title: "Technical Audit", detail: "Speed, indexing, and site structure." },
+    { type: "keyword" as const, title: "Keyword Strategy", detail: "On-page focus built around search intent." },
+    { type: "content" as const, title: "Content That Ranks", detail: "Useful pages designed to earn visibility." },
+  ];
   const rankingRows = [
     { keyword: "Service keyword", position: "18 → 9" },
     { keyword: "Local search", position: "24 → 12" },
@@ -262,31 +299,24 @@ export function SearchFlow({ className = "" }: { className?: string }) {
   ];
 
   return (
-    <div className={className} aria-label="Illustrative search performance dashboard" role="img">
-      <Panel>
-        <div className="flex h-full flex-col gap-3">
-          <Glass className="fluid-drift flex min-h-0 flex-[1.05] flex-col p-4">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <span className="graphic-kicker block">Organic Traffic</span>
-                <span className="graphic-headline mt-1.5 block">Target: top 10 ranking</span>
+    <div
+      className={className}
+      aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles above an illustrative Keyword Rankings widget"
+      role="img"
+    >
+      <div className="relative h-full w-full overflow-hidden bg-card">
+        <div className="flex h-full flex-col gap-3 p-5 sm:p-7">
+          <div className="grid flex-[1.35] grid-cols-1 gap-2 sm:grid-cols-3">
+            {workstreams.map((item) => (
+              <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-3 text-center">
+                <div className="seo-icon-tile flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-foreground">
+                  <SeoIcon type={item.type} />
+                </div>
+                <span className="mt-2.5 text-[10px] font-extrabold leading-tight text-foreground">{item.title}</span>
+                <span className="mt-1 text-[8px] font-semibold leading-3 text-foreground/65">{item.detail}</span>
               </div>
-              <span className="rounded-full bg-background px-2 py-1 text-[9px] font-bold uppercase text-foreground">
-                Illustrative
-              </span>
-            </div>
-            <div className="relative mt-4 min-h-16 flex-1 overflow-hidden rounded-xl border border-foreground/15 bg-foreground/5">
-              <div className="absolute inset-x-3 bottom-3 top-3 flex items-end gap-1.5">
-                {[22, 30, 27, 42, 48, 61, 72, 86].map((height, index) => (
-                  <span
-                    key={`${height}-${index}`}
-                    className={`flex-1 rounded-t-sm ${index === 7 ? "bg-background" : "bg-foreground/25"}`}
-                    style={{ height: `${height}%` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </Glass>
+            ))}
+          </div>
 
           <Glass className="fluid-drift flex flex-1 flex-col p-4">
             <span className="graphic-headline">Keyword Rankings</span>
@@ -300,14 +330,14 @@ export function SearchFlow({ className = "" }: { className?: string }) {
             </div>
           </Glass>
         </div>
-      </Panel>
+      </div>
     </div>
   );
 }
 
 export function ProblemFlow({ className = "" }: { className?: string }) {
   return (
-    <div className={className} aria-label="Marketing funnel problem map" role="img">
+    <div className={className} aria-label="Marketing funnel diagram connecting attention, trust, enquiries, and revenue goals" role="img">
       <Panel>
         <div className="flex h-full flex-col justify-center gap-4">
           {[
@@ -336,7 +366,7 @@ export function ProblemFlow({ className = "" }: { className?: string }) {
 
 export function ProofFlow({ className = "" }: { className?: string }) {
   return (
-    <div className={className} aria-label="Social proof dashboard" role="img">
+    <div className={className} aria-label="Results board illustrating reach, leads, and sales performance categories" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <Glass className="fluid-drift p-4">

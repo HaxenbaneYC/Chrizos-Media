@@ -31,3 +31,8 @@
 - [x] Move homepage canonical, social URL, sitemap, and robots references to chrizosmedia.com
 - [x] Add SEO as service 04 with an honest Search Performance illustration
 - [x] Add SEO to the marquee and contact service selection
+- [x] Replace the SEO trend chart with three glass icon illustrations and keep Keyword Rankings
+- [x] Add descriptive text alternatives for all logos and interface illustrations
+- [x] Add a branded social share image with matching image descriptions
+- [x] Add Dubai ProfessionalService structured data for the four services and Instagram
+- [x] Keep the one-page sitemap as-is; include future public pages when they are added
