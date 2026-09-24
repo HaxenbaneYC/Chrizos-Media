@@ -434,14 +434,16 @@ function Index() {
                     <p className="mt-4 max-w-lg leading-7 text-foreground/80">
                       {service.description}
                     </p>
-                    <ul className="mt-6 space-y-2.5">
-                      {service.points.map((point) => (
-                        <li key={point} className="flex items-start gap-3 text-sm font-semibold">
-                          <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
+                    {service.visual !== "search" ? (
+                      <ul className="mt-6 space-y-2.5">
+                        {service.points.map((point) => (
+                          <li key={point} className="flex items-start gap-3 text-sm font-semibold">
+                            <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                     <div className="glass-panel lift overflow-hidden">

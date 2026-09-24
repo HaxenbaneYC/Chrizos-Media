@@ -304,8 +304,8 @@ export function SearchFlow({ className = "" }: { className?: string }) {
       aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles above an illustrative Keyword Rankings widget"
       role="img"
     >
-      <Panel>
-        <div className="flex h-full flex-col gap-3">
+      <div className="relative h-full w-full overflow-hidden bg-card">
+        <div className="flex h-full flex-col gap-3 p-5 sm:p-7">
           <div className="grid flex-[1.35] grid-cols-1 gap-2 sm:grid-cols-3">
             {workstreams.map((item) => (
               <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-3 text-center">
@@ -330,7 +330,7 @@ export function SearchFlow({ className = "" }: { className?: string }) {
             </div>
           </Glass>
         </div>
-      </Panel>
+      </div>
     </div>
   );
 }
