@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -406,7 +406,7 @@ function Index() {
           fetchPriority="high"
           decoding="async"
           className="parallax-layer relative z-10 w-full max-w-xs sm:max-w-md"
-          style={{ "--hero-shift": `${scrollY * 0.12}px` } as React.CSSProperties}
+          style={{ "--hero-shift": `${scrollY * 0.12}px` } as CSSProperties}
         />
 
 
