@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Checklist Dashboard | Chrizos Media" },
@@ -97,7 +98,7 @@ function Dashboard() {
         </header>
 
         {admin.isLoading ? <p>Loading…</p> : admin.data === false ? (
-          <div className="glass rounded-2xl p-6">
+          <div className="glass-panel rounded-2xl p-6">
             <p className="font-bold">This account doesn't have dashboard access yet.</p>
             <p className="mt-1 text-sm text-foreground/70">Signed in as {user.email}.</p>
           </div>
@@ -115,7 +116,7 @@ function Dashboard() {
               <Stat label="Downloads" value={stats.downloads} note={`${stats.emailDl} from email, ${stats.downloads - stats.emailDl} from site`} />
               <Stat label="Download rate" value={`${stats.rate}%`} note="Downloads per sign-up" />
             </div>
-            <section className="glass rounded-2xl p-6">
+            <section className="glass-panel rounded-2xl p-6">
               <div className="mb-4 flex items-center gap-4 text-sm">
                 <span className="flex items-center gap-2"><i className="inline-block h-3 w-3 rounded-sm bg-primary" />Sign-ups</span>
                 <span className="flex items-center gap-2"><i className="inline-block h-3 w-3 rounded-sm bg-foreground" />Downloads</span>
@@ -144,7 +145,7 @@ function Dashboard() {
 
 function Stat({ label, value, note }: { label: string; value: number | string; note?: string }) {
   return (
-    <div className="glass rounded-2xl p-6">
+    <div className="glass-panel rounded-2xl p-6">
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/60">{label}</p>
       <p className="mt-2 text-4xl font-extrabold">{value}</p>
       {note ? <p className="mt-1 text-xs text-foreground/60">{note}</p> : null}

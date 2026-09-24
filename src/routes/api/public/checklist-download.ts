@@ -4,6 +4,7 @@ import { recordChecklistEvent } from "@/lib/checklist-events.server";
 const PDF_PATH = "/downloads/chrizos-media-dubai-marketing-checklist.pdf";
 
 export const Route = createFileRoute("/api/public/checklist-download")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       GET: async ({ request }) => {

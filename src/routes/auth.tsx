@@ -51,7 +51,7 @@ function AuthPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-section-navy px-6">
-      <form onSubmit={onSubmit} className="glass w-full max-w-sm space-y-4 rounded-2xl p-8">
+      <form onSubmit={onSubmit} className="glass-panel w-full max-w-sm space-y-4 rounded-2xl p-8">
         <h1 className="text-2xl font-extrabold">{mode === "signin" ? "Sign in" : "Create account"}</h1>
         <Input name="email" type="email" required placeholder="Email" autoComplete="email" />
         <Input name="password" type="password" required minLength={8} placeholder="Password" autoComplete={mode === "signin" ? "current-password" : "new-password"} />
