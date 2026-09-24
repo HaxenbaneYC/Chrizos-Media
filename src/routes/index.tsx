@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
+import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { CalendlyBooking } from "@/components/calendly-booking";
 import { Reveal } from "@/components/reveal";
@@ -20,6 +21,9 @@ import {
 const CONTACT_EMAIL = "chrizosmedia@gmail.com";
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_URL = "https://wa.me/971504254366?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
+const SITE_DESCRIPTION =
+  "Chrizos Media helps ambitious businesses turn attention into sales, revenue, and recognition through paid advertising, content strategy, and brand consulting.";
+const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
 
 function InstagramIcon({ className = "" }: { className?: string }) {
   return (
@@ -47,8 +51,7 @@ export const Route = createFileRoute("/")({
       { title: "Chrizos Media | Marketing & Advertising Agency" },
       {
         name: "description",
-        content:
-          "Chrizos Media helps ambitious businesses turn attention into sales, revenue, and recognition through paid advertising, content strategy, and brand consulting.",
+        content: SITE_DESCRIPTION,
       },
       { property: "og:title", content: "Chrizos Media | Marketing & Advertising Agency" },
       {
@@ -58,9 +61,35 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/" },
+      { property: "og:image", content: SOCIAL_SHARE_IMAGE_URL },
+      { property: "og:image:alt", content: "Chrizos Media logo on an electric blue background" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: SOCIAL_SHARE_IMAGE_URL },
+      { name: "twitter:image:alt", content: "Chrizos Media logo on an electric blue background" },
     ],
     links: [{ rel: "canonical", href: "https://chrizosmedia.com/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Chrizos Media",
+          description: SITE_DESCRIPTION,
+          url: "https://chrizosmedia.com",
+          logo: SOCIAL_SHARE_IMAGE_URL,
+          image: SOCIAL_SHARE_IMAGE_URL,
+          areaServed: {
+            "@type": "City",
+            name: "Dubai",
+            containedInPlace: { "@type": "Country", name: "United Arab Emirates" },
+          },
+          knowsAbout: ["Marketing", "Advertising", "Paid Advertising", "Content Strategy", "Brand Strategy", "SEO"],
+          serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Market Insights", "SEO"],
+          sameAs: [INSTAGRAM_URL],
+        }),
+      },
+    ],
   }),
   component: Index,
 });
@@ -226,7 +255,7 @@ function Index() {
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
               src={logoWhiteSmall}
-              alt="Chrizos Media"
+              alt="Chrizos Media lightning bolt logo"
               width={488}
               height={216}
               decoding="async"
@@ -265,7 +294,7 @@ function Index() {
       <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-32 pt-24">
         <img
           src={logoWhite}
-          alt="Chrizos Media"
+          alt="Chrizos Media logo with a lightning bolt replacing the letter Z"
           width={975}
           height={431}
           fetchPriority="high"
@@ -417,7 +446,7 @@ function Index() {
                   <div className={index % 2 === 1 ? "lg:order-1" : ""}>
                     <div className="glass-panel lift overflow-hidden">
 
-                      <div className="aspect-[4/3] w-full">
+                      <div className={service.visual === "search" ? "min-h-[640px] w-full sm:aspect-[4/3] sm:min-h-0" : "aspect-[4/3] w-full"}>
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
