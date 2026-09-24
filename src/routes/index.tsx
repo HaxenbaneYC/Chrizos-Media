@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -663,7 +663,7 @@ function Index() {
                       { label: "Campaign live", detail: "Publishing" },
                       { label: "Break-even", detail: "Month 3" },
                     ].map((step, index) => (
-                      <div key={step.label} className="result-step min-w-0 text-center" style={{ "--step": index } as React.CSSProperties}>
+                      <div key={step.label} className="result-step min-w-0 text-center" style={{ "--step": index } as CSSProperties}>
                         <span aria-hidden className="result-dot" />
                         <span className="mt-3 block text-[10px] font-extrabold leading-tight sm:text-xs">{step.label}</span>
                         <span className="mt-1 block text-[9px] font-semibold leading-tight text-foreground/55 sm:text-[10px]">{step.detail}</span>
