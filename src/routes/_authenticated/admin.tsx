@@ -128,12 +128,12 @@ function Panel({ role }: { role: "owner" | "viewer" }) {
   const isOwner = role === "owner";
   return (
     <Tabs defaultValue="overview" className="space-y-6">
-      <TabsList className="flex h-auto flex-wrap justify-start gap-1 bg-background/40 p-1 text-foreground/70">
-        <TabsTrigger value="overview">Overview</TabsTrigger>
-        <TabsTrigger value="inquiries">Inquiries</TabsTrigger>
-        <TabsTrigger value="team">Team &amp; Access</TabsTrigger>
-        {isOwner ? <TabsTrigger value="settings">Website Settings</TabsTrigger> : null}
-        {isOwner ? <TabsTrigger value="security">Security</TabsTrigger> : null}
+      <TabsList className="glass-panel flex h-auto w-full flex-wrap justify-start gap-1 rounded-2xl p-1.5 text-foreground">
+        <TabsTrigger value="overview" className="text-foreground/80 data-[state=active]:text-primary-foreground">Overview</TabsTrigger>
+        <TabsTrigger value="inquiries" className="text-foreground/80 data-[state=active]:text-primary-foreground">Inquiries</TabsTrigger>
+        <TabsTrigger value="team" className="text-foreground/80 data-[state=active]:text-primary-foreground">Team &amp; Access</TabsTrigger>
+        {isOwner ? <TabsTrigger value="settings" className="text-foreground/80 data-[state=active]:text-primary-foreground">Website Settings</TabsTrigger> : null}
+        {isOwner ? <TabsTrigger value="security" className="text-foreground/80 data-[state=active]:text-primary-foreground">Security</TabsTrigger> : null}
       </TabsList>
       <TabsContent value="overview"><Overview /></TabsContent>
       <TabsContent value="inquiries"><Inquiries isOwner={isOwner} /></TabsContent>
