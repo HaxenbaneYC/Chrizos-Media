@@ -347,10 +347,10 @@ function Index() {
   return (
     <main className="bg-background text-foreground">
       {settings.announcement_text ? (
-        <div className="fixed inset-x-0 top-0 z-[60] truncate bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:text-sm" title={settings.announcement_text}>{settings.announcement_text}</div>
+        <div className="relative z-[60] truncate bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:fixed sm:inset-x-0 sm:top-0 sm:text-sm" title={settings.announcement_text}>{settings.announcement_text}</div>
       ) : null}
       <header
-        className={`fixed inset-x-0 ${settings.announcement_text ? "top-8 sm:top-9" : "top-0"} z-50 transition-colors duration-200 ${
+        className={`relative top-auto z-50 sm:fixed sm:inset-x-0 ${settings.announcement_text ? "sm:top-9" : "sm:top-0"} transition-colors duration-200 ${
           scrollY > 12
             ? "glass-panel rounded-none border-x-0 border-t-0"
             : "border-b border-border bg-background/95"
@@ -556,7 +556,7 @@ function Index() {
                   </div>
                   <div className="mt-8">
                     <div className="glass-panel overflow-hidden">
-                      <div className="aspect-square w-full sm:aspect-[4/3]">
+                      <div className={`${service.visual === "strategy" || service.visual === "search" ? "h-[340px]" : "h-[320px]"} w-full sm:h-auto sm:aspect-[4/3]`}>
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
