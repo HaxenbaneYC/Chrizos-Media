@@ -45,13 +45,6 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function formatWhatsAppDisplay(raw: string) {
-  const digits = raw.replace(/\D/g, "");
-  if (digits.length === 12 && digits.startsWith("971")) {
-    return `+971 ${digits.slice(3, 5)} ${digits.slice(5, 8)} ${digits.slice(8)}`;
-  }
-  return `+${digits}`;
-}
 
 const RESULT_STAGES = [
   { label: "Brand built", detail: "Identity" },
