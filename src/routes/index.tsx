@@ -5,10 +5,10 @@ import { useEffect, useState, type FormEvent } from "react";
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
 import { Button } from "@/components/ui/button";
+import { CalendlyBooking } from "@/components/calendly-booking";
 import { Reveal } from "@/components/reveal";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import {
-  BookingFlow,
   ContentFlow,
   GrowthFlow,
   ProblemFlow,
@@ -404,6 +404,26 @@ function Index() {
         </div>
       </section>
 
+      {/* ============ Post-services booking CTA ============ */}
+      <section className="border-y border-border bg-card px-6 py-16 sm:py-20" aria-labelledby="services-booking-title">
+        <Reveal>
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 sm:flex-row sm:items-center">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Ready for a clearer growth plan?</p>
+              <h2 id="services-booking-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
+                Book your free brand audit.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/75 sm:text-base">
+                Get an honest read on your positioning, brand, and website, with no obligation.
+              </p>
+            </div>
+            <Button asChild size="lg" className="lift min-h-12 shrink-0 rounded-xl px-7 font-extrabold">
+              <a href="#work-with-us">See Live Availability</a>
+            </Button>
+          </div>
+        </Reveal>
+      </section>
+
       {/* ============ Social Proof ============ */}
       <section id="proof" className="bg-card px-6 py-24 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
@@ -486,10 +506,7 @@ function Index() {
 
         <div className="mx-auto mt-12 max-w-3xl">
           <Reveal delay={100}>
-            <BookingFlow />
-            <p className="mt-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/45">
-              Placeholder: calendar booking widget goes here
-            </p>
+            <CalendlyBooking />
           </Reveal>
         </div>
 

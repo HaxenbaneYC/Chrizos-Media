@@ -291,6 +291,12 @@ main > section:not(:first-of-type) {
   color: var(--color-foreground);
 }
 
+.booking-shell {
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
 /* Snappy hover / press feedback */
 .lift {
   transition: transform 250ms ease-out, box-shadow 250ms ease-out, background-color 250ms ease-out;

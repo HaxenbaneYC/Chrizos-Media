@@ -79,7 +79,7 @@ export function CalendlyBooking() {
           ) : null}
 
           <iframe
-            src={`${CALENDLY_URL}?embed_domain=${typeof window === "undefined" ? "chrizosmedia.com" : window.location.hostname}&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=052662&primary_color=1700ff`}
+            src={`${CALENDLY_URL}?embed_domain=chrizosmedia.com&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=052662&primary_color=1700ff`}
             title="Book a free brand audit with Chrizos Media"
             className="h-[680px] w-full border-0"
             loading="lazy"
