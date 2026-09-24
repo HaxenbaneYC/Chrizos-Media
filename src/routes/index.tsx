@@ -7,7 +7,7 @@ import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import { CalendlyBooking } from "@/components/calendly-booking";
-import { getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
+import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { Reveal } from "@/components/reveal";
 import { sendChecklistRequest, sendContactInquiry } from "@/lib/contact.functions";
 import {
@@ -168,7 +168,7 @@ const proofCards = [
 
 
 function Index() {
-  const settings = Route.useLoaderData();
+  const settings = Route.useLoaderData() ?? DEFAULT_SETTINGS;
   const CONTACT_EMAIL = settings.contact_email;
   const WHATSAPP_URL = `https://wa.me/${settings.whatsapp_number}${WHATSAPP_TEXT}`;
   const IG_URL = settings.instagram_url;
