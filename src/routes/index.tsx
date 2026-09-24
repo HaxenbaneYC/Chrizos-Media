@@ -68,16 +68,26 @@ function ResultTracker() {
     const tracker = trackerRef.current;
     if (!tracker) return;
 
-    let timer: ReturnType<typeof setInterval> | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let currentStage = -1;
+    const advance = () => {
+      if (currentStage === RESULT_STAGES.length - 1) {
+        timer = setTimeout(() => {
+          currentStage = -1;
+          setActiveStage(-1);
+          timer = setTimeout(advance, 1200);
+        }, 1800);
+        return;
+      }
+      currentStage += 1;
+      setActiveStage(currentStage);
+      timer = setTimeout(advance, 1200);
+    };
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || timer) return;
-        let nextStage = -1;
         setActiveStage(-1);
-        timer = setInterval(() => {
-          nextStage = nextStage >= RESULT_STAGES.length ? -1 : nextStage + 1;
-          setActiveStage(nextStage);
-        }, 1100);
+        timer = setTimeout(advance, 1800);
       },
       { threshold: 0.6 },
     );
@@ -85,7 +95,7 @@ function ResultTracker() {
     observer.observe(tracker);
     return () => {
       observer.disconnect();
-      if (timer) clearInterval(timer);
+      if (timer) clearTimeout(timer);
     };
   }, []);
 
