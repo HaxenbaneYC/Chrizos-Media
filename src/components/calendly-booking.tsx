@@ -61,7 +61,19 @@ export function CalendlyBooking({ url, onBooked }: { url?: string; onBooked?: ()
           </p>
         </div>
       ) : (
-        <div className="relative min-h-[720px] bg-foreground sm:min-h-[680px]">
+        <>
+          <div className="flex flex-col items-center justify-center bg-card px-5 py-10 text-center sm:hidden">
+            <p className="text-xl font-extrabold">See live times on Calendly</p>
+            <p className="mt-2 max-w-sm text-sm leading-6 text-foreground/70">
+              Open the mobile booking page to choose your time without scrolling inside a small window.
+            </p>
+            <Button asChild className="lift mt-6 min-h-12 w-full max-w-xs font-semibold">
+              <a href={CALENDLY_URL} target="_blank" rel="noreferrer">
+                View Available Times
+              </a>
+            </Button>
+          </div>
+          <div className="relative hidden min-h-[680px] bg-foreground sm:block">
           {!loaded && !timedOut ? (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-card px-6 text-center" role="status">
               <p className="text-sm font-bold text-foreground/75">Loading available times…</p>
@@ -85,15 +97,16 @@ export function CalendlyBooking({ url, onBooked }: { url?: string; onBooked?: ()
           <iframe
             src={`${CALENDLY_URL}?embed_domain=chrizosmedia.com&embed_type=Inline&hide_gdpr_banner=1&background_color=ffffff&text_color=052662&primary_color=1700ff`}
             title="Book a free brand audit with Chrizos Media"
-            className="h-[720px] w-full border-0 sm:h-[680px]"
+            className="h-[680px] w-full border-0"
             loading="lazy"
             onLoad={handleLoad}
           />
-        </div>
+          </div>
+        </>
       )}
 
       {!confirmed ? (
-        <div className="border-t border-border px-5 py-4 text-center sm:px-7">
+        <div className="hidden border-t border-border px-5 py-4 text-center sm:block sm:px-7">
           <p className="text-xs font-semibold leading-5 text-foreground/65">
             Not seeing the calendar?{" "}
             <a className="font-extrabold text-foreground underline underline-offset-4" href={CALENDLY_URL} target="_blank" rel="noreferrer">

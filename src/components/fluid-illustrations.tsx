@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 function Panel({ children }: { children: ReactNode }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-card">
-      <div className="relative h-full w-full p-5 sm:p-7">{children}</div>
+      <div className="relative h-full w-full p-4 sm:p-7">{children}</div>
     </div>
   );
 }
@@ -91,7 +91,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
                 return (
                   <div
                     key={bar.value + index}
-                    className="bar-col group relative flex h-full flex-1 items-end"
+                    className="bar-col group relative flex h-full min-w-1.5 flex-1 items-end"
                   >
                     <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-1.5 py-0.5 text-[8px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       {bar.value}
@@ -303,9 +303,9 @@ export function SearchFlow({ className = "" }: { className?: string }) {
     >
       <div className="relative h-full w-full overflow-hidden bg-card">
         <div className="flex h-full flex-col gap-3 p-5 sm:p-7">
-          <div className="grid flex-[1.35] grid-cols-3 gap-2">
+          <div className="grid flex-[1.35] grid-cols-3 gap-1.5 sm:gap-2">
             {workstreams.map((item) => (
-              <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-3 text-center">
+              <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-2 text-center sm:p-3">
                 <div className="seo-icon-tile flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-foreground sm:h-16 sm:w-16 sm:rounded-2xl">
                   <SeoIcon type={item.type} />
                 </div>

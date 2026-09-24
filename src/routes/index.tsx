@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import logoWhiteSmall from "../assets/chrizos-logo-white-small.webp";
@@ -347,10 +347,10 @@ function Index() {
   return (
     <main className="bg-background text-foreground">
       {settings.announcement_text ? (
-        <div className="fixed inset-x-0 top-0 z-[60] bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:text-sm">{settings.announcement_text}</div>
+        <div className="relative z-[60] truncate bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:fixed sm:inset-x-0 sm:top-0 sm:text-sm" title={settings.announcement_text}>{settings.announcement_text}</div>
       ) : null}
       <header
-        className={`fixed inset-x-0 ${settings.announcement_text ? "top-8 sm:top-9" : "top-0"} z-50 transition-colors duration-200 ${
+        className={`relative top-auto z-50 sm:fixed sm:inset-x-0 ${settings.announcement_text ? "sm:top-9" : "sm:top-0"} transition-colors duration-200 ${
           scrollY > 12
             ? "glass-panel rounded-none border-x-0 border-t-0"
             : "border-b border-border bg-background/95"
@@ -365,7 +365,7 @@ function Index() {
               width={488}
               height={216}
               decoding="async"
-              className="h-auto w-[4.5rem] sm:w-28"
+              className="h-auto w-16 sm:w-28"
             />
           </a>
 
@@ -378,7 +378,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="shrink-0 rounded-full px-1.5 py-2 text-[9px] font-bold uppercase tracking-[0.08em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:text-[10px] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
+                className="inline-flex min-h-10 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.04em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:tracking-[0.08em] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
               >
                 {item.label}
               </a>
@@ -397,7 +397,7 @@ function Index() {
       </header>
 
       {/* ============ Hero ============ */}
-      <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-32 pt-24">
+      <section id="top" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-28 pt-28 sm:px-6 sm:pb-32 sm:pt-24">
         <img
           src={logoWhite}
           alt="Chrizos Media logo with a lightning bolt replacing the letter Z"
@@ -405,12 +405,12 @@ function Index() {
           height={431}
           fetchPriority="high"
           decoding="async"
-          className="parallax-layer relative z-10 w-full max-w-md"
-          style={{ transform: `translate3d(0, ${scrollY * 0.12}px, 0)` }}
+          className="parallax-layer relative z-10 w-full max-w-xs sm:max-w-md"
+          style={{ "--hero-shift": `${scrollY * 0.12}px` } as CSSProperties}
         />
 
 
-        <h1 className="relative z-10 mt-10 max-w-4xl text-center text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">
+        <h1 className="relative z-10 mt-7 max-w-4xl text-center text-3xl font-extrabold leading-tight sm:mt-10 sm:text-6xl">
           {settings.hero_headline}
         </h1>
 
@@ -430,7 +430,7 @@ function Index() {
 ) : null}
 
 
-        <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
+        <div className="relative z-10 mt-8 grid w-full max-w-3xl gap-2.5 sm:mt-10 sm:grid-cols-3 sm:gap-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
             <div key={claim} className="lift rounded-xl bg-chip px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground">
               {claim}
@@ -442,7 +442,7 @@ function Index() {
         <a
           href="#problem"
           aria-label="Scroll down to see the strategy"
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-foreground/70 transition-colors hover:text-foreground"
+          className="relative z-10 mt-8 text-foreground/70 transition-colors hover:text-foreground sm:absolute sm:bottom-8 sm:left-1/2 sm:mt-0 sm:-translate-x-1/2"
         >
           <span className="mb-2 block text-center text-[11px] font-semibold uppercase tracking-[0.3em]">
             Scroll
@@ -461,13 +461,13 @@ function Index() {
       </section>
 
       {/* ============ Problem ============ */}
-      <section id="problem" className="scroll-mt-24 bg-section-navy px-6 py-24 sm:py-32">
+      <section id="problem" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
               The problem
             </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+            <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
               Most brands are visible. Fewer are easy to choose.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
@@ -500,13 +500,13 @@ function Index() {
       </div>
 
       {/* ============ Services ============ */}
-      <section id="services" className="scroll-mt-24 px-4 py-20 sm:px-6 sm:py-32">
+      <section id="services" className="scroll-mt-28 px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
               The solution
             </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+            <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
               Strategy, campaigns, and content built around commercial growth.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
@@ -556,7 +556,7 @@ function Index() {
                   </div>
                   <div className="mt-8">
                     <div className="glass-panel overflow-hidden">
-                      <div className="aspect-square w-full sm:aspect-[4/3]">
+                      <div className={`${service.visual === "strategy" || service.visual === "search" ? "h-[340px]" : "h-[320px]"} w-full sm:h-auto sm:aspect-[4/3]`}>
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
@@ -577,7 +577,7 @@ function Index() {
       </section>
 
       {/* ============ Post-services booking CTA ============ */}
-      <section className="border-y border-border bg-section-electric px-6 py-16 sm:py-20" aria-labelledby="services-booking-title">
+      <section className="border-y border-border bg-section-electric px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="services-booking-title">
         <Reveal>
           <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 sm:flex-row sm:items-center">
             <div className="max-w-2xl">
@@ -601,10 +601,10 @@ function Index() {
 
       {/* ============ Lead magnet ============ */}
       {settings.checklist_enabled ? (
-      <section className="bg-section-navy px-6 py-20 sm:py-24" aria-labelledby="checklist-title">
+      <section className="bg-section-navy px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="checklist-title">
         <Reveal>
-          <div className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
-            <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr]">
+            <div className="glass-panel mx-auto max-w-4xl p-5 sm:p-10">
+            <div className="grid items-start gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free Dubai marketing checklist</p>
                 <h2 id="checklist-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
@@ -649,13 +649,13 @@ function Index() {
       ) : null}
 
       {/* ============ Glaucia Case Study ============ */}
-      <section id="proof" className="bg-section-navy px-6 py-24 sm:py-32" aria-labelledby="glaucia-case-study-title">
+      <section id="proof" className="bg-section-navy px-4 py-20 sm:px-6 sm:py-32" aria-labelledby="glaucia-case-study-title">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">Client case study</p>
-                <h2 id="glaucia-case-study-title" className="mt-4 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+                <h2 id="glaucia-case-study-title" className="mt-4 max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl">
                   Building Glaucia from brand to market.
                 </h2>
               </div>
@@ -667,7 +667,7 @@ function Index() {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
             <Reveal className="h-full">
-              <figure className="glass-panel relative h-full min-h-[520px] overflow-hidden sm:min-h-[680px] lg:min-h-0">
+              <figure className="glass-panel relative aspect-[4/5] overflow-hidden sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0">
                 <img
                   src={glauciaCampaign.url}
                   alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
@@ -725,14 +725,14 @@ function Index() {
       </section>
 
       {/* ============ About ============ */}
-      <section id="about" className="scroll-mt-24 bg-section-navy px-6 py-24 sm:py-32">
+      <section id="about" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
               About
             </p>
             <div className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-              <h2 className="text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+              <h2 className="text-3xl font-extrabold leading-tight sm:text-5xl">
                 Not a big agency. That is the point.
               </h2>
               <div className="space-y-5 leading-7 text-foreground/80">
@@ -754,13 +754,13 @@ function Index() {
       </section>
 
       {/* ============ Final CTA: booking first ============ */}
-      <section id="work-with-us" className="scroll-mt-20 bg-section-electric px-6 py-24 sm:scroll-mt-24 sm:py-32">
+      <section id="work-with-us" className="scroll-mt-20 bg-section-electric px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
               Contact
             </p>
-            <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+            <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
               Book Your Free 30-Minute Brand Audit
             </h2>
             <p className="mt-5 leading-7 text-foreground/80">
@@ -796,19 +796,19 @@ function Index() {
           </Reveal>
         </div>
 
-        <div className="mx-auto mt-20 max-w-6xl border-t border-border pt-16">
+        <div className="mx-auto mt-16 max-w-6xl border-t border-border pt-14 sm:mt-20 sm:pt-16">
           <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
             <Reveal delay={160}>
               <div>
                 <span className="inline-flex items-center rounded-full border border-border bg-background/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-foreground/80">
                   We&apos;re listening
                 </span>
-                <h2 className="mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl">
+                <h2 className="mt-6 text-4xl font-extrabold leading-none sm:text-6xl sm:leading-[0.95]">
                   GET IN
                   <br />
                   TOUCH.
                 </h2>
-                <p className="mt-6 max-w-sm text-lg leading-7 text-foreground/80">
+                <p className="mt-6 max-w-none text-lg leading-7 text-foreground/80 lg:max-w-sm">
                   Tell us what you&apos;re building. We&apos;ll come back with a route and a
                   timeline &mdash; we reply to every brief within 6&ndash;12 hours.
                 </p>
@@ -866,7 +866,7 @@ function Index() {
             </Reveal>
 
             <Reveal delay={220}>
-              <form onSubmit={handleInquirySubmit} className="glass-soft grid gap-4 rounded-3xl p-6 sm:p-8">
+              <form onSubmit={handleInquirySubmit} className="glass-soft grid gap-4 rounded-2xl p-5 sm:rounded-3xl sm:p-8">
                 <div>
                   <h3 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Start a project</h3>
                   <p className="mt-1 text-sm font-semibold text-foreground/65">
