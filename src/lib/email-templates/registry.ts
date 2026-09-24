@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react'
+import { template as checklistRequestTemplate } from './checklist-request'
 import { template as contactInquiryTemplate } from './contact-inquiry'
 
 export interface TemplateEntry {
@@ -19,5 +20,6 @@ export interface TemplateEntry {
  *   // then add to TEMPLATES: 'welcome': welcomeTemplate
  */
 export const TEMPLATES: Record<string, TemplateEntry> = {
+  'checklist-request': checklistRequestTemplate,
   'contact-inquiry': contactInquiryTemplate,
 }

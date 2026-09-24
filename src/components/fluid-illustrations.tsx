@@ -54,13 +54,13 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <div className={className} aria-label="Illustrative paid advertising dashboard showing ROAS and CPA targets, weekly lead reporting, and a rising campaign return chart" role="img">
+    <div className={className} aria-label="Illustrative paid advertising dashboard showing target returns, customer costs, weekly lead reporting, and a rising campaign return chart" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <div className="grid grid-cols-3 gap-2">
             {[
-              { k: "ROAS", v: "Target 3–5x" },
-              { k: "CPA", v: "Lower by design" },
+              { k: "Ad return", v: "$3–$5 back per $1" },
+              { k: "Customer cost", v: "Lower by design" },
               { k: "Leads", v: "Weekly reports" },
             ].map((m) => (
               <Glass key={m.k} className="fluid-drift lift min-w-0 p-3">
@@ -77,7 +77,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
           <Glass className="fluid-drift flex flex-1 flex-col p-4">
             <div className="flex items-start justify-between gap-3">
               <span className="graphic-headline max-w-[75%]">
-                Example target: 3–5x ROAS
+                Example target: $3–$5 back per $1 spent
               </span>
               <span className="flex shrink-0 items-center gap-1.5 text-[9px] font-bold uppercase text-foreground/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-background" />
@@ -111,7 +111,7 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
             </div>
 
             <div className="mt-3 rounded-lg bg-foreground/10 px-3 py-2 text-[9px] font-bold leading-4 text-foreground/80">
-              Conversion tracking from day one. Leads reported weekly.
+              Sales tracking from day one. Leads reported every week.
             </div>
           </Glass>
         </div>
@@ -133,7 +133,7 @@ export function ContentFlow({ className = "" }: { className?: string }) {
   ];
 
   return (
-    <div className={className} aria-label="Content strategy calendar showing a structured weekly cadence for hooks, stories, and calls to action" role="img">
+    <div className={className} aria-label="Content strategy calendar showing a weekly plan for attention-grabbing openings, stories, and clear next steps" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <Glass className="fluid-drift p-4">
@@ -174,10 +174,10 @@ export function ContentFlow({ className = "" }: { className?: string }) {
             <div className="min-w-0 flex-1 space-y-2">
               <p className="graphic-headline">Structured weekly cadence</p>
               <p className="text-[9px] font-semibold leading-4 text-foreground/70">
-                Hook, story, CTA, planned a month at a time.
+                Opening idea, story, and next step, planned a month at a time.
               </p>
               <div className="flex flex-wrap gap-1.5 pt-1">
-                {["Hook", "Story", "CTA"].map((tag) => (
+                {["Opening", "Story", "Next step"].map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-foreground/25 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-foreground/70"
@@ -286,7 +286,7 @@ function SeoIcon({ type }: { type: "audit" | "keyword" | "content" }) {
 export function SearchFlow({ className = "" }: { className?: string }) {
   const workstreams = [
     { type: "audit" as const, title: "Technical Audit", detail: "Speed, indexing, and site structure." },
-    { type: "keyword" as const, title: "Keyword Strategy", detail: "On-page focus built around search intent." },
+    { type: "keyword" as const, title: "Keyword Strategy", detail: "Pages matched to what customers search for." },
     { type: "content" as const, title: "Content That Ranks", detail: "Useful pages designed to earn visibility." },
   ];
   const rankingRows = [

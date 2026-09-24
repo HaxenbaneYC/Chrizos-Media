@@ -8,7 +8,7 @@ import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.jso
 import { Button } from "@/components/ui/button";
 import { CalendlyBooking } from "@/components/calendly-booking";
 import { Reveal } from "@/components/reveal";
-import { sendContactInquiry } from "@/lib/contact.functions";
+import { sendChecklistRequest, sendContactInquiry } from "@/lib/contact.functions";
 import {
   ContentFlow,
   GrowthFlow,
@@ -22,7 +22,7 @@ const CONTACT_EMAIL = "chrizosmedia@gmail.com";
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_URL = "https://wa.me/971504254366?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
 const SITE_DESCRIPTION =
-  "Chrizos Media helps ambitious businesses turn attention into sales, revenue, and recognition through paid advertising, content strategy, and brand consulting.";
+  "Chrizos Media helps Dubai local businesses turn attention into paying customers through market-aware strategy, paid advertising, content, brand consulting, and SEO.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
 
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -48,16 +48,15 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Chrizos Media | Marketing & Advertising Agency" },
+      { title: "Chrizos Media | Dubai Marketing & Advertising Agency" },
       {
         name: "description",
         content: SITE_DESCRIPTION,
       },
-      { property: "og:title", content: "Chrizos Media | Marketing & Advertising Agency" },
+      { property: "og:title", content: "Chrizos Media | Dubai Marketing & Advertising Agency" },
       {
         property: "og:description",
-        content:
-          "A boutique digital marketing agency for paid advertising, content strategy, and brand consulting that turns attention into measurable growth.",
+        content: SITE_DESCRIPTION,
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/" },
@@ -109,11 +108,11 @@ const services: Service[] = [
     title: "Paid Advertising",
     tagline: "Turn ad spend into sales, leads, and measurable momentum.",
     description:
-      "Campaign strategy and management across Meta (Instagram & Facebook), Google, and TikTok, built around sharper tracking, stronger offers, and better conversion paths so spend has a clear commercial job.",
+      "Campaign strategy and management across Meta (Instagram & Facebook), Google, and TikTok, built around clearer tracking, stronger offers, and simpler steps from click to sale, so every dirham has a clear job.",
     points: [
       "Meta (Instagram & Facebook), Google & TikTok ads",
-      "Sales funnel optimization",
-      "Conversion tracking & revenue reporting",
+      "A simpler journey from first click to sale",
+      "Tracking which ads lead to enquiries and revenue",
     ],
     visual: "growth",
   },
@@ -126,7 +125,7 @@ const services: Service[] = [
     points: [
       "Instagram & Facebook content planning",
       "Content calendars & campaign ideas",
-      "Brand storytelling & conversion-focused copy",
+      "Brand stories and words designed to prompt action",
     ],
     visual: "content",
   },
@@ -135,11 +134,11 @@ const services: Service[] = [
     title: "Brand Strategy & Market Insights",
     tagline: "Know what to say, who to say it to, and why it will move them.",
     description:
-      "Premium strategy consulting for businesses that need clarity before scaling. We study the market, customer motivations, competitors, positioning, and offer structure, then turn the findings into sharper messaging and smarter growth decisions.",
+      "Premium strategy consulting for Dubai businesses that need clarity before growing. We study the local market, customer motivations, competitors, where your brand stands, and how your offer is packaged, then turn the findings into clearer messages and smarter growth decisions.",
     points: [
       "Audience, competitor & category research",
-      "Positioning, offers & messaging strategy",
-      "Actionable growth roadmap for campaigns and content",
+      "A clear place for your brand against competitors",
+      "A step-by-step growth plan for campaigns and content",
     ],
     visual: "strategy",
   },
@@ -148,10 +147,10 @@ const services: Service[] = [
     title: "SEO",
     tagline: "Get found by people already looking for what you sell.",
     description:
-      "Technical, on-page, and content SEO built to grow organic visibility and search rankings over time, so you're not paying for every single lead.",
+      "Website health checks, page improvements, and useful search-led content designed to help more customers find you on Google over time, so you are not paying for every lead.",
     points: [
-      "Technical SEO audits & fixes (site speed, indexing, structure)",
-      "On-page optimization & keyword strategy",
+      "Website health checks and fixes for speed, Google access, and structure",
+      "Page improvements based on what customers search for",
       "Content built to rank, not just to post",
     ],
     visual: "search",
@@ -169,8 +168,11 @@ const proofCards = [
 
 function Index() {
   const submitContactInquiry = useServerFn(sendContactInquiry);
+  const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [inquiryStatus, setInquiryStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [inquiryMessage, setInquiryMessage] = useState("");
+  const [checklistStatus, setChecklistStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
+  const [checklistMessage, setChecklistMessage] = useState("");
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -238,6 +240,38 @@ function Index() {
     } catch {
       setInquiryStatus("not_sent");
       setInquiryMessage(`Something stopped the form from sending. Please email ${CONTACT_EMAIL}.`);
+    }
+  }
+
+  async function handleChecklistSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email = String(new FormData(form).get("checklistEmail") ?? "").trim();
+
+    setChecklistStatus("sending");
+    setChecklistMessage("");
+
+    try {
+      const result = await submitChecklistRequest({
+        data: { submissionId: crypto.randomUUID(), email },
+      });
+
+      if (result.status === "sent") {
+        setChecklistStatus("sent");
+        setChecklistMessage("You're on the list. We'll email the checklist as soon as it is ready.");
+        form.reset();
+        return;
+      }
+
+      setChecklistStatus("not_sent");
+      setChecklistMessage(
+        result.reason === "rate_limited"
+          ? "That request is already on our list."
+          : `We could not save your request. Please email ${CONTACT_EMAIL}.`,
+      );
+    } catch {
+      setChecklistStatus("not_sent");
+      setChecklistMessage(`We could not save your request. Please email ${CONTACT_EMAIL}.`);
     }
   }
 
@@ -309,8 +343,8 @@ function Index() {
         </h1>
 
         <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
-          Chrizos Media is a boutique digital marketing agency for businesses that want clearer strategy,
-          sharper campaigns, and growth that shows up in the numbers.
+          Chrizos Media helps Dubai businesses turn attention into paying customers, with strategy,
+          campaigns, and content built around your local market, not generic playbooks.
         </p>
 
         <a
@@ -319,6 +353,10 @@ function Index() {
         >
           Book Your Free Brand Audit
         </a>
+
+        <p className="relative z-10 mt-4 max-w-xl text-center text-sm font-semibold leading-6 text-foreground/75">
+          We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
+        </p>
 
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
@@ -362,8 +400,8 @@ function Index() {
               Most brands are visible. Fewer are easy to choose.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              Ads, posts, and content only work when the audience, offer, message, and conversion path
-              line up. When one part is unclear, attention leaks before it becomes revenue.
+              Ads, posts, and content only work when the right audience sees a clear offer, understands the
+              message, and can take an easy next step. When one part is unclear, you lose customers before the sale.
             </p>
           </Reveal>
 
@@ -477,12 +515,54 @@ function Index() {
                 Book your free brand audit.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/75 sm:text-base">
-                Get an honest read on your positioning, brand, and website, with no obligation.
+                Get an honest read on how your brand compares, how clearly it communicates, and how well your website turns interest into enquiries.
+              </p>
+              <p className="mt-3 text-sm font-bold leading-6 text-foreground/85">
+                We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
               </p>
             </div>
             <Button asChild size="lg" className="lift min-h-12 shrink-0 rounded-xl px-7 font-extrabold">
               <a href="#work-with-us">See Live Availability</a>
             </Button>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ============ Lead magnet ============ */}
+      <section className="bg-section-navy px-6 py-20 sm:py-24" aria-labelledby="checklist-title">
+        <Reveal>
+          <div className="glass-panel mx-auto max-w-4xl p-6 sm:p-10">
+            <div className="grid items-end gap-8 lg:grid-cols-[1fr_0.8fr]">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free Dubai marketing checklist</p>
+                <h2 id="checklist-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
+                  Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients
+                </h2>
+                <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/75 sm:text-base">
+                  The exact issues we see most often in local businesses&apos; ads, content, and positioning: see if you&apos;re making any of them.
+                </p>
+              </div>
+              <form onSubmit={handleChecklistSubmit} className="grid gap-3">
+                <label htmlFor="checklistEmail" className="sr-only">Email address</label>
+                <input
+                  id="checklistEmail"
+                  name="checklistEmail"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Enter your email — we'll send it instantly"
+                  className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
+                />
+                <Button type="submit" disabled={checklistStatus === "sending"} className="lift min-h-12 w-full font-extrabold">
+                  {checklistStatus === "sending" ? "Saving..." : "Get the Free Checklist"}
+                </Button>
+                {checklistMessage ? (
+                  <p className="text-sm font-semibold leading-6 text-foreground/75" role={checklistStatus === "not_sent" ? "alert" : "status"}>
+                    {checklistMessage}
+                  </p>
+                ) : null}
+              </form>
+            </div>
           </div>
         </Reveal>
       </section>
@@ -536,12 +616,14 @@ function Index() {
               </h2>
               <div className="space-y-5 leading-7 text-foreground/80">
                 <p>
-                  Chrizos Media helps ambitious businesses connect brand clarity with measurable marketing
-                  execution, from strategy and content to paid campaigns that are easier to track and improve.
+                  I started Chrizos Media after seeing how large marketing agencies treat local businesses:
+                  one account among hundreds, generic playbooks, and results nobody is truly accountable for.
+                  I wanted to build something different for Dubai: a young, ambitious team that treats every
+                  client as the top priority, not another line item.
                 </p>
                 <p>
-                  We are deliberately small: our entire focus right now is on our first five clients, so each
-                  one gets senior attention instead of being passed down a team.
+                   We are deliberately small: our entire focus right now is on our first five Dubai clients, so
+                   each one gets full attention instead of being passed down a team.
                 </p>
               </div>
 
@@ -561,9 +643,20 @@ function Index() {
               Book Your Free 30-Minute Brand Audit
             </h2>
             <p className="mt-5 leading-7 text-foreground/80">
-              A quick, honest read on your positioning, brand and website, plus the one change most likely
-              to lift enquiries. No pitch, no obligation.
+               A quick, honest read on how your brand compares, how clearly it communicates, and how well your
+               website turns local interest into enquiries. No pitch, no obligation.
             </p>
+             <div className="glass-soft mx-auto mt-7 max-w-2xl space-y-3 p-5 text-left">
+               <p className="text-sm font-extrabold leading-6">
+                 If you don&apos;t walk away with at least one clear, usable idea, we&apos;ll give you a second audit: free.
+               </p>
+               <p className="text-sm font-semibold leading-6 text-foreground/75">
+                 You&apos;ll also get a written 1-page summary of the audit: yours to keep and act on, whether we work together or not.
+               </p>
+               <p className="text-sm font-semibold leading-6 text-foreground/75">
+                 We&apos;re currently taking on our first 5 clients: limited spots, and each one gets full focus.
+               </p>
+             </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-foreground/65">
               Book below, ask a quick question on WhatsApp, or send a written enquiry.
             </p>
