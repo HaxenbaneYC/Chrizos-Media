@@ -258,7 +258,7 @@ function Index() {
 
       if (result.status === "sent") {
         setChecklistStatus("sent");
-        setChecklistMessage("You're on the list. We'll email the checklist as soon as it is ready.");
+        setChecklistMessage("Sent! Your checklist is on its way to your inbox — or grab it right now:");
         form.reset();
         return;
       }
