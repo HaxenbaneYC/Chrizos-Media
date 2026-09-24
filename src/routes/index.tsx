@@ -357,7 +357,7 @@ function Index() {
         }`}
       >
 
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-6">
+        <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-1 px-3 py-3 sm:flex sm:justify-between sm:gap-4 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
               src={logoWhiteSmall}
@@ -365,11 +365,11 @@ function Index() {
               width={488}
               height={216}
               decoding="async"
-              className="h-auto w-20 sm:w-28"
+              className="h-auto w-[4.5rem] sm:w-28"
             />
           </a>
 
-          <nav aria-label="Primary navigation" className="flex items-center gap-1 overflow-x-auto">
+          <nav aria-label="Primary navigation" className="flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
             {[
               { label: "Services", href: "#services" },
               { label: "About", href: "#about" },
@@ -378,7 +378,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="shrink-0 rounded-full px-2 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-foreground/70 transition-colors hover:text-foreground sm:px-3 sm:text-sm sm:tracking-[0.14em]"
+                className="shrink-0 rounded-full px-1.5 py-2 text-[9px] font-bold uppercase tracking-[0.08em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:text-[10px] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
               >
                 {item.label}
               </a>
@@ -477,7 +477,7 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="glass-panel overflow-hidden">
+            <div className="glass-panel aspect-[4/3] overflow-hidden">
               <ProblemFlow className="h-full w-full" />
             </div>
           </Reveal>
@@ -500,7 +500,7 @@ function Index() {
       </div>
 
       {/* ============ Services ============ */}
-      <section id="services" className="scroll-mt-24 px-6 py-24 sm:py-32">
+      <section id="services" className="scroll-mt-24 px-4 py-20 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
@@ -526,11 +526,11 @@ function Index() {
           </div>
 
 
-          <div className="mt-16 grid auto-rows-fr items-stretch gap-6 sm:mt-24 lg:grid-cols-2">
+          <div className="mt-14 grid items-start gap-5 sm:mt-24 lg:auto-rows-fr lg:grid-cols-2 lg:items-stretch lg:gap-6">
             {services.map((service, index) => (
-              <Reveal key={service.number} delay={(index % 2) * 100} className="h-full">
-                <article className="glass-soft lift flex h-full flex-col overflow-hidden p-5 sm:p-7">
-                  <div className="flex flex-1 flex-col">
+              <Reveal key={service.number} delay={(index % 2) * 100} className="lg:h-full">
+                <article className="glass-soft lift flex flex-col overflow-hidden p-5 sm:p-7 lg:h-full">
+                  <div className="flex flex-col lg:flex-1">
                     <span className="text-5xl font-extrabold text-foreground/25 sm:text-6xl">
                       {service.number}
                     </span>
@@ -556,7 +556,7 @@ function Index() {
                   </div>
                   <div className="mt-8">
                     <div className="glass-panel overflow-hidden">
-                      <div className={service.visual === "search" ? "min-h-[600px] w-full sm:aspect-[4/3] sm:min-h-0" : "aspect-[4/3] w-full"}>
+                      <div className="aspect-square w-full sm:aspect-[4/3]">
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (

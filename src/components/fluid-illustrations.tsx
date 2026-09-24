@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
  */
 function Panel({ children }: { children: ReactNode }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-card">
+    <div className="relative h-full w-full overflow-hidden bg-card">
       <div className="relative h-full w-full p-5 sm:p-7">{children}</div>
     </div>
   );
@@ -303,10 +303,10 @@ export function SearchFlow({ className = "" }: { className?: string }) {
     >
       <div className="relative h-full w-full overflow-hidden bg-card">
         <div className="flex h-full flex-col gap-3 p-5 sm:p-7">
-          <div className="grid flex-[1.35] grid-cols-1 gap-2 sm:grid-cols-3">
+          <div className="grid flex-[1.35] grid-cols-3 gap-2">
             {workstreams.map((item) => (
               <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-3 text-center">
-                <div className="seo-icon-tile flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl text-foreground">
+                <div className="seo-icon-tile flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-foreground sm:h-16 sm:w-16 sm:rounded-2xl">
                   <SeoIcon type={item.type} />
                 </div>
                 <span className="mt-2.5 text-[10px] font-extrabold leading-tight text-foreground">{item.title}</span>
