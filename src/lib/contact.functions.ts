@@ -101,17 +101,28 @@ export const sendChecklistRequest = createServerFn({ method: 'POST' })
     }
 
     try {
-      const result = await sendTemplateEmail('checklist-request', CONTACT_EMAIL, {
-        idempotencyKey: `checklist-request-${data.submissionId}`,
-        replyTo: data.email,
-        templateData: {
-          email: data.email,
-          submittedAt: formatSubmittedAt(),
-        },
+      // Deliver the checklist PDF link straight to the requester.
+      const delivery = await sendTemplateEmail('checklist-delivery', data.email, {
+        idempotencyKey: `checklist-delivery-${data.submissionId}`,
+        templateData: { email: data.email },
       })
 
-      if (!result.sent) {
+      if (!delivery.sent) {
         return { status: 'not_sent', reason: 'recipient_suppressed' }
+      }
+
+      // Best-effort notification to Chrizos Media — never blocks delivery.
+      try {
+        await sendTemplateEmail('checklist-request', CONTACT_EMAIL, {
+          idempotencyKey: `checklist-request-${data.submissionId}`,
+          replyTo: data.email,
+          templateData: {
+            email: data.email,
+            submittedAt: formatSubmittedAt(),
+          },
+        })
+      } catch {
+        // Notification failure is non-fatal — the checklist was delivered.
       }
 
       return { status: 'sent' }
