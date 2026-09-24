@@ -22,9 +22,6 @@ function Glass({
   return <div className={`graphic-glass ${className}`}>{children}</div>;
 }
 
-const faintLine = "h-2 rounded-full bg-foreground/20";
-const strongLine = "h-2.5 rounded-full bg-foreground/80";
-
 /** 01 — Paid Advertising: a live campaign performance dashboard. */
 export function GrowthFlow({ className = "" }: { className?: string }) {
   const bars = [
