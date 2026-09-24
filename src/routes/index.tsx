@@ -693,112 +693,189 @@ function Index() {
           </Reveal>
         </div>
 
-        <div className="mx-auto mt-20 max-w-xl border-t border-border pt-12">
-          <Reveal delay={160}>
-            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">
-              Not ready to book? Send an enquiry instead
-            </p>
-            <form onSubmit={handleInquirySubmit} className="glass-soft mt-6 grid gap-4 p-5">
-              <div className="grid gap-2">
-                <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                  placeholder="Your name"
-                />
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="grid gap-2">
-                  <label htmlFor="email" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div className="grid gap-2">
-                  <label htmlFor="phone" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                    Phone Number
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                    placeholder="+971..."
-                  />
-                </div>
-              </div>
-
-              <div className="grid gap-2">
-                <label htmlFor="service" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                  Service Needed
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  required
-                  defaultValue="General Enquiry"
-                  className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors focus:border-foreground"
-                >
-                  <option>Paid Advertising</option>
-                  <option>Content Strategy</option>
-                  <option>Brand Strategy &amp; Market Insights</option>
-                  <option>SEO</option>
-                  <option>General Enquiry</option>
-                </select>
-              </div>
-
-              <div className="grid gap-2">
-                <label htmlFor="message" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  minLength={10}
-                  rows={4}
-                  className="min-h-24 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                  placeholder="Tell us what you want to grow or improve."
-                />
-              </div>
-
-              <Button
-                type="submit"
-                variant="outline"
-                disabled={inquiryStatus === "sending"}
-                className="lift min-h-11 w-full font-semibold"
-
-              >
-                {inquiryStatus === "sending" ? "Sending..." : "Send Inquiry"}
-              </Button>
-
-              {inquiryMessage ? (
-                <p
-                  className="text-sm font-semibold leading-6 text-foreground/70"
-                  role={inquiryStatus === "not_sent" ? "alert" : "status"}
-                >
-                  {inquiryMessage}
+        <div className="mx-auto mt-20 max-w-6xl border-t border-border pt-16">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
+            <Reveal delay={160}>
+              <div>
+                <span className="inline-flex items-center rounded-full border border-border bg-background/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-foreground/80">
+                  We&apos;re listening
+                </span>
+                <h2 className="mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight sm:text-6xl">
+                  GET IN
+                  <br />
+                  TOUCH.
+                </h2>
+                <p className="mt-6 max-w-sm text-lg leading-7 text-foreground/80">
+                  Tell us what you&apos;re building. We&apos;ll come back with a route and a
+                  timeline &mdash; we reply to every brief within 6&ndash;12 hours.
                 </p>
-              ) : null}
-            </form>
-          </Reveal>
+
+                <div className="mt-8 grid gap-4">
+                  <a
+                    href={WHATSAPP_URL}
+                    onClick={() => { void logBooking({ data: { source: "whatsapp" } }); }}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Message Chrizos Media on WhatsApp"
+                    className="glass-soft group flex items-center gap-4 rounded-2xl p-4 transition-transform duration-200 hover:scale-[1.03]"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-foreground/10">
+                      <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-base font-extrabold">+{settings.whatsapp_number}</span>
+                      <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
+                        WhatsApp &middot; Fastest reply
+                      </span>
+                    </span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-200 group-hover:translate-x-0.5">
+                      <path d="m9 5 7 7-7 7" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    aria-label={`Email Chrizos Media at ${CONTACT_EMAIL}`}
+                    className="glass-soft group flex items-center gap-4 rounded-2xl p-4 transition-transform duration-200 hover:scale-[1.03]"
+                  >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-foreground/10">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true" className="h-5 w-5 text-foreground/80">
+                        <rect x="3" y="5" width="18" height="14" rx="2" />
+                        <path d="m3 7 9 6 9-6" />
+                      </svg>
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-base font-extrabold">{CONTACT_EMAIL}</span>
+                      <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
+                        Email &middot; Briefs &amp; enquiries
+                      </span>
+                    </span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-200 group-hover:translate-x-0.5">
+                      <path d="m9 5 7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+
+                <p className="mt-8 text-sm font-semibold leading-6 text-foreground/65">
+                  Prefer to talk it through? Book your free 30-minute audit above.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={220}>
+              <form onSubmit={handleInquirySubmit} className="glass-soft grid gap-4 rounded-3xl p-6 sm:p-8">
+                <div>
+                  <h3 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Start a project</h3>
+                  <p className="mt-1 text-sm font-semibold text-foreground/65">
+                    The more you tell us, the sharper the first reply.
+                  </p>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-2">
+                    <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                      Your name <span aria-hidden="true" className="text-foreground/85">*</span>
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      autoComplete="name"
+                      className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                      placeholder="Your name"
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                      Email <span aria-hidden="true" className="text-foreground/85">*</span>
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                      placeholder="you@company.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-2">
+                    <label htmlFor="phone" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                      Phone
+                    </label>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                      placeholder="+971 ..."
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor="service" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                      What do you need? <span aria-hidden="true" className="text-foreground/85">*</span>
+                    </label>
+                    <select
+                      id="service"
+                      name="service"
+                      required
+                      defaultValue="General Enquiry"
+                      className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors focus:border-foreground"
+                    >
+                      <option>Paid Advertising</option>
+                      <option>Content Strategy</option>
+                      <option>Brand Strategy &amp; Market Insights</option>
+                      <option>SEO</option>
+                      <option>General Enquiry</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="message" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                    Tell us about the project <span aria-hidden="true" className="text-foreground/85">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    minLength={10}
+                    rows={5}
+                    className="min-h-28 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
+                    placeholder="What are you building, who is it for, and when does it need to land?"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={inquiryStatus === "sending"}
+                  className="lift min-h-12 w-full rounded-full font-extrabold"
+                >
+                  {inquiryStatus === "sending" ? "Sending..." : "Send Enquiry"}
+                </Button>
+
+                <p className="text-center text-xs font-semibold text-foreground/60">
+                  We reply to every brief within 6&ndash;12 hours.
+                </p>
+
+                {inquiryMessage ? (
+                  <p
+                    className="text-sm font-semibold leading-6 text-foreground/70"
+                    role={inquiryStatus === "not_sent" ? "alert" : "status"}
+                  >
+                    {inquiryMessage}
+                  </p>
+                ) : null}
+              </form>
+            </Reveal>
+          </div>
         </div>
 
         <div className="mt-16 flex flex-col items-center gap-4">
