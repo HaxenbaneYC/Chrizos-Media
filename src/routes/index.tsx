@@ -247,7 +247,7 @@ function Index() {
       </header>
 
       {/* ============ Hero ============ */}
-      <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24">
+      <section id="top" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pb-32 pt-24">
         <img
           src={logoWhite}
           alt="Chrizos Media"
@@ -279,7 +279,7 @@ function Index() {
 
         <div className="relative z-10 mt-10 grid w-full max-w-3xl gap-3 sm:grid-cols-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
-            <div key={claim} className="glass-soft lift px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground/75">
+            <div key={claim} className="lift rounded-xl bg-chip px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground">
               {claim}
             </div>
           ))}
@@ -365,7 +365,7 @@ function Index() {
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {["More sales", "More revenue per campaign", "More brand recognition"].map((claim, index) => (
               <Reveal key={claim} delay={index * 100}>
-                <div className="glass-soft lift px-5 py-4 text-sm font-bold uppercase tracking-[0.12em]">
+                <div className="lift rounded-xl bg-chip px-5 py-4 text-sm font-bold uppercase tracking-[0.12em] text-foreground">
                   {claim}
                 </div>
               </Reveal>

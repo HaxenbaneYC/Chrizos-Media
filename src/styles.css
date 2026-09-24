@@ -70,6 +70,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-section-electric: var(--section-electric);
   --color-section-navy: var(--section-navy);
+  --color-chip: var(--chip);
   --color-whatsapp: var(--whatsapp);
 }
 
@@ -112,6 +113,7 @@
   --sidebar-ring: oklch(1 0 0);
   --section-electric: oklch(0.456 0.31 265.9);
   --section-navy: oklch(0.29 0.113 261.1);
+  --chip: oklch(0.17 0.02 275);                 /* near-black callout chips #0A0A0F */
   --whatsapp: oklch(0.72 0.19 151);
 }
 
