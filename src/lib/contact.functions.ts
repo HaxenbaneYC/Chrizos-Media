@@ -67,13 +67,14 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
 
     try {
       const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
-      await supabaseAdmin.from('inquiries').insert({
+      await supabaseAdmin.from('inquiries').upsert({
+        id: data.submissionId,
         name: data.name,
         email: data.email,
         phone: data.phone,
         service: data.service,
         message: data.message,
-      })
+      }, { onConflict: 'id', ignoreDuplicates: true })
     } catch (error) {
       console.error('inquiry not stored', error)
     }
