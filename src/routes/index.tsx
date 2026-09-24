@@ -347,7 +347,7 @@ function Index() {
   return (
     <main className="bg-background text-foreground">
       {settings.announcement_text ? (
-        <div className="fixed inset-x-0 top-0 z-[60] bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:text-sm">{settings.announcement_text}</div>
+        <div className="fixed inset-x-0 top-0 z-[60] truncate bg-primary px-4 py-2 text-center text-xs font-bold text-primary-foreground sm:text-sm" title={settings.announcement_text}>{settings.announcement_text}</div>
       ) : null}
       <header
         className={`fixed inset-x-0 ${settings.announcement_text ? "top-8 sm:top-9" : "top-0"} z-50 transition-colors duration-200 ${
@@ -365,7 +365,7 @@ function Index() {
               width={488}
               height={216}
               decoding="async"
-              className="h-auto w-[4.5rem] sm:w-28"
+              className="h-auto w-16 sm:w-28"
             />
           </a>
 
@@ -378,7 +378,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="shrink-0 rounded-full px-1.5 py-2 text-[9px] font-bold uppercase tracking-[0.08em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:text-[10px] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
+                className="inline-flex min-h-10 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.04em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:tracking-[0.08em] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
               >
                 {item.label}
               </a>
@@ -406,7 +406,7 @@ function Index() {
           fetchPriority="high"
           decoding="async"
           className="parallax-layer relative z-10 w-full max-w-xs sm:max-w-md"
-          style={{ transform: `translate3d(0, ${scrollY * 0.12}px, 0)` }}
+          style={{ "--hero-shift": `${scrollY * 0.12}px` } as React.CSSProperties}
         />
 
 

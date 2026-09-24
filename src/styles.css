@@ -442,6 +442,7 @@ main > section:not(:first-of-type) {
 
 /* Hero parallax layer */
 .parallax-layer {
+  transform: translate3d(0, var(--hero-shift, 0), 0);
   will-change: transform;
 }
 
@@ -462,5 +463,12 @@ main > section:not(:first-of-type) {
   }
   .result-dot {
     transition: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .parallax-layer {
+    transform: none;
+    will-change: auto;
   }
 }
