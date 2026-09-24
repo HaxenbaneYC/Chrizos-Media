@@ -39,4 +39,4 @@
 - [x] Replace the social-proof mockup with an honest three-point break-even timeline
 - [x] Confirm SEO remains in the scrolling services marquee
 - [x] Rework the four services into an even desktop grid and clean mobile stack
-- [ ] Verify proof and service layouts on desktop and mobile
+- [x] Verify proof and service layouts on desktop and mobile
