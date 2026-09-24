@@ -14,7 +14,7 @@ import {
 import type { TemplateEntry } from './registry'
 
 const SITE_URL = 'https://chrizosmedia.com'
-const DOWNLOAD_URL = `${SITE_URL}/downloads/chrizos-media-dubai-marketing-checklist.pdf`
+const DOWNLOAD_URL = `${SITE_URL}/api/public/checklist-download?src=email`
 
 export interface ChecklistDeliveryEmailProps {
   email?: string
