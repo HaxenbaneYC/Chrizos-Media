@@ -833,9 +833,9 @@ function Index() {
                       <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate text-base font-extrabold">{formatWhatsAppDisplay(settings.whatsapp_number)}</span>
+                      <span className="block truncate text-base font-extrabold">WhatsApp</span>
                       <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
-                        WhatsApp &middot; Fastest reply
+                        Fastest reply
                       </span>
                     </span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" className="h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-200 group-hover:translate-x-0.5">
