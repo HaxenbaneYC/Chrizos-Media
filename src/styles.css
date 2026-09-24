@@ -428,7 +428,7 @@ main > section:not(:first-of-type) {
   transform: scaleX(0.667);
 }
 
-.result-tracker[data-active="3"],
+.result-tracker[data-active="3"] .result-track-fill,
 .result-tracker[data-active="4"] .result-track-fill {
   transform: scaleX(1);
 }
