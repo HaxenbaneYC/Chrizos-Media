@@ -19,7 +19,8 @@ export interface ContactInquiryEmailProps {
   name?: string
   email?: string
   phone?: string
-  inquiry?: string
+  service?: string
+  message?: string
   submittedAt?: string
 }
 
@@ -99,7 +100,8 @@ export function ContactInquiryEmail({
   name,
   email,
   phone,
-  inquiry,
+  service,
+  message,
   submittedAt,
 }: ContactInquiryEmailProps) {
   const displayName = display(name, 'New lead')
@@ -132,8 +134,13 @@ export function ContactInquiryEmail({
             <Hr />
 
             <Section style={styles.block}>
-              <Text style={styles.label}>Inquiry / Service Needed</Text>
-              <Text style={styles.inquiry}>{display(inquiry)}</Text>
+              <Text style={styles.label}>Service Needed</Text>
+              <Text style={styles.value}>{display(service)}</Text>
+            </Section>
+
+            <Section style={styles.block}>
+              <Text style={styles.label}>Message</Text>
+              <Text style={styles.inquiry}>{display(message)}</Text>
             </Section>
 
             <Text style={styles.footer}>
@@ -154,10 +161,11 @@ export const template = {
     return `New Chrizos Media inquiry${name ? `: ${name}` : ''}`
   },
   previewData: {
-    name: 'Placeholder Client',
+    name: 'Example Client',
     email: 'client@example.com',
     phone: '+971 50 000 0000',
-    inquiry:
+    service: 'Paid Advertising',
+    message:
       'We want to improve lead quality and make our paid campaigns easier to measure. We are interested in paid advertising and brand strategy.',
     submittedAt: '23 Sep 2026, 14:27 UTC',
   },
