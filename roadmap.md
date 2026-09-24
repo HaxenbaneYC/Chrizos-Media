@@ -48,3 +48,4 @@
 - [x] Replace the generic proof area with a full Glaucia case study using the real shoot, logo, delivered work, and break-even result
 - [x] Make the Glaucia journey a slow dynamic tracker with initially empty stages that illuminate left to right
 - [ ] Diagnose why Chrizos Media is not appearing in Google search and resolve actionable indexing issues
+- [ ] Add the supplied Google verification file to the live website
