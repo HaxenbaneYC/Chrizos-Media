@@ -49,3 +49,4 @@
 - [x] Make the Glaucia journey a slow dynamic tracker with initially empty stages that illuminate left to right
 - [x] Diagnose why Chrizos Media is not appearing in Google search and resolve actionable indexing issues
 - [x] Add the supplied Google verification file to the live website
+- [x] Optimize the navigation and service cards for phone screens, removing oversized empty space and clipped illustrations
