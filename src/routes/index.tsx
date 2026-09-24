@@ -134,6 +134,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: SOCIAL_SHARE_IMAGE_URL },
       { name: "twitter:image:alt", content: "Chrizos Media logo on an electric blue background" },
+      { name: "google-site-verification", content: "uzzj9R9Aahmkmf3VYqislFgiWItzv8dwuVJ5lUHZKc0" },
     ],
     links: [{ rel: "canonical", href: "https://chrizosmedia.com/" }],
     scripts: [
