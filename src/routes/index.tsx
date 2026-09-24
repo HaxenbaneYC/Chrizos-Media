@@ -294,7 +294,7 @@ function Index() {
         }`}
       >
 
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-6">
           <a href="#top" aria-label="Chrizos Media home" className="shrink-0">
             <img
               src={logoWhiteSmall}
@@ -302,7 +302,7 @@ function Index() {
               width={488}
               height={216}
               decoding="async"
-              className="h-auto w-24 sm:w-28"
+              className="h-auto w-20 sm:w-28"
             />
           </a>
 
@@ -315,7 +315,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="shrink-0 rounded-full px-3 py-2 text-xs font-bold uppercase tracking-[0.14em] text-foreground/70 transition-colors hover:text-foreground sm:text-sm"
+                className="shrink-0 rounded-full px-2 py-2 text-[10px] font-bold uppercase tracking-[0.1em] text-foreground/70 transition-colors hover:text-foreground sm:px-3 sm:text-sm sm:tracking-[0.14em]"
               >
                 {item.label}
               </a>
@@ -325,7 +325,7 @@ function Index() {
               target="_blank"
               rel="noreferrer"
               aria-label="Chrizos Media on Instagram"
-              className="ml-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground/75 transition-colors hover:text-foreground"
+              className="ml-1 hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground/75 transition-colors hover:text-foreground sm:inline-flex"
             >
               <InstagramIcon className="h-4 w-4" />
             </a>
