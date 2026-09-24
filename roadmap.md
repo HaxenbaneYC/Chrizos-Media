@@ -18,4 +18,6 @@
 - [x] Glassmorphism panels (services, graphics, proof cards, contact form, nav on scroll)
 - [x] Animated campaign-return bar chart (staggered grow, pulse glow, hover tooltip)
 - [x] Site motion pass (reveal stagger, hover/press feedback, hero parallax)
+- [x] Strengthen dashboard graphics with target, example, and process-led framing
+- [x] Link the Chrizos Media Calendly account to the project
 - [ ] Real scheduling embed in the booking section — ON HOLD per user until further instructions
