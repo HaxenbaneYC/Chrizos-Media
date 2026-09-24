@@ -27,7 +27,7 @@
 - [x] Remove obsolete placeholder labels and calendar illustration
 - [x] Add WhatsApp as a contact option using the verified business number
 - [x] Add service selection to the enquiry form and email notification
-- [ ] Replace the tab icon with the approved standalone lightning bolt on transparency and refresh its filename
-- [ ] Move homepage canonical, social URL, sitemap, and robots references to chrizosmedia.com
-- [ ] Add SEO as service 04 with an honest Search Performance illustration
-- [ ] Add SEO to the marquee and contact service selection
+- [x] Replace the tab icon with the approved standalone lightning bolt on transparency and refresh its filename
+- [x] Move homepage canonical, social URL, sitemap, and robots references to chrizosmedia.com
+- [x] Add SEO as service 04 with an honest Search Performance illustration
+- [x] Add SEO to the marquee and contact service selection
