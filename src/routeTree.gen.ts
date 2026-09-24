@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as Google2046e1efb4605547DothtmlRouteImport } from './routes/google2046e1efb4605547[.]html'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -33,6 +34,12 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Google2046e1efb4605547DothtmlRoute =
+  Google2046e1efb4605547DothtmlRouteImport.update({
+    id: '/google2046e1efb4605547.html',
+    path: '/google2046e1efb4605547.html',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -69,6 +76,7 @@ const LovableEmailTransactionalPreviewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -79,6 +87,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -91,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -103,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/admin'
     | '/dashboard'
@@ -113,6 +124,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/admin'
     | '/dashboard'
@@ -124,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
@@ -136,6 +149,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  Google2046e1efb4605547DothtmlRoute: typeof Google2046e1efb4605547DothtmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicChecklistDownloadRoute: typeof ApiPublicChecklistDownloadRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
@@ -163,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google2046e1efb4605547.html': {
+      id: '/google2046e1efb4605547.html'
+      path: '/google2046e1efb4605547.html'
+      fullPath: '/google2046e1efb4605547.html'
+      preLoaderRoute: typeof Google2046e1efb4605547DothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -227,6 +248,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  Google2046e1efb4605547DothtmlRoute: Google2046e1efb4605547DothtmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicChecklistDownloadRoute: ApiPublicChecklistDownloadRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
