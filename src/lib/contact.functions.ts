@@ -111,6 +111,10 @@ export const sendChecklistRequest = createServerFn({ method: 'POST' })
         return { status: 'not_sent', reason: 'recipient_suppressed' }
       }
 
+      const { recordChecklistEvent } = await import('./checklist-events.server')
+      await recordChecklistEvent('signup', 'page')
+
+
       // Best-effort notification to Chrizos Media — never blocks delivery.
       try {
         await sendTemplateEmail('checklist-request', CONTACT_EMAIL, {
