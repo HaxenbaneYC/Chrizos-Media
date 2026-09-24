@@ -550,7 +550,7 @@ function Index() {
                   type="email"
                   required
                   autoComplete="email"
-                  placeholder="Enter your email — get it when it's ready"
+                  placeholder="Enter your email — we'll send it instantly"
                   className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
                 />
                 <Button type="submit" disabled={checklistStatus === "sending"} className="lift min-h-12 w-full font-extrabold">
