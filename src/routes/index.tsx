@@ -561,6 +561,15 @@ function Index() {
                     {checklistMessage}
                   </p>
                 ) : null}
+                {checklistStatus === "sent" ? (
+                  <a
+                    href="/downloads/chrizos-media-dubai-marketing-checklist.pdf"
+                    download
+                    className="lift min-h-12 inline-flex w-full items-center justify-center rounded-xl bg-foreground px-4 font-extrabold text-background"
+                  >
+                    Download the Checklist (PDF)
+                  </a>
+                ) : null}
               </form>
             </div>
           </div>
