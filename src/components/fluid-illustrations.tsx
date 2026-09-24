@@ -365,39 +365,52 @@ export function ProblemFlow({ className = "" }: { className?: string }) {
 }
 
 export function ProofFlow({ className = "" }: { className?: string }) {
+  const milestones = [
+    { label: "Launch", detail: "Campaign live", featured: false },
+    { label: "Month 2", detail: "Learning and refining", featured: false },
+    { label: "Break-even", detail: "Month 3", featured: true },
+  ];
+
   return (
-    <div className={className} aria-label="Results board illustrating reach, leads, and sales performance categories" role="img">
+    <div
+      className={className}
+      aria-label="Three-month campaign timeline from launch to break-even in month three for a single-product brand"
+      role="img"
+    >
       <Panel>
-        <div className="flex h-full flex-col gap-3">
-          <Glass className="fluid-drift p-4">
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground/70">
-              Results board
-            </span>
-            <div className="mt-4 grid grid-cols-3 gap-2">
-              {["Reach", "Leads", "Sales"].map((item, index) => (
-                <div key={item} className="rounded-xl bg-foreground/10 p-3 text-center">
-                  <span className="block text-[9px] font-bold uppercase tracking-wider text-foreground/55">
-                    {item}
+        <div className="flex h-full items-center">
+          <Glass className="fluid-drift w-full p-5 sm:p-6">
+            <span className="graphic-kicker block">Campaign milestone</span>
+            <p className="mt-2 text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
+              Break-even in 3 months
+            </p>
+
+            <div className="relative mt-8 grid grid-cols-3 gap-2 sm:gap-4">
+              <div aria-hidden className="absolute left-[16.67%] right-[16.67%] top-5 h-px bg-foreground/25" />
+              {milestones.map((milestone) => (
+                <div key={milestone.label} className="relative flex min-w-0 flex-col items-center text-center">
+                  <div
+                    className={
+                      milestone.featured
+                        ? "seo-icon-tile relative z-10 flex h-11 w-11 items-center justify-center rounded-xl"
+                        : "relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-foreground/20 bg-card"
+                    }
+                  >
+                    <span className={`rounded-full ${milestone.featured ? "h-3 w-3 bg-foreground" : "h-2.5 w-2.5 bg-foreground/55"}`} />
+                  </div>
+                  <span className="mt-3 text-[10px] font-extrabold leading-tight text-foreground sm:text-xs">
+                    {milestone.label}
                   </span>
-                  <span className="mt-1 block text-base font-extrabold text-foreground">
-                    {index === 0 ? "+" : "↑"}
+                  <span className="mt-1 text-[8px] font-semibold leading-3 text-foreground/60 sm:text-[9px]">
+                    {milestone.detail}
                   </span>
                 </div>
               ))}
             </div>
-          </Glass>
 
-          <Glass className="fluid-drift flex flex-1 items-center gap-4 p-4">
-            <div className="flex -space-x-2">
-              {[0, 1, 2].map((item) => (
-                <span key={item} className="h-10 w-10 rounded-full border border-foreground/20 bg-foreground/20" />
-              ))}
-            </div>
-            <div className="flex-1 space-y-2">
-              <div className={`${strongLine} w-4/5`} />
-              <div className={`${faintLine} w-full`} />
-              <div className={`${faintLine} w-2/3`} />
-            </div>
+            <p className="mt-7 border-t border-foreground/15 pt-4 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-foreground/65">
+              Single-product brand, first campaign
+            </p>
           </Glass>
         </div>
       </Panel>

@@ -417,15 +417,15 @@ function Index() {
           </div>
 
 
-          <div className="mt-16 space-y-20 sm:mt-24 sm:space-y-28">
+          <div className="mt-16 grid items-stretch gap-6 sm:mt-24 lg:grid-cols-2">
             {services.map((service, index) => (
-              <Reveal key={service.number}>
-                <article className="grid items-center gap-10 sm:gap-14 lg:grid-cols-2">
-                  <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+              <Reveal key={service.number} delay={(index % 2) * 100} className="h-full">
+                <article className="glass-soft lift flex h-full flex-col overflow-hidden p-5 sm:p-7">
+                  <div className="flex flex-1 flex-col">
                     <span className="text-5xl font-extrabold text-foreground/25 sm:text-6xl">
                       {service.number}
                     </span>
-                    <h3 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+                    <h3 className="mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl">
                       {service.title}
                     </h3>
                     <p className="mt-2 text-base font-semibold text-foreground/70">
@@ -435,7 +435,7 @@ function Index() {
                       {service.description}
                     </p>
                     {service.visual !== "search" ? (
-                      <ul className="mt-6 space-y-2.5">
+                      <ul className="mt-6 space-y-2.5 pb-1">
                         {service.points.map((point) => (
                           <li key={point} className="flex items-start gap-3 text-sm font-semibold">
                             <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
@@ -445,10 +445,9 @@ function Index() {
                       </ul>
                     ) : null}
                   </div>
-                  <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                    <div className="glass-panel lift overflow-hidden">
-
-                      <div className={service.visual === "search" ? "min-h-[640px] w-full sm:aspect-[4/3] sm:min-h-0" : "aspect-[4/3] w-full"}>
+                  <div className="mt-8">
+                    <div className="glass-panel overflow-hidden">
+                      <div className={service.visual === "search" ? "min-h-[600px] w-full sm:aspect-[4/3] sm:min-h-0" : "aspect-[4/3] w-full"}>
                         {service.visual === "growth" ? (
                           <GrowthFlow className="h-full w-full" />
                         ) : service.visual === "content" ? (
