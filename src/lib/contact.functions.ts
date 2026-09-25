@@ -31,7 +31,7 @@ const contactInquiryInput = z.object({
   service: z.enum([
     'Paid Advertising',
     'Content Strategy',
-    'Brand Strategy & Market Insights',
+    'Brand Consulting',
     'SEO',
     'General Enquiry',
   ]),

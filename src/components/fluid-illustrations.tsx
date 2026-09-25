@@ -25,13 +25,13 @@ function Glass({
 /** 01 — Paid Advertising: a live campaign performance dashboard. */
 export function GrowthFlow({ className = "" }: { className?: string }) {
   const bars = [
-    { height: "38%", value: "Example 1.6x" },
-    { height: "52%", value: "Example 2.2x" },
-    { height: "44%", value: "Example 1.9x" },
-    { height: "66%", value: "Example 2.9x" },
-    { height: "58%", value: "Example 2.5x" },
-    { height: "82%", value: "Target 3.7x" },
-    { height: "95%", value: "Target 4.8x" },
+    { height: "38%", label: "Week 1" },
+    { height: "52%", label: "Week 2" },
+    { height: "44%", label: "Week 3" },
+    { height: "66%", label: "Week 4" },
+    { height: "58%", label: "Week 5" },
+    { height: "82%", label: "Week 6" },
+    { height: "95%", label: "Week 7" },
   ];
 
   const chartRef = useRef<HTMLDivElement>(null);
@@ -54,13 +54,13 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
   }, []);
 
   return (
-    <div className={className} aria-label="Illustrative paid advertising dashboard showing target returns, customer costs, weekly lead reporting, and a rising campaign return chart" role="img">
+    <div className={className} aria-label="Paid advertising service panel showing campaign setup, weekly customer-cost tracking, weekly lead reports, and a rising activity chart by week" role="img">
       <Panel>
         <div className="flex h-full flex-col gap-3">
           <div className="grid grid-cols-3 gap-2">
             {[
-              { k: "Ad return", v: "$3–$5 back per $1" },
-              { k: "Customer cost", v: "Lower by design" },
+              { k: "Campaigns", v: "Setup & daily management" },
+              { k: "Customer cost", v: "Tracked & improved weekly" },
               { k: "Leads", v: "Weekly reports" },
             ].map((m) => (
               <Glass key={m.k} className="fluid-drift lift min-w-0 p-3">
@@ -75,26 +75,20 @@ export function GrowthFlow({ className = "" }: { className?: string }) {
           </div>
 
           <Glass className="fluid-drift flex flex-1 flex-col p-4">
-            <div className="flex items-start justify-between gap-3">
-              <span className="graphic-headline max-w-[75%]">
-                Example target: $3–$5 back per $1 spent
-              </span>
-              <span className="flex shrink-0 items-center gap-1.5 text-[9px] font-bold uppercase text-foreground/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-background" />
-                Illustrative
-              </span>
-            </div>
+            <span className="graphic-headline max-w-[75%]">
+              Spend, leads, and sales tracked from week one
+            </span>
 
             <div ref={chartRef} className="mt-5 flex flex-1 items-end gap-2">
               {bars.map((bar, index) => {
                 const isLast = index === bars.length - 1;
                 return (
                   <div
-                    key={bar.value + index}
+                    key={bar.label + index}
                     className="bar-col group relative flex h-full min-w-1.5 flex-1 items-end"
                   >
                     <span className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-1.5 py-0.5 text-[8px] font-extrabold text-primary-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                      {bar.value}
+                      {bar.label}
                     </span>
                     <div
                       className={`bar-grow ${grown ? "is-grown" : ""} min-h-4 w-full rounded-t-md ${
@@ -282,7 +276,7 @@ function SeoIcon({ type }: { type: "audit" | "keyword" | "content" }) {
   );
 }
 
-/** 04 — SEO: three core workstreams and illustrative keyword movement. */
+/** 04 — SEO: three core workstreams and target keyword visibility. */
 export function SearchFlow({ className = "" }: { className?: string }) {
   const workstreams = [
     { type: "audit" as const, title: "Technical Audit", detail: "Speed, indexing, and site structure." },
@@ -290,15 +284,15 @@ export function SearchFlow({ className = "" }: { className?: string }) {
     { type: "content" as const, title: "Content That Ranks", detail: "Useful pages designed to earn visibility." },
   ];
   const rankingRows = [
-    { keyword: "Service keyword", position: "18 → 9" },
-    { keyword: "Local search", position: "24 → 12" },
-    { keyword: "Buyer question", position: "31 → 16" },
+    { keyword: "Service keyword", position: "Target: page 1" },
+    { keyword: "Local search", position: "Target: page 1" },
+    { keyword: "Buyer question", position: "Target: page 1" },
   ];
 
   return (
     <div
       className={className}
-      aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles above an illustrative Keyword Rankings widget"
+      aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles above a target keyword visibility widget"
       role="img"
     >
       <div className="relative h-full w-full overflow-hidden bg-card">
