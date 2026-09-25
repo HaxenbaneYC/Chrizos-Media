@@ -1159,7 +1159,7 @@ function Index() {
             href={IG_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
           >
             <InstagramIcon className="h-5 w-5" />
             Instagram
