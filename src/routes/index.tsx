@@ -8,6 +8,12 @@ import glauciaCampaign from "../assets/glaucia-campaign-shoot.png.asset.json";
 import glauciaLogo from "../assets/glaucia-logo.jpg.asset.json";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { CalendlyBooking } from "@/components/calendly-booking";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { Reveal } from "@/components/reveal";
@@ -83,6 +89,52 @@ const RESULT_STAGES = [
   { label: "Content ready", detail: "Production" },
   { label: "Campaign live", detail: "Publishing" },
   { label: "Break-even", detail: "Month 3" },
+];
+
+// ---- "How it works" and FAQ content — edit the wording here ----
+const HOW_IT_WORKS_STEPS = [
+  {
+    title: "Free Brand Audit",
+    detail: "A 30-minute call where we review your ads, content and online presence together.",
+  },
+  {
+    title: "Your Growth Plan",
+    detail:
+      "You receive a clear written plan within 48 hours — yours to keep either way.",
+  },
+  {
+    title: "Launch & Report",
+    detail:
+      "We execute, you get weekly updates and a monthly results review.",
+  },
+];
+
+const FAQ_ITEMS = [
+  {
+    question: "Is the brand audit really free?",
+    answer:
+      "Yes. There is no obligation and no catch — you keep the written plan either way, whether we work together or not.",
+  },
+  {
+    question: "Why only 5 clients?",
+    answer:
+      "So every client gets founder-level attention, not a junior account manager. Deliberately small is how we keep the quality high.",
+  },
+  {
+    question: "Do you lock me into a long contract?",
+    answer:
+      "No. After the initial period, everything runs month-to-month — you can pause or stop whenever you need to. [Edit this to match your terms.]",
+  },
+  {
+    question: "What budget do I need for ads?",
+    answer:
+      "[Placeholder — write your recommended starting ad budget and how you size it per business.]",
+  },
+  {
+    question: "Which industries do you work with?",
+    answer:
+      "[Placeholder — list the industries you serve best, e.g. fashion, beauty, hospitality, local services in Dubai.]",
+  },
 ];
 
 function ResultTracker() {
@@ -804,6 +856,72 @@ function Index() {
               </div>
 
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ How it works ============ */}
+      <section id="how-it-works" className="scroll-mt-28 bg-section-electric px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32" aria-labelledby="how-it-works-title">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+              How it works
+            </p>
+            <h2 id="how-it-works-title" className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
+              From first call to first results.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <ol className="relative mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+              {/* Connecting line: vertical on mobile, horizontal on desktop */}
+              <span
+                aria-hidden
+                className="absolute left-[1.375rem] top-2 h-[calc(100%-1rem)] w-px bg-foreground/25 md:left-[10%] md:right-[10%] md:top-[1.375rem] md:h-px md:w-auto"
+              />
+              {HOW_IT_WORKS_STEPS.map((step, index) => (
+                <li key={step.title} className="relative flex gap-5 md:flex-col md:items-center md:gap-0 md:text-center">
+                  <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-card text-lg font-extrabold text-primary shadow-[0_0_24px_rgba(255,255,255,0.25)]">
+                    {index + 1}
+                  </span>
+                  <div className="md:mt-6">
+                    <h3 className="text-xl font-extrabold leading-tight">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-foreground/80 md:max-w-xs md:mx-auto">
+                      {step.detail}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ FAQ ============ */}
+      <section id="faq" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32" aria-labelledby="faq-title">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+              FAQ
+            </p>
+            <h2 id="faq-title" className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
+              Questions, answered.
+            </h2>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <Accordion type="single" collapsible className="glass-soft mt-10 px-6 sm:px-8">
+              {FAQ_ITEMS.map((item) => (
+                <AccordionItem key={item.question} value={item.question} className="border-border">
+                  <AccordionTrigger className="py-5 text-base font-extrabold hover:no-underline sm:text-lg">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-sm leading-7 text-foreground/80">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </Reveal>
         </div>
       </section>
