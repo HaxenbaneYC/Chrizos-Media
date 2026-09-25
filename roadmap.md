@@ -50,3 +50,6 @@
 - [x] Diagnose why Chrizos Media is not appearing in Google search and resolve actionable indexing issues
 - [x] Add the supplied Google verification file to the live website
 - [x] Optimize the navigation and service cards for phone screens, removing oversized empty space and clipped illustrations
+- [x] Remove "Dubai" from the "Free marketing checklist" label
+- [x] Track UTM campaign tags on checklist sign-ups/downloads and compare them in the private panel
+- [x] Add an AI production-checklist tool for prospective clients (/production-checklist)
