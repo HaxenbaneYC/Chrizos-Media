@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import logoWhite from "../assets/chrizos-logo-white.webp";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
@@ -44,6 +44,24 @@ function ChecklistPage() {
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [message, setMessage] = useState("");
+  const [utm, setUtm] = useState<{ source?: string | undefined; medium?: string | undefined; campaign?: string | undefined }>({});
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const pick = (k: string) => params.get(k)?.slice(0, 80) || undefined;
+    setUtm({
+      source: pick("utm_source") ?? "instagram",
+      medium: pick("utm_medium") ?? "bio",
+      campaign: pick("utm_campaign"),
+    });
+  }, []);
+
+  const downloadHref = `/api/public/checklist-download?${new URLSearchParams({
+    src: "instagram",
+    ...(utm.source ? { utm_source: utm.source } : {}),
+    ...(utm.medium ? { utm_medium: utm.medium } : {}),
+    ...(utm.campaign ? { utm_campaign: utm.campaign } : {}),
+  }).toString()}`;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -55,7 +73,7 @@ function ChecklistPage() {
 
     try {
       const result = await submitChecklistRequest({
-        data: { submissionId: crypto.randomUUID(), email, source: "instagram" },
+        data: { submissionId: crypto.randomUUID(), email, source: "instagram", utm },
       });
 
       if (result.status === "sent") {
@@ -85,7 +103,7 @@ function ChecklistPage() {
         </a>
 
         <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
-          Free Dubai marketing checklist
+          Free marketing checklist
         </p>
         <h1 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
           5 Marketing Mistakes Costing Dubai Businesses Clients
@@ -127,7 +145,7 @@ function ChecklistPage() {
           ) : null}
           {status === "sent" ? (
             <a
-              href="/api/public/checklist-download?src=instagram"
+              href={downloadHref}
               className="lift inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-foreground px-4 font-extrabold text-background"
             >
               Download the Checklist (PDF)

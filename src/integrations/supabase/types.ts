@@ -41,18 +41,27 @@ export type Database = {
           event_type: string
           id: number
           source: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
         }
         Insert: {
           created_at?: string
           event_type: string
           id?: never
           source?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Update: {
           created_at?: string
           event_type?: string
           id?: never
           source?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }

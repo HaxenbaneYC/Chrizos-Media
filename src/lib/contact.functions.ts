@@ -14,6 +14,13 @@ const checklistRequestInput = z.object({
   submissionId: z.string().uuid(),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
   source: z.enum(['page', 'instagram']).optional().default('page'),
+  utm: z
+    .object({
+      source: z.string().max(80).optional(),
+      medium: z.string().max(80).optional(),
+      campaign: z.string().max(120).optional(),
+    })
+    .optional(),
 })
 
 const contactInquiryInput = z.object({
@@ -127,7 +134,7 @@ export const sendChecklistRequest = createServerFn({ method: 'POST' })
       }
 
       const { recordChecklistEvent } = await import('./checklist-events.server')
-      await recordChecklistEvent('signup', data.source)
+      await recordChecklistEvent('signup', data.source, data.utm)
 
 
       // Best-effort notification to Chrizos Media — never blocks delivery.
