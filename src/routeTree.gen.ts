@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as Google2046e1efb4605547DothtmlRouteImport } from './routes/google2046e1efb4605547[.]html'
+import { Route as ProductionChecklistRouteImport } from './routes/production-checklist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -46,6 +47,11 @@ const Google2046e1efb4605547DothtmlRoute =
     path: '/google2046e1efb4605547.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductionChecklistRoute = ProductionChecklistRouteImport.update({
+  id: '/production-checklist',
+  path: '/production-checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/google2046e1efb4605547.html'
+    | '/production-checklist'
     | '/sitemap.xml'
     | '/admin'
     | '/dashboard'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/google2046e1efb4605547.html'
+    | '/production-checklist'
     | '/sitemap.xml'
     | '/admin'
     | '/dashboard'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/checklist'
     | '/google2046e1efb4605547.html'
+    | '/production-checklist'
     | '/sitemap.xml'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
@@ -163,6 +175,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
   Google2046e1efb4605547DothtmlRoute: typeof Google2046e1efb4605547DothtmlRoute
+  ProductionChecklistRoute: typeof ProductionChecklistRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicChecklistDownloadRoute: typeof ApiPublicChecklistDownloadRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       path: '/google2046e1efb4605547.html'
       fullPath: '/google2046e1efb4605547.html'
       preLoaderRoute: typeof Google2046e1efb4605547DothtmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/production-checklist': {
+      id: '/production-checklist'
+      path: '/production-checklist'
+      fullPath: '/production-checklist'
+      preLoaderRoute: typeof ProductionChecklistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -270,6 +290,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
   Google2046e1efb4605547DothtmlRoute: Google2046e1efb4605547DothtmlRoute,
+  ProductionChecklistRoute: ProductionChecklistRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicChecklistDownloadRoute: ApiPublicChecklistDownloadRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
