@@ -613,6 +613,9 @@ function Index() {
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/75 sm:text-base">
                   The exact issues we see most often in local businesses&apos; ads, content, and how they stand out: see if you&apos;re making any of them.
                 </p>
+                <a href="/production-checklist" className="mt-4 inline-block text-sm font-bold underline underline-offset-4">
+                  Planning a shoot or launch? Get a free AI production checklist →
+                </a>
               </div>
               <form onSubmit={handleChecklistSubmit} className="grid gap-3">
                 <label htmlFor="checklistEmail" className="sr-only">Email address</label>
