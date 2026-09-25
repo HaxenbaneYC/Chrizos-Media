@@ -44,7 +44,7 @@ function ChecklistPage() {
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [message, setMessage] = useState("");
-  const [utm, setUtm] = useState<{ source?: string; medium?: string; campaign?: string }>({});
+  const [utm, setUtm] = useState<{ source?: string | undefined; medium?: string | undefined; campaign?: string | undefined }>({});
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

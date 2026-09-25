@@ -1,6 +1,6 @@
 // Records anonymous events — no emails, IPs, or identifiers are stored.
 // Campaign tags (utm_*) describe the link clicked, not the person.
-export type Utm = { source?: string; medium?: string; campaign?: string };
+export type Utm = { source?: string | undefined; medium?: string | undefined; campaign?: string | undefined };
 
 function clean(value: string | null | undefined, max: number) {
   const v = (value ?? "").trim().toLowerCase().replace(/[^a-z0-9._\- ]/g, "").slice(0, max);
