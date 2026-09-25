@@ -11,6 +11,7 @@ const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`
 
 export const Route = createFileRoute("/checklist")({
   staticData: { sitemap: true },
+  component: ChecklistPage,
   head: () => ({
     meta: [
       {
