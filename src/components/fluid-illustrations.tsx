@@ -283,21 +283,16 @@ export function SearchFlow({ className = "" }: { className?: string }) {
     { type: "keyword" as const, title: "Keyword Strategy", detail: "Pages matched to what customers search for." },
     { type: "content" as const, title: "Content That Ranks", detail: "Useful pages designed to earn visibility." },
   ];
-  const rankingRows = [
-    { keyword: "Service keyword", position: "Target: page 1" },
-    { keyword: "Local search", position: "Target: page 1" },
-    { keyword: "Buyer question", position: "Target: page 1" },
-  ];
 
   return (
     <div
       className={className}
-      aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles above a target keyword visibility widget"
+      aria-label="SEO service illustration with Technical Audit, Keyword Strategy, and Content That Ranks glass tiles"
       role="img"
     >
       <div className="relative h-full w-full overflow-hidden bg-card">
         <div className="flex h-full flex-col gap-3 p-5 sm:p-7">
-          <div className="grid flex-[1.35] grid-cols-3 gap-1.5 sm:gap-2">
+          <div className="grid flex-1 grid-cols-3 gap-1.5 sm:gap-2">
             {workstreams.map((item) => (
               <div key={item.title} className="seo-icon-card fluid-drift flex min-w-0 flex-col items-center justify-center p-2 text-center sm:p-3">
                 <div className="seo-icon-tile flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-foreground sm:h-16 sm:w-16 sm:rounded-2xl">
@@ -309,17 +304,6 @@ export function SearchFlow({ className = "" }: { className?: string }) {
             ))}
           </div>
 
-          <Glass className="fluid-drift flex flex-1 flex-col p-4">
-            <span className="graphic-headline">Keyword Rankings</span>
-            <div className="mt-3 grid gap-2">
-              {rankingRows.map((row) => (
-                <div key={row.keyword} className="flex items-center justify-between gap-3 rounded-lg bg-foreground/10 px-3 py-2">
-                  <span className="truncate text-[9px] font-bold text-foreground/75">{row.keyword}</span>
-                  <span className="shrink-0 text-[9px] font-extrabold text-foreground">{row.position}</span>
-                </div>
-              ))}
-            </div>
-          </Glass>
         </div>
       </div>
     </div>
