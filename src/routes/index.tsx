@@ -8,6 +8,12 @@ import glauciaCampaign from "../assets/glaucia-campaign-shoot.png.asset.json";
 import glauciaLogo from "../assets/glaucia-logo.jpg.asset.json";
 import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { CalendlyBooking } from "@/components/calendly-booking";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { Reveal } from "@/components/reveal";
