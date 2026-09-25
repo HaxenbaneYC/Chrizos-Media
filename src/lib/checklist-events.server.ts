@@ -1,7 +1,7 @@
 // Records anonymous events — no emails, IPs, or identifiers are stored.
 export async function recordChecklistEvent(
   eventType: "signup" | "download" | "booking",
-  source: "page" | "email" | "calendly" | "whatsapp",
+  source: "page" | "email" | "calendly" | "whatsapp" | "instagram",
 ) {
   try {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
