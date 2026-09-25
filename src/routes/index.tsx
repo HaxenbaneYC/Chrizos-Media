@@ -68,19 +68,19 @@ function ResultTracker() {
         timer = setTimeout(() => {
           currentStage = -1;
           setActiveStage(-1);
-          timer = setTimeout(advance, 1200);
-        }, 1800);
+          timer = setTimeout(advance, 500);
+        }, 1100);
         return;
       }
       currentStage += 1;
       setActiveStage(currentStage);
-      timer = setTimeout(advance, 1200);
+      timer = setTimeout(advance, 600);
     };
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || timer) return;
         setActiveStage(-1);
-        timer = setTimeout(advance, 1800);
+        timer = setTimeout(advance, 700);
       },
       { threshold: 0.6 },
     );
