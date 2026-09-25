@@ -9,7 +9,11 @@ export const Route = createFileRoute("/api/public/checklist-download")({
     handlers: {
       GET: async ({ request }) => {
         const url = new URL(request.url);
-        const source = url.searchParams.get("src") === "email" ? "email" : "page";
+        const rawSource = url.searchParams.get("src") ?? "page";
+        const source = (["email", "instagram"].includes(rawSource) ? rawSource : "page") as
+          | "email"
+          | "instagram"
+          | "page";
         await recordChecklistEvent("download", source);
         return new Response(null, {
           status: 302,

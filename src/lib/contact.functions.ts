@@ -13,6 +13,7 @@ const recentSubmissions = new Map<string, number[]>()
 const checklistRequestInput = z.object({
   submissionId: z.string().uuid(),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
+  source: z.enum(['page', 'instagram']).optional().default('page'),
 })
 
 const contactInquiryInput = z.object({
@@ -126,7 +127,7 @@ export const sendChecklistRequest = createServerFn({ method: 'POST' })
       }
 
       const { recordChecklistEvent } = await import('./checklist-events.server')
-      await recordChecklistEvent('signup', 'page')
+      await recordChecklistEvent('signup', data.source)
 
 
       // Best-effort notification to Chrizos Media — never blocks delivery.

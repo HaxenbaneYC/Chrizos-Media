@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as Google2046e1efb4605547DothtmlRouteImport } from './routes/google2046e1efb4605547[.]html'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -32,6 +33,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChecklistRoute = ChecklistRouteImport.update({
+  id: '/checklist',
+  path: '/checklist',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Google2046e1efb4605547DothtmlRoute =
@@ -76,6 +82,7 @@ const LovableEmailTransactionalPreviewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/checklist': typeof ChecklistRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/checklist'
     | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/admin'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/checklist'
     | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/admin'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/checklist'
     | '/google2046e1efb4605547.html'
     | '/sitemap.xml'
     | '/_authenticated/admin'
@@ -149,6 +161,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ChecklistRoute: typeof ChecklistRoute
   Google2046e1efb4605547DothtmlRoute: typeof Google2046e1efb4605547DothtmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiPublicChecklistDownloadRoute: typeof ApiPublicChecklistDownloadRoute
@@ -177,6 +190,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checklist': {
+      id: '/checklist'
+      path: '/checklist'
+      fullPath: '/checklist'
+      preLoaderRoute: typeof ChecklistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/google2046e1efb4605547.html': {
@@ -248,6 +268,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ChecklistRoute: ChecklistRoute,
   Google2046e1efb4605547DothtmlRoute: Google2046e1efb4605547DothtmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiPublicChecklistDownloadRoute: ApiPublicChecklistDownloadRoute,
