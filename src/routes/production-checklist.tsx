@@ -67,7 +67,7 @@ function ProductionChecklistPage() {
     <main className="min-h-[100svh] bg-background px-4 py-12 text-foreground sm:py-16">
       <div className="mx-auto w-full max-w-2xl">
         <a href="/" className="flex justify-center" aria-label="Chrizos Media home">
-          <img src={logoWhite} alt="Chrizos Media" className="h-auto w-24 sm:w-28" />
+          <img src={logoWhite} alt="Chrizos Media lightning bolt logo" decoding="async" className="h-auto w-24 sm:w-28" />
         </a>
         <div className="glass-panel mt-8 p-6 sm:p-10">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free AI tool</p>

@@ -99,7 +99,7 @@ function ChecklistPage() {
     <main className="flex min-h-[100svh] flex-col items-center justify-center bg-background px-4 py-12 text-foreground sm:py-16">
       <div className="glass-panel w-full max-w-xl p-6 sm:p-10">
         <a href="/" className="flex items-center justify-center" aria-label="Chrizos Media home">
-          <img src={logoWhite} alt="Chrizos Media" className="h-auto w-24 sm:w-28" />
+          <img src={logoWhite} alt="Chrizos Media lightning bolt logo" decoding="async" className="h-auto w-24 sm:w-28" />
         </a>
 
         <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
