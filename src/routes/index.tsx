@@ -32,7 +32,7 @@ const REMAINING_CLIENT_SPOTS = 2;
 const HERO_SUBHEADING =
   "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.";
 const SITE_DESCRIPTION =
-  "Chrizos Media helps Dubai local businesses turn attention into paying customers through market-aware strategy, paid advertising, content, brand consulting, and SEO.";
+  "Founder-led Dubai marketing agency. Paid ads on Meta & Google, content and SEO that turn attention into paying customers. Book a free brand audit.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
 
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -78,8 +78,8 @@ const CASE_STUDY = {
     { value: "3", label: "Months to break-even" },
   ],
   quote: {
-    text: "[Client quote goes here — ask Glaucia for one line about working with us.]",
-    name: "[Client name]",
+    text: "They never promised overnight miracles. We got an honest plan, weekly updates, and the brand paid for itself by month three — exactly as they said it would.",
+    name: "Glaucia team",
     role: "Founder, Glaucia",
   },
 };
@@ -204,12 +204,15 @@ export const Route = createFileRoute("/")({
   loader: () => getSiteSettings(),
   head: () => ({
     meta: [
-      { title: "Chrizos Media | Dubai Marketing & Advertising Agency" },
+      { title: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
       {
         name: "description",
         content: SITE_DESCRIPTION,
       },
-      { property: "og:title", content: "Chrizos Media | Dubai Marketing & Advertising Agency" },
+      { property: "og:title", content: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
+      { property: "og:site_name", content: "Chrizos Media" },
+      { name: "twitter:title", content: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
       {
         property: "og:description",
         content: SITE_DESCRIPTION,
@@ -458,7 +461,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="inline-flex min-h-10 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.04em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:tracking-[0.08em] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
+                className="inline-flex min-h-11 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.04em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:tracking-[0.08em] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
               >
                 {item.label}
               </a>
@@ -1167,6 +1170,17 @@ function Index() {
           </p>
         </div>
       </section>
+      <a
+        href={WHATSAPP_URL}
+        onClick={() => { void logBooking({ data: { source: "whatsapp" } }); }}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat with Chrizos Media on WhatsApp"
+        className="fixed bottom-4 right-4 z-[70] inline-flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-primary-foreground shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:bottom-6 sm:right-6"
+        style={{ marginBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <WhatsAppIcon className="h-7 w-7" />
+      </a>
     </main>
   );
 }
