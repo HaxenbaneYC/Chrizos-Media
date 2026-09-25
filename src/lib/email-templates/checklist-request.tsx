@@ -34,7 +34,7 @@ export function ChecklistRequestEmail({ email, submittedAt }: ChecklistRequestEm
   return (
     <Html>
       <Head />
-      <Preview>New Dubai marketing checklist request</Preview>
+      <Preview>New marketing checklist request</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Section style={styles.card}>
@@ -55,7 +55,7 @@ export function ChecklistRequestEmail({ email, submittedAt }: ChecklistRequestEm
 export const template = {
   component: ChecklistRequestEmail,
   displayName: 'Checklist request',
-  subject: 'New Dubai marketing checklist request',
+  subject: 'New marketing checklist request',
   previewData: {
     email: 'owner@example.com',
     submittedAt: '24 Sep 2026, 11:10 UTC',

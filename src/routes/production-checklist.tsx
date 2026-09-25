@@ -70,18 +70,18 @@ function ProductionChecklistPage() {
           <img src={logoWhite} alt="Chrizos Media lightning bolt logo" decoding="async" className="h-auto w-24 sm:w-28" />
         </a>
         <div className="glass-panel mt-8 p-6 sm:p-10">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free AI tool</p>
+          <p className="text-xs font-bold uppercase text-foreground/60">Free AI tool</p>
           <h1 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
             Get your personalized production checklist
           </h1>
           <p className="mt-4 text-sm leading-6 text-foreground/75 sm:text-base">
-            Tell us what you're planning — a shoot, reels, a launch, a rebrand — and get a step-by-step
+            Tell us what you're planning (a shoot, reels, a launch, a rebrand) and get a step-by-step
             checklist tailored to your project in seconds.
           </p>
           <form onSubmit={handleSubmit} className="mt-6 grid gap-3">
             <label className="grid gap-1 text-sm font-bold">
               Your business (optional)
-              <input name="business" maxLength={120} placeholder="e.g. Streetwear brand in Dubai" className={`${inputClass} min-h-12`} />
+              <input name="business" maxLength={120} placeholder="e.g. Streetwear brand" className={`${inputClass} min-h-12`} />
             </label>
             <label className="grid gap-1 text-sm font-bold">
               Main goal (optional)
@@ -115,7 +115,7 @@ function ProductionChecklistPage() {
             <ol className="mt-6 grid gap-6">
               {result.phases.map((p, i) => (
                 <li key={p.phase}>
-                  <h3 className="text-sm font-extrabold uppercase tracking-[0.15em]">
+                  <h3 className="text-sm font-extrabold uppercase">
                     {i + 1}. {p.phase}
                   </h3>
                   <ul className="mt-3 grid gap-2">
@@ -137,7 +137,7 @@ function ProductionChecklistPage() {
                 Print / save as PDF
               </Button>
             </div>
-            <p className="mt-4 text-xs text-foreground/55">AI-generated guide — we'll refine it with you on a call.</p>
+            <p className="mt-4 text-xs text-foreground/55">AI-generated guide. We'll refine it with you on a call.</p>
           </section>
         ) : null}
       </div>

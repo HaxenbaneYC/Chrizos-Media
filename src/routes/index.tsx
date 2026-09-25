@@ -30,9 +30,9 @@ const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_TEXT = "?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
 const REMAINING_CLIENT_SPOTS = 2;
 const HERO_SUBHEADING =
-  "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.";
+  "Paid ads, content and SEO for growing businesses. Run personally by the founder, not handed to a junior.";
 const SITE_DESCRIPTION =
-  "Founder-led Dubai marketing agency. Paid ads on Meta & Google, content and SEO that turn attention into paying customers. Book a free brand audit.";
+  "Founder-led marketing agency. Paid ads on Meta and Google, content and SEO that turn attention into paying customers. Book a free brand audit.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
 
 function InstagramIcon({ className = "" }: { className?: string }) {
@@ -59,9 +59,9 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
 const CASE_STUDY = {
   client: "Glaucia",
   industry: "Fashion brand launch",
-  location: "Dubai",
+  location: "Brand launch",
   problem:
-    "A single-product fashion brand with no identity, no content and no audience — starting from zero before its first campaign.",
+    "A single-product fashion brand with no identity, no content and no audience, starting from zero before its first campaign.",
   deliverables: [
     "Full brand identity",
     "Product production",
@@ -71,14 +71,14 @@ const CASE_STUDY = {
     "Paid marketing",
   ],
   result:
-    "From zero to a launched brand with a running paid campaign — reaching break-even in 3 months.",
+    "From zero to a launched brand with a running paid campaign, reaching break-even in 3 months.",
   stats: [
     { value: "32%", label: "Increase in 6 weeks" },
     { value: "400", label: "New followers in [period]" },
     { value: "3", label: "Months to break-even" },
   ],
   quote: {
-    text: "They never promised overnight miracles. We got an honest plan, weekly updates, and the brand paid for itself by month three — exactly as they said it would.",
+    text: "They never promised overnight miracles. We got an honest plan, weekly updates, and the brand paid for itself by month three, exactly as they said it would.",
     name: "Glaucia team",
     role: "Founder, Glaucia",
   },
@@ -100,7 +100,7 @@ const HOW_IT_WORKS_STEPS = [
   {
     title: "Your Growth Plan",
     detail:
-      "You receive a clear written plan within 48 hours — yours to keep either way.",
+      "You receive a clear written plan within 48 hours. Yours to keep either way.",
   },
   {
     title: "Launch & Report",
@@ -113,7 +113,7 @@ const FAQ_ITEMS = [
   {
     question: "Is the brand audit really free?",
     answer:
-      "Yes. There is no obligation and no catch — you keep the written plan either way, whether we work together or not.",
+      "Yes. There is no obligation and no catch. You keep the written plan either way, whether we work together or not.",
   },
   {
     question: "Why only 5 clients?",
@@ -123,17 +123,17 @@ const FAQ_ITEMS = [
   {
     question: "Do you lock me into a long contract?",
     answer:
-      "No. After the initial period, everything runs month-to-month — you can pause or stop whenever you need to. [Edit this to match your terms.]",
+      "No. After the initial period, everything runs month-to-month, so you can pause or stop whenever you need to. [Edit this to match your terms.]",
   },
   {
     question: "What budget do I need for ads?",
     answer:
-      "[Placeholder — write your recommended starting ad budget and how you size it per business.]",
+      "[Placeholder: write your recommended starting ad budget and how you size it per business.]",
   },
   {
     question: "Which industries do you work with?",
     answer:
-      "[Placeholder — list the industries you serve best, e.g. fashion, beauty, hospitality, local services in Dubai.]",
+      "[Placeholder: list the industries you serve best, e.g. fashion, beauty, hospitality, local services.]",
   },
 ];
 
@@ -204,14 +204,14 @@ export const Route = createFileRoute("/")({
   loader: () => getSiteSettings(),
   head: () => ({
     meta: [
-      { title: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
+      { title: "Chrizos Media | Marketing Agency for Ads, Content & SEO" },
       {
         name: "description",
         content: SITE_DESCRIPTION,
       },
-      { property: "og:title", content: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
+      { property: "og:title", content: "Chrizos Media | Marketing Agency for Ads, Content & SEO" },
       { property: "og:site_name", content: "Chrizos Media" },
-      { name: "twitter:title", content: "Chrizos Media | Marketing Agency in Dubai — Ads, Content & SEO" },
+      { name: "twitter:title", content: "Chrizos Media | Marketing Agency for Ads, Content & SEO" },
       { name: "twitter:description", content: SITE_DESCRIPTION },
       {
         property: "og:description",
@@ -238,11 +238,6 @@ export const Route = createFileRoute("/")({
           url: "https://chrizosmedia.com",
           logo: SOCIAL_SHARE_IMAGE_URL,
           image: SOCIAL_SHARE_IMAGE_URL,
-          areaServed: {
-            "@type": "City",
-            name: "Dubai",
-            containedInPlace: { "@type": "Country", name: "United Arab Emirates" },
-          },
           knowsAbout: ["Marketing", "Advertising", "Paid Advertising", "Content Strategy", "Brand Strategy", "SEO"],
           serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Consulting", "SEO"],
           sameAs: [INSTAGRAM_URL],
@@ -281,7 +276,7 @@ const services: Service[] = [
     tagline: "Build attention and trust before you ever ask for the sale.",
     points: [
       "A monthly content calendar for Instagram & Facebook",
-      "Hooks, captions, and campaign ideas written to prompt action",
+      "Hooks, captions and campaign ideas written to prompt action",
       "Launch and seasonal content planned around your key dates",
     ],
     timeframe: "First results in: 4–6 weeks",
@@ -292,7 +287,7 @@ const services: Service[] = [
     title: "Brand Consulting",
     tagline: "Know what to say, who to say it to, and why they'll pick you.",
     points: [
-      "Audience, competitor, and market research",
+      "Audience, competitor and market research",
       "A clear positioning and message framework",
       "A step-by-step 90-day growth plan",
     ],
@@ -304,7 +299,7 @@ const services: Service[] = [
     title: "SEO",
     tagline: "Get found on Google by people already searching for what you sell.",
     points: [
-      "Website health fixes for speed, Google access, and structure",
+      "Website health fixes for speed, Google access and structure",
       "Page improvements built around what customers search for",
       "Content designed to rank and bring free traffic over time",
     ],
@@ -410,7 +405,7 @@ function Index() {
 
       if (result.status === "sent") {
         setChecklistStatus("sent");
-        setChecklistMessage("Sent! Your checklist is on its way to your inbox — or grab it right now:");
+        setChecklistMessage("Sent. Your checklist is on its way to your inbox, or grab it right now:");
         form.reset();
         return;
       }
@@ -461,7 +456,7 @@ function Index() {
               <a
                 key={item.label}
                 href={item.href}
-                className="inline-flex min-h-11 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase tracking-[0.04em] text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 min-[390px]:tracking-[0.08em] sm:px-3 sm:text-sm sm:tracking-[0.14em]"
+                className="inline-flex min-h-11 shrink-0 items-center rounded-full px-1.5 py-2 text-[10px] font-bold uppercase text-foreground/70 transition-colors hover:text-foreground min-[390px]:px-2 sm:px-3 sm:text-sm"
               >
                 {item.label}
               </a>
@@ -514,13 +509,13 @@ function Index() {
         </div>
 
         <p className="relative z-10 mt-4 max-w-xl text-center text-xs font-semibold leading-5 text-foreground/60 sm:text-sm">
-          Currently onboarding 5 Dubai clients · {REMAINING_CLIENT_SPOTS} spots left
+          Currently onboarding 5 clients · {REMAINING_CLIENT_SPOTS} spots left
         </p>
 
 
         <div className="relative z-10 mt-8 grid w-full max-w-3xl gap-2.5 sm:mt-10 sm:grid-cols-3 sm:gap-3">
           {["Sales-focused strategy", "Premium execution", "Clearer campaign decisions"].map((claim) => (
-            <div key={claim} className="lift rounded-xl bg-chip px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+            <div key={claim} className="lift rounded-xl bg-chip px-4 py-3 text-center text-xs font-bold uppercase text-foreground">
               {claim}
             </div>
           ))}
@@ -532,7 +527,7 @@ function Index() {
           aria-label="Scroll down to see the strategy"
           className="relative z-10 mt-8 text-foreground/70 transition-colors hover:text-foreground sm:absolute sm:bottom-8 sm:left-1/2 sm:mt-0 sm:-translate-x-1/2"
         >
-          <span className="mb-2 block text-center text-[11px] font-semibold uppercase tracking-[0.3em]">
+          <span className="mb-2 block text-center text-[11px] font-semibold uppercase">
             Scroll
           </span>
           <svg
@@ -552,14 +547,14 @@ function Index() {
       <section id="problem" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               The problem
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
               Most brands are visible. Fewer are easy to choose.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              Ads, posts, and content only work when the right audience sees a clear offer, understands the
+              Ads, posts and content only work when the right audience sees a clear offer, understands the
               message, and can take an easy next step. When one part is unclear, you lose customers before the sale.
             </p>
           </Reveal>
@@ -579,7 +574,7 @@ function Index() {
             <span
               key={copy}
               aria-hidden={copy === 1}
-              className="px-6 text-sm font-semibold uppercase tracking-[0.35em] text-foreground/60"
+              className="px-6 text-sm font-semibold uppercase text-foreground/60"
             >
               Paid Advertising&nbsp;&nbsp;✦&nbsp;&nbsp;Meta (Instagram &amp; Facebook) Ads&nbsp;&nbsp;✦&nbsp;&nbsp;Content Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Brand Strategy&nbsp;&nbsp;✦&nbsp;&nbsp;Market Insights&nbsp;&nbsp;✦&nbsp;&nbsp;Sales Funnels&nbsp;&nbsp;✦&nbsp;&nbsp;SEO&nbsp;&nbsp;✦&nbsp;&nbsp;
             </span>
@@ -591,14 +586,14 @@ function Index() {
       <section id="services" className="scroll-mt-28 px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               The solution
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
-              Strategy, campaigns, and content built around commercial growth.
+              Strategy, campaigns and content built around commercial growth.
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-foreground/80">
-              Premium marketing work should make decisions easier, campaigns sharper, and your business
+              Premium marketing work should make decisions easier, campaigns sharper and your business
               harder to ignore.
             </p>
           </Reveal>
@@ -606,7 +601,7 @@ function Index() {
           <div className="mt-10 grid gap-3 sm:grid-cols-3">
             {["More sales", "More revenue per campaign", "More brand recognition"].map((claim, index) => (
               <Reveal key={claim} delay={index * 100}>
-                <div className="lift rounded-xl bg-chip px-5 py-4 text-sm font-bold uppercase tracking-[0.12em] text-foreground">
+                <div className="lift rounded-xl bg-chip px-5 py-4 text-sm font-bold uppercase text-foreground">
                   {claim}
                 </div>
               </Reveal>
@@ -622,13 +617,13 @@ function Index() {
                     <span className="text-5xl font-extrabold text-foreground/25 sm:text-6xl">
                       {service.number}
                     </span>
-                    <h3 className="mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl">
+                    <h3 className="mt-4 text-2xl font-extrabold sm:text-3xl">
                       {service.title}
                     </h3>
                     <p className="mt-2 text-base font-semibold text-foreground/70">
                       {service.tagline}
                     </p>
-                    <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
+                    <p className="mt-6 text-xs font-bold uppercase text-foreground/60">
                       What you get
                     </p>
                     <ul className="mt-3 space-y-2.5 pb-1">
@@ -672,12 +667,12 @@ function Index() {
             <div className="glass-panel mx-auto max-w-4xl p-5 sm:p-10">
             <div className="grid items-start gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free marketing checklist</p>
+                <p className="text-xs font-bold uppercase text-foreground/60">Free marketing checklist</p>
                 <h2 id="checklist-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-                  Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients
+                  Free Checklist: 5 Marketing Mistakes Costing Businesses Clients
                 </h2>
                 <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/75 sm:text-base">
-                  The exact issues we see most often in local businesses&apos; ads, content, and how they stand out: see if you&apos;re making any of them.
+                  The exact issues we see most often in businesses&apos; ads, content and how they stand out. See if you&apos;re making any of them.
                 </p>
                 <a href="/production-checklist" className="mt-4 inline-block text-sm font-bold underline underline-offset-4">
                   Planning a shoot or launch? Get a free AI production checklist →
@@ -691,7 +686,7 @@ function Index() {
                   type="email"
                   required
                   autoComplete="email"
-                  placeholder="Enter your email — we'll send it instantly"
+                  placeholder="Enter your email and we'll send it instantly"
                   className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
                 />
                 <Button type="submit" disabled={checklistStatus === "sending"} className="lift min-h-12 w-full font-extrabold">
@@ -723,7 +718,7 @@ function Index() {
           <Reveal>
             <div className="flex flex-col gap-4 border-b border-border pb-8 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">Client case study</p>
+                <p className="text-sm font-bold uppercase text-foreground/70">Client case study</p>
                 <h2 id="glaucia-case-study-title" className="mt-4 max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl">
                   Building Glaucia from brand to market.
                 </h2>
@@ -750,7 +745,7 @@ function Index() {
                     <p className="mt-1 text-sm font-semibold text-foreground/70">{CASE_STUDY.industry}</p>
                   </div>
                 </div>
-                <span className="inline-flex w-fit items-center rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.2em] text-primary">
+                <span className="inline-flex w-fit items-center rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-extrabold uppercase text-primary">
                   {CASE_STUDY.location}
                 </span>
               </div>
@@ -758,11 +753,11 @@ function Index() {
               {/* Problem / What we did / Result */}
               <div className="grid gap-px bg-border md:grid-cols-3">
                 <div className="bg-card p-6 sm:p-8">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The problem</span>
+                  <span className="text-xs font-bold uppercase text-foreground/55">The problem</span>
                   <p className="mt-4 text-sm leading-7 text-foreground/80">{CASE_STUDY.problem}</p>
                 </div>
                 <div className="bg-card p-6 sm:p-8">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">What we did</span>
+                  <span className="text-xs font-bold uppercase text-foreground/55">What we did</span>
                   <ul className="mt-4 space-y-2.5">
                     {CASE_STUDY.deliverables.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6">
@@ -773,7 +768,7 @@ function Index() {
                   </ul>
                 </div>
                 <div className="bg-card p-6 sm:p-8">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The result</span>
+                  <span className="text-xs font-bold uppercase text-foreground/55">The result</span>
                   <p className="mt-4 text-sm leading-7 text-foreground/80">{CASE_STUDY.result}</p>
                   <ResultTracker />
                 </div>
@@ -784,7 +779,7 @@ function Index() {
                 {CASE_STUDY.stats.map((stat) => (
                   <div key={stat.label} className="bg-section-electric/40 p-6 text-center sm:p-8">
                     <p className="text-3xl font-extrabold leading-tight text-primary sm:text-4xl">{stat.value}</p>
-                    <p className="mt-2 text-xs font-bold uppercase tracking-[0.15em] text-foreground/65">{stat.label}</p>
+                    <p className="mt-2 text-xs font-bold uppercase text-foreground/65">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -799,7 +794,7 @@ function Index() {
                       className="absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-card/85 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/80">Before</span>
+                    <span className="absolute left-3 top-3 rounded-full bg-card/85 px-3 py-1 text-[10px] font-extrabold uppercase text-foreground/80">Before</span>
                   </figure>
                   <figure className="glass-soft relative aspect-[4/5] overflow-hidden">
                     <img
@@ -808,7 +803,7 @@ function Index() {
                       className="absolute inset-0 h-full w-full object-cover"
                       loading="lazy"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary-foreground">After</span>
+                    <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-[10px] font-extrabold uppercase text-primary-foreground">After</span>
                   </figure>
                 </div>
                 <blockquote className="glass-soft flex flex-col justify-between p-6 sm:p-8">
@@ -817,7 +812,7 @@ function Index() {
                   </p>
                   <footer className="mt-6 border-t border-border pt-5">
                     <p className="text-sm font-extrabold">{CASE_STUDY.quote.name}</p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/55">{CASE_STUDY.quote.role}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase text-foreground/55">{CASE_STUDY.quote.role}</p>
                   </footer>
                 </blockquote>
               </div>
@@ -838,7 +833,7 @@ function Index() {
       <section id="about" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               About
             </p>
             <div className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -849,11 +844,11 @@ function Index() {
                 <p>
                   I started Chrizos Media after seeing how large marketing agencies treat local businesses:
                   one account among hundreds, generic playbooks, and results nobody is truly accountable for.
-                  I wanted to build something different for Dubai: a young, ambitious team that treats every
+                  I wanted to build something different: a young, ambitious team that treats every
                   client as the top priority, not another line item.
                 </p>
                 <p>
-                   We are deliberately small: our entire focus right now is on our first five Dubai clients, so
+                   We are deliberately small: our entire focus right now is on our first five clients, so
                    each one gets full attention instead of being passed down a team.
                 </p>
               </div>
@@ -867,7 +862,7 @@ function Index() {
       <section id="how-it-works" className="scroll-mt-28 bg-section-electric px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32" aria-labelledby="how-it-works-title">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               How it works
             </p>
             <h2 id="how-it-works-title" className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight sm:text-5xl">
@@ -904,7 +899,7 @@ function Index() {
       <section id="faq" className="scroll-mt-28 bg-section-navy px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32" aria-labelledby="faq-title">
         <div className="mx-auto max-w-3xl">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               FAQ
             </p>
             <h2 id="faq-title" className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
@@ -933,15 +928,15 @@ function Index() {
       <section id="work-with-us" className="scroll-mt-20 bg-section-electric px-4 py-20 sm:scroll-mt-24 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
-            <p className="text-sm font-bold uppercase tracking-[0.35em] text-foreground/70">
+            <p className="text-sm font-bold uppercase text-foreground/70">
               Contact
             </p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
               Claim one of the remaining spots
             </h2>
             <p className="mt-5 leading-7 text-foreground/80">
-               A quick, honest read on how your brand compares, how clearly it communicates, and how well your
-               website turns local interest into enquiries. No pitch, no obligation.
+               A quick, honest read on how your brand compares, how clearly it communicates and how well your
+               website turns interest into enquiries. No pitch, no obligation.
             </p>
              <div className="glass-soft mx-auto mt-7 max-w-2xl space-y-3 p-5 text-left">
                <p className="text-sm font-extrabold leading-6">
@@ -951,7 +946,7 @@ function Index() {
                  You&apos;ll also get a written 1-page summary of the audit: yours to keep and act on, whether we work together or not.
                </p>
                <p className="text-sm font-semibold leading-6 text-foreground/75">
-                 Currently onboarding 5 Dubai clients · {REMAINING_CLIENT_SPOTS} spots left
+                 Currently onboarding 5 clients · {REMAINING_CLIENT_SPOTS} spots left
                </p>
              </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-foreground/65">
@@ -976,7 +971,7 @@ function Index() {
           <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
             <Reveal delay={160}>
               <div>
-                <span className="inline-flex items-center rounded-full border border-border bg-background/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-foreground/80">
+                <span className="inline-flex items-center rounded-full border border-border bg-background/40 px-4 py-1.5 text-xs font-bold uppercase text-foreground/80">
                   We&apos;re listening
                 </span>
                 <h2 className="mt-6 text-4xl font-extrabold leading-none sm:text-6xl sm:leading-[0.95]">
@@ -986,7 +981,7 @@ function Index() {
                 </h2>
                 <p className="mt-6 max-w-none text-lg leading-7 text-foreground/80 lg:max-w-sm">
                   Tell us what you&apos;re building. We&apos;ll come back with a route and a
-                  timeline &mdash; we reply to every brief within 6&ndash;12 hours.
+                  timeline. We reply to every brief within 6&ndash;12 hours.
                 </p>
 
                 <div className="mt-8 grid gap-4">
@@ -1003,7 +998,7 @@ function Index() {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-base font-extrabold">WhatsApp</span>
-                      <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
+                      <span className="block text-xs font-semibold uppercase text-foreground/60">
                         Fastest reply
                       </span>
                     </span>
@@ -1025,7 +1020,7 @@ function Index() {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-base font-extrabold">{CONTACT_EMAIL}</span>
-                      <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-foreground/60">
+                      <span className="block text-xs font-semibold uppercase text-foreground/60">
                         Email &middot; Briefs &amp; enquiries
                       </span>
                     </span>
@@ -1041,7 +1036,7 @@ function Index() {
             <Reveal delay={220}>
               <form onSubmit={handleInquirySubmit} className="glass-soft grid gap-4 rounded-2xl p-5 sm:rounded-3xl sm:p-8">
                 <div>
-                  <h3 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Start a project</h3>
+                  <h3 className="text-2xl font-extrabold sm:text-3xl">Start a project</h3>
                   <p className="mt-1 text-sm font-semibold text-foreground/65">
                     The more you tell us, the sharper the first reply.
                   </p>
@@ -1049,7 +1044,7 @@ function Index() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="grid gap-2">
-                    <label htmlFor="name" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                    <label htmlFor="name" className="text-xs font-bold uppercase text-foreground/65">
                       Your name <span aria-hidden="true" className="text-foreground/85">*</span>
                     </label>
                     <input
@@ -1064,7 +1059,7 @@ function Index() {
                   </div>
 
                   <div className="grid gap-2">
-                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                    <label htmlFor="email" className="text-xs font-bold uppercase text-foreground/65">
                       Email <span aria-hidden="true" className="text-foreground/85">*</span>
                     </label>
                     <input
@@ -1081,7 +1076,7 @@ function Index() {
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="grid gap-2">
-                    <label htmlFor="phone" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                    <label htmlFor="phone" className="text-xs font-bold uppercase text-foreground/65">
                       Phone
                     </label>
                     <input
@@ -1090,12 +1085,12 @@ function Index() {
                       type="tel"
                       autoComplete="tel"
                       className="min-h-12 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                      placeholder="+971 ..."
+                      placeholder="Your phone number"
                     />
                   </div>
 
                   <div className="grid gap-2">
-                    <label htmlFor="service" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                    <label htmlFor="service" className="text-xs font-bold uppercase text-foreground/65">
                       What do you need? <span aria-hidden="true" className="text-foreground/85">*</span>
                     </label>
                     <select
@@ -1115,7 +1110,7 @@ function Index() {
                 </div>
 
                 <div className="grid gap-2">
-                  <label htmlFor="message" className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/65">
+                  <label htmlFor="message" className="text-xs font-bold uppercase text-foreground/65">
                     Tell us about the project <span aria-hidden="true" className="text-foreground/85">*</span>
                   </label>
                   <textarea
@@ -1125,7 +1120,7 @@ function Index() {
                     minLength={10}
                     rows={5}
                     className="min-h-28 resize-y rounded-xl border border-border bg-card px-4 py-3 text-sm font-semibold leading-6 text-foreground outline-none transition-colors placeholder:text-foreground/40 focus:border-foreground"
-                    placeholder="What are you building, who is it for, and when does it need to land?"
+                    placeholder="What are you building, who is it for and when does it need to land?"
                   />
                 </div>
 
@@ -1159,13 +1154,13 @@ function Index() {
             href={IG_URL}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex min-h-11 items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-foreground/75 transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center gap-3 text-sm font-bold uppercase text-foreground/75 transition-colors hover:text-foreground"
           >
             <InstagramIcon className="h-5 w-5" />
             Instagram
 
           </a>
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.3em] text-foreground/50">
+          <p className="text-center text-xs font-semibold uppercase text-foreground/50">
             © {new Date().getFullYear()} Chrizos Media
           </p>
         </div>

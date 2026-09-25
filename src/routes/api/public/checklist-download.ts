@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { recordChecklistEvent } from "@/lib/checklist-events.server";
 
-const PDF_PATH = "/downloads/chrizos-media-dubai-marketing-checklist.pdf";
+const PDF_PATH = "/downloads/chrizos-media-marketing-checklist.pdf";
 
 export const Route = createFileRoute("/api/public/checklist-download")({
   staticData: { sitemap: false },

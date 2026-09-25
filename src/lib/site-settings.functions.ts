@@ -10,7 +10,7 @@ export const DEFAULT_SETTINGS = {
   calendly_url: "https://calendly.com/chrizosmedia/youssef",
   hero_headline: "More sales. More revenue. More recognition.",
   hero_subheading:
-    "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.",
+    "Paid ads, content and SEO for growing businesses. Run personally by the founder, not handed to a junior.",
   scarcity_enabled: true,
   scarcity_text: "We're currently taking on our first 5 clients: limited spots, and each one gets full focus.",
   checklist_enabled: true,

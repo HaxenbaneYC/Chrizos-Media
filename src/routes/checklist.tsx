@@ -15,18 +15,18 @@ export const Route = createFileRoute("/checklist")({
   head: () => ({
     meta: [
       {
-        title: "Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients | Chrizos Media",
+        title: "Free Checklist: 5 Marketing Mistakes Costing Businesses Clients | Chrizos Media",
         description:
-          "Get the free Dubai marketing checklist: the 5 mistakes that quietly cost local businesses clients, plus a 30-day fix plan. Enter your email and it lands in your inbox instantly.",
+          "Get the free marketing checklist: the 5 mistakes that quietly cost businesses clients, plus a 30-day fix plan. Enter your email and it lands in your inbox instantly.",
       },
       {
         property: "og:title",
-        content: "Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients",
+        content: "Free Checklist: 5 Marketing Mistakes Costing Businesses Clients",
       },
       {
         property: "og:description",
         content:
-          "The 5 marketing mistakes we see most often in Dubai businesses — and how to fix them. Free PDF, sent instantly.",
+          "The 5 marketing mistakes we see most often in businesses, and how to fix them. Free PDF, sent instantly.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/checklist" },
@@ -78,7 +78,7 @@ function ChecklistPage() {
 
       if (result.status === "sent") {
         setStatus("sent");
-        setMessage("Sent! Your checklist is on its way to your inbox — or grab it right now:");
+        setMessage("Sent. Your checklist is on its way to your inbox, or grab it right now:");
         form.reset();
         return;
       }
@@ -102,14 +102,14 @@ function ChecklistPage() {
           <img src={logoWhite} alt="Chrizos Media lightning bolt logo" decoding="async" className="h-auto w-24 sm:w-28" />
         </a>
 
-        <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
+        <p className="mt-6 text-xs font-bold uppercase text-foreground/60">
           Free marketing checklist
         </p>
         <h1 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
-          5 Marketing Mistakes Costing Dubai Businesses Clients
+          5 Marketing Mistakes Costing Businesses Clients
         </h1>
         <p className="mt-4 text-sm leading-6 text-foreground/75 sm:text-base">
-          The exact issues we see most often in local businesses&apos; ads and content — and a
+          The exact issues we see most often in businesses&apos; ads and content, plus a
           simple 30-day plan to fix them. Enter your email and the PDF lands in your inbox
           instantly.
         </p>
@@ -125,7 +125,7 @@ function ChecklistPage() {
             required
             autoComplete="email"
             inputMode="email"
-            placeholder="Enter your email — we'll send it instantly"
+            placeholder="Enter your email and we'll send it instantly"
             className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
           />
           <Button
@@ -154,7 +154,7 @@ function ChecklistPage() {
         </form>
 
         <p className="mt-6 text-xs leading-5 text-foreground/55">
-          No spam — just the checklist and the occasional useful note. Want to talk instead?{" "}
+          No spam. Just the checklist and the occasional useful note. Want to talk instead?{" "}
           <a href="/" className="font-bold underline underline-offset-4">
             Book a free audit call
           </a>

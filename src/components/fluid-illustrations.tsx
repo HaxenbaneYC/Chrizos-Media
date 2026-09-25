@@ -174,7 +174,7 @@ export function ContentFlow({ className = "" }: { className?: string }) {
                 {["Opening", "Story", "Next step"].map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-foreground/25 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-foreground/70"
+                    className="rounded-full border border-foreground/25 px-2 py-0.5 text-[9px] font-bold uppercase text-foreground/70"
                   >
                     {tag}
                   </span>
@@ -218,7 +218,7 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
                 <span className="graphic-headline">
                   Research first
                 </span>
-                <span className="rounded-full bg-background px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-foreground">
+                <span className="rounded-full bg-background px-2 py-1 text-[9px] font-bold uppercase text-foreground">
                   Focus
                 </span>
               </div>
@@ -231,7 +231,7 @@ export function StrategyFlow({ className = "" }: { className?: string }) {
               {["Audience", "Offer", "Message"].map((item, index) => (
                 <div key={item} className="flex items-center gap-2">
                   <span className={`h-6 w-6 rounded-full ${index === 0 ? "bg-background" : "bg-foreground/20"}`} />
-                  <span className="text-xs font-bold uppercase tracking-[0.15em] text-foreground/75">
+                  <span className="text-xs font-bold uppercase text-foreground/75">
                     {item}
                   </span>
                 </div>
@@ -356,7 +356,7 @@ export function ProofFlow({ className = "" }: { className?: string }) {
         <div className="flex h-full items-center">
           <Glass className="fluid-drift w-full p-5 sm:p-6">
             <span className="graphic-kicker block">Campaign milestone</span>
-            <p className="mt-2 text-xl font-extrabold tracking-tight text-foreground sm:text-2xl">
+            <p className="mt-2 text-xl font-extrabold text-foreground sm:text-2xl">
               Break-even in 3 months
             </p>
 
@@ -383,7 +383,7 @@ export function ProofFlow({ className = "" }: { className?: string }) {
               ))}
             </div>
 
-            <p className="mt-7 border-t border-foreground/15 pt-4 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-foreground/65">
+            <p className="mt-7 border-t border-foreground/15 pt-4 text-center text-[10px] font-bold uppercase text-foreground/65">
               Single-product brand, first campaign
             </p>
           </Glass>

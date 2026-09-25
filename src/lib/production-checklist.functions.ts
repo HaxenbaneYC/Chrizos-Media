@@ -23,7 +23,7 @@ export const generateProductionChecklist = createServerFn({ method: "POST" })
     const now = Date.now();
     const recent = (hits.get(ip) ?? []).filter((t) => t > now - 3600_000);
     if (recent.length >= 5) {
-      return { status: "error", message: "You've made several checklists already — please try again in an hour." };
+      return { status: "error", message: "You've made several checklists already. Please try again in an hour." };
     }
     hits.set(ip, [...recent, now]);
 
@@ -78,7 +78,7 @@ Respond ONLY with JSON: {"title": string, "summary": string (max 2 sentences), "
     } catch (error) {
       const status = (error as { statusCode?: number })?.statusCode;
       console.error("production checklist failed", status, error);
-      if (status === 429) return { status: "error", message: "It's busy right now — please try again in a minute." };
+      if (status === 429) return { status: "error", message: "It's busy right now. Please try again in a minute." };
       if (status === 402 || status === 403)
         return { status: "error", message: "The checklist tool is temporarily unavailable. Please message us instead." };
       return { status: "error", message: "We couldn't build your checklist. Please try again." };

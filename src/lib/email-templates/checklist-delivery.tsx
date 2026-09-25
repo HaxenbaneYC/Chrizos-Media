@@ -45,14 +45,14 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>Your Dubai marketing checklist is ready</Preview>
+      <Preview>Your marketing checklist is ready</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Section style={styles.card}>
             <Text style={styles.eyebrow}>Chrizos Media</Text>
             <Heading style={styles.heading}>Your checklist is ready</Heading>
             <Text style={styles.text}>
-              Here is your free guide: &ldquo;5 Marketing Mistakes Costing Dubai Businesses Clients&rdquo;.
+              Here is your free guide: &ldquo;5 Marketing Mistakes Costing Businesses Clients&rdquo;.
               Inside you&rsquo;ll find the 10-minute leak check, five mistakes to fix first, and a 30-day action plan.
             </Text>
             <Button href={DOWNLOAD_URL} style={styles.button}>
@@ -64,7 +64,7 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
             </Text>
             <Text style={styles.footer}>
               This copy was requested for {email?.trim() || 'your email'} from chrizosmedia.com. If that wasn&rsquo;t you,
-              you can ignore this email — nothing else will be sent.
+              you can ignore this email. Nothing else will be sent.
             </Text>
           </Section>
         </Container>
@@ -76,7 +76,7 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
 export const template = {
   component: ChecklistDeliveryEmail,
   displayName: 'Checklist delivery',
-  subject: 'Your free Dubai marketing checklist (PDF)',
+  subject: 'Your free marketing checklist (PDF)',
   previewData: {
     email: 'owner@example.com',
   },

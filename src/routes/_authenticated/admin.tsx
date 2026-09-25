@@ -67,7 +67,7 @@ function AdminPage() {
       <div className="mx-auto max-w-6xl space-y-6">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Chrizos Media</p>
+            <p className="text-xs font-bold uppercase text-foreground/60">Chrizos Media</p>
             <h1 className="text-3xl font-extrabold">Admin panel</h1>
             <p className="mt-1 text-sm text-foreground/70">Signed in as {user.email}</p>
           </div>
@@ -256,7 +256,7 @@ function Overview() {
           <div className="mt-4 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wider text-foreground/60">
+                <tr className="text-left text-xs uppercase text-foreground/60">
                   <th className="py-2 pr-4">Campaign</th>
                   <th className="py-2 pr-4 text-right">Sign-ups</th>
                   <th className="py-2 pr-4 text-right">Downloads</th>
@@ -288,7 +288,7 @@ function Legend({ className, label }: { className: string; label: string }) {
 function Stat({ label, value, note }: { label: string; value: number | string; note?: string }) {
   return (
     <Card>
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/60">{label}</p>
+      <p className="text-xs font-bold uppercase text-foreground/60">{label}</p>
       <p className="mt-2 text-4xl font-extrabold">{value}</p>
       {note ? <p className="mt-1 text-xs text-foreground/60">{note}</p> : null}
     </Card>
