@@ -49,6 +49,35 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
 }
 
 
+// ---- Glaucia case study content — edit the numbers and quote here ----
+const CASE_STUDY = {
+  client: "Glaucia",
+  industry: "Fashion brand launch",
+  location: "Dubai",
+  problem:
+    "A single-product fashion brand with no identity, no content and no audience — starting from zero before its first campaign.",
+  deliverables: [
+    "Full brand identity",
+    "Product production",
+    "Campaign photography",
+    "Product images",
+    "Social reels",
+    "Paid marketing",
+  ],
+  result:
+    "From zero to a launched brand with a running paid campaign — reaching break-even in 3 months.",
+  stats: [
+    { value: "32%", label: "Increase in 6 weeks" },
+    { value: "400", label: "New followers in [period]" },
+    { value: "3", label: "Months to break-even" },
+  ],
+  quote: {
+    text: "[Client quote goes here — ask Glaucia for one line about working with us.]",
+    name: "[Client name]",
+    role: "Founder, Glaucia",
+  },
+};
+
 const RESULT_STAGES = [
   { label: "Brand built", detail: "Identity" },
   { label: "Content ready", detail: "Production" },
@@ -650,62 +679,96 @@ function Index() {
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-            <Reveal className="h-full">
-              <figure className="glass-panel relative aspect-[4/5] overflow-hidden sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-0">
-                <img
-                  src={glauciaCampaign.url}
-                  alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-card via-card/80 to-transparent px-6 pb-6 pt-24 sm:px-8 sm:pb-8">
-                  <figcaption className="max-w-md text-sm font-semibold leading-6 text-foreground/85">
-                    One of the campaign images created as part of Glaucia&apos;s complete product launch.
-                  </figcaption>
-                </div>
-              </figure>
-            </Reveal>
-
-            <Reveal delay={120} className="h-full">
-              <div className="flex h-full flex-col gap-4">
-                <div className="glass-soft flex min-h-28 items-center gap-5 p-5 sm:p-6">
+          <Reveal>
+            <article className="glass-panel mt-10 overflow-hidden">
+              {/* Client header */}
+              <div className="flex flex-col gap-5 border-b border-border p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+                <div className="flex items-center gap-5">
                   <img
                     src={glauciaLogo.url}
                     alt="Glaucia logo"
-                    className="h-20 w-20 shrink-0 rounded-lg object-cover"
+                    className="h-16 w-16 shrink-0 rounded-xl object-cover sm:h-20 sm:w-20"
                     loading="lazy"
                   />
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The client</span>
-                    <p className="mt-1 text-2xl font-extrabold">Glaucia</p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/70">A single-product fashion brand prepared for its first campaign.</p>
+                    <p className="text-2xl font-extrabold sm:text-3xl">{CASE_STUDY.client}</p>
+                    <p className="mt-1 text-sm font-semibold text-foreground/70">{CASE_STUDY.industry}</p>
                   </div>
                 </div>
+                <span className="inline-flex w-fit items-center rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.2em] text-primary">
+                  {CASE_STUDY.location}
+                </span>
+              </div>
 
-                <div className="glass-soft flex-1 p-6 sm:p-8">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">What we delivered</span>
-                  <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                    {["Full brand identity", "Product production", "Campaign photography", "Product images", "Social reels", "Paid marketing"].map((item) => (
+              {/* Problem / What we did / Result */}
+              <div className="grid gap-px bg-border md:grid-cols-3">
+                <div className="bg-card p-6 sm:p-8">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The problem</span>
+                  <p className="mt-4 text-sm leading-7 text-foreground/80">{CASE_STUDY.problem}</p>
+                </div>
+                <div className="bg-card p-6 sm:p-8">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">What we did</span>
+                  <ul className="mt-4 space-y-2.5">
+                    {CASE_STUDY.deliverables.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm font-semibold leading-6">
                         <span aria-hidden className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
                         {item}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-7 border-t border-border pt-6 text-sm leading-7 text-foreground/75">
-                    We developed the visual identity, produced the product and launch content, then carried the same creative direction into the paid campaign.
-                  </p>
                 </div>
-
-                <div className="glass-soft p-6 sm:p-8">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">Verified result</span>
-                  <p className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Break-even in 3 months.</p>
+                <div className="bg-card p-6 sm:p-8">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/55">The result</span>
+                  <p className="mt-4 text-sm leading-7 text-foreground/80">{CASE_STUDY.result}</p>
                   <ResultTracker />
                 </div>
               </div>
-            </Reveal>
-          </div>
+
+              {/* Stats row — edit the numbers in CASE_STUDY.stats above */}
+              <div className="grid gap-px border-y border-border bg-border sm:grid-cols-3">
+                {CASE_STUDY.stats.map((stat) => (
+                  <div key={stat.label} className="bg-section-electric/40 p-6 text-center sm:p-8">
+                    <p className="text-3xl font-extrabold leading-tight text-primary sm:text-4xl">{stat.value}</p>
+                    <p className="mt-2 text-xs font-bold uppercase tracking-[0.15em] text-foreground/65">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Before / after + quote */}
+              <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <figure className="glass-soft relative aspect-[4/5] overflow-hidden">
+                    <img
+                      src={glauciaLogo.url}
+                      alt="Glaucia brand identity before the campaign launch"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full bg-card/85 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.2em] text-foreground/80">Before</span>
+                  </figure>
+                  <figure className="glass-soft relative aspect-[4/5] overflow-hidden">
+                    <img
+                      src={glauciaCampaign.url}
+                      alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary-foreground">After</span>
+                  </figure>
+                </div>
+                <blockquote className="glass-soft flex flex-col justify-between p-6 sm:p-8">
+                  <p className="text-base font-semibold leading-8 text-foreground/90 sm:text-lg">
+                    &ldquo;{CASE_STUDY.quote.text}&rdquo;
+                  </p>
+                  <footer className="mt-6 border-t border-border pt-5">
+                    <p className="text-sm font-extrabold">{CASE_STUDY.quote.name}</p>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-foreground/55">{CASE_STUDY.quote.role}</p>
+                  </footer>
+                </blockquote>
+              </div>
+            </article>
+          </Reveal>
+
           <Reveal delay={100}>
             <div className="mt-10 flex justify-center sm:mt-12">
               <Button asChild size="lg" className="lift min-h-12 rounded-xl px-7 font-extrabold">
