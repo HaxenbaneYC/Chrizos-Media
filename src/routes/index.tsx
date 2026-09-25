@@ -160,7 +160,7 @@ export const Route = createFileRoute("/")({
             containedInPlace: { "@type": "Country", name: "United Arab Emirates" },
           },
           knowsAbout: ["Marketing", "Advertising", "Paid Advertising", "Content Strategy", "Brand Strategy", "SEO"],
-          serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Market Insights", "SEO"],
+          serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Consulting", "SEO"],
           sameAs: [INSTAGRAM_URL],
         }),
       },
@@ -173,8 +173,8 @@ type Service = {
   number: string;
   title: string;
   tagline: string;
-  description: string;
   points: string[];
+  timeframe: string;
   visual: "growth" | "content" | "strategy" | "search";
 };
 
@@ -182,53 +182,49 @@ const services: Service[] = [
   {
     number: "01",
     title: "Paid Advertising",
-    tagline: "Turn ad spend into sales, leads, and measurable momentum.",
-    description:
-      "Campaign strategy and management across Meta (Instagram & Facebook), Google, and TikTok, built around clearer tracking, stronger offers, and simpler steps from click to sale, so every dirham has a clear job.",
+    tagline: "Turn ad spend into booked customers, not just clicks.",
     points: [
-      "Meta (Instagram & Facebook), Google & TikTok ads",
-      "A simpler journey from first click to sale",
-      "Tracking which ads lead to enquiries and revenue",
+      "Campaign setup and management on Meta (Instagram & Facebook) and Google",
+      "A weekly performance report you can actually read",
+      "A monthly strategy call to agree the next moves",
     ],
+    timeframe: "First results in: 2–4 weeks",
     visual: "growth",
   },
   {
     number: "02",
     title: "Content Strategy",
-    tagline: "Attention that builds trust before the sale.",
-    description:
-      "We plan the themes, angles, calendars, and campaign stories that make your brand easier to understand, remember, and choose across social media, launch moments, and always-on content.",
+    tagline: "Build attention and trust before you ever ask for the sale.",
     points: [
-      "Instagram & Facebook content planning",
-      "Content calendars & campaign ideas",
-      "Brand stories and words designed to prompt action",
+      "A monthly content calendar for Instagram & Facebook",
+      "Hooks, captions, and campaign ideas written to prompt action",
+      "Launch and seasonal content planned around your key dates",
     ],
+    timeframe: "First results in: 4–6 weeks",
     visual: "content",
   },
   {
     number: "03",
-    title: "Brand Strategy & Market Insights",
-    tagline: "Know what to say, who to say it to, and why it will move them.",
-    description:
-      "Premium strategy consulting for Dubai businesses that need clarity before growing. We study the local market, customer motivations, competitors, where your brand stands, and how your offer is packaged, then turn the findings into clearer messages and smarter growth decisions.",
+    title: "Brand Consulting",
+    tagline: "Know what to say, who to say it to, and why they'll pick you.",
     points: [
-      "Audience, competitor & category research",
-      "A clear place for your brand against competitors",
-      "A step-by-step growth plan for campaigns and content",
+      "Audience, competitor, and market research",
+      "A clear positioning and message framework",
+      "A step-by-step 90-day growth plan",
     ],
+    timeframe: "First results in: 2–3 weeks",
     visual: "strategy",
   },
   {
     number: "04",
     title: "SEO",
-    tagline: "Get found by people already looking for what you sell.",
-    description:
-      "Website health checks, page improvements, and useful search-led content designed to help more customers find you on Google over time, so you are not paying for every lead.",
+    tagline: "Get found on Google by people already searching for what you sell.",
     points: [
-      "Website health checks and fixes for speed, Google access, and structure",
-      "Page improvements based on what customers search for",
-      "Content built to rank, not just to post",
+      "Website health fixes for speed, Google access, and structure",
+      "Page improvements built around what customers search for",
+      "Content designed to rank and bring free traffic over time",
     ],
+    timeframe: "First results in: 2–3 months",
     visual: "search",
   },
 ];
@@ -276,7 +272,7 @@ function Index() {
     const service = String(formData.get("service") ?? "General Enquiry") as
       | "Paid Advertising"
       | "Content Strategy"
-      | "Brand Strategy & Market Insights"
+      | "Brand Consulting"
       | "SEO"
       | "General Enquiry";
     const message = String(formData.get("message") ?? "").trim();
@@ -548,19 +544,20 @@ function Index() {
                     <p className="mt-2 text-base font-semibold text-foreground/70">
                       {service.tagline}
                     </p>
-                    <p className="mt-4 max-w-lg leading-7 text-foreground/80">
-                      {service.description}
+                    <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
+                      What you get
                     </p>
-                    {service.visual !== "search" ? (
-                      <ul className="mt-6 space-y-2.5 pb-1">
-                        {service.points.map((point) => (
-                          <li key={point} className="flex items-start gap-3 text-sm font-semibold">
-                            <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
+                    <ul className="mt-3 space-y-2.5 pb-1">
+                      {service.points.map((point) => (
+                        <li key={point} className="flex items-start gap-3 text-sm font-semibold">
+                          <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-extrabold text-foreground/85">
+                      {service.timeframe}
+                    </p>
                   </div>
                   <div className="mt-8">
                     <div className="glass-panel overflow-hidden">
@@ -926,7 +923,7 @@ function Index() {
                     >
                       <option>Paid Advertising</option>
                       <option>Content Strategy</option>
-                      <option>Brand Strategy &amp; Market Insights</option>
+                      <option>Brand Consulting</option>
                       <option>SEO</option>
                       <option>General Enquiry</option>
                     </select>
