@@ -27,7 +27,7 @@ export const generateProductionChecklist = createServerFn({ method: "POST" })
     }
     hits.set(ip, [...recent, now]);
 
-    const apiKey = process.env.LOVABLE_API_KEY;
+    const apiKey = process.env['LOVABLE_API_KEY'];
     if (!apiKey) return { status: "error", message: "The checklist tool isn't configured yet." };
 
     const { createOpenAI } = await import("@ai-sdk/openai");
