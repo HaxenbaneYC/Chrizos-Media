@@ -923,7 +923,7 @@ function Index() {
                     >
                       <option>Paid Advertising</option>
                       <option>Content Strategy</option>
-                      <option>Brand Strategy &amp; Market Insights</option>
+                      <option>Brand Consulting</option>
                       <option>SEO</option>
                       <option>General Enquiry</option>
                     </select>
