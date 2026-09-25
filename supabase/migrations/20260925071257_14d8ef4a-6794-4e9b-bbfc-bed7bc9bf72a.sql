@@ -1,0 +1,4 @@
+alter table public.checklist_events add column if not exists utm_source text, add column if not exists utm_medium text, add column if not exists utm_campaign text;
+alter table public.checklist_events drop constraint if exists checklist_events_source_check;
+alter table public.checklist_events add constraint checklist_events_source_check check (source in ('page','email','calendly','whatsapp','instagram'));
+alter table public.checklist_events add constraint checklist_events_utm_len check (coalesce(length(utm_source),0) <= 80 and coalesce(length(utm_medium),0) <= 80 and coalesce(length(utm_campaign),0) <= 120);
