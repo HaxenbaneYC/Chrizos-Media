@@ -23,6 +23,8 @@ import {
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_TEXT = "?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
 const REMAINING_CLIENT_SPOTS = 2;
+const HERO_SUBHEADING =
+  "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.";
 const SITE_DESCRIPTION =
   "Chrizos Media helps Dubai local businesses turn attention into paying customers through market-aware strategy, paid advertising, content, brand consulting, and SEO.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
@@ -416,7 +418,7 @@ function Index() {
         </h1>
 
         <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
-          {settings.hero_subheading}
+          {HERO_SUBHEADING}
         </p>
 
         <div className="relative z-10 mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
