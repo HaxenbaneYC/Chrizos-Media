@@ -507,7 +507,7 @@ function Index() {
           </Button>
           <a
             href="#services"
-            className="text-sm font-bold text-foreground/80 underline decoration-foreground/35 underline-offset-4 transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center px-2 text-sm font-bold text-foreground/80 underline decoration-foreground/35 underline-offset-4 transition-colors hover:text-foreground"
           >
             See how we work ↓
           </a>
