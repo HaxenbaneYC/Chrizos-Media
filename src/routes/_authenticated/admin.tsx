@@ -190,6 +190,20 @@ function Overview() {
       whatsapp: count("booking", "whatsapp"),
       series,
       max,
+      campaigns: (() => {
+        const m = new Map<string, { s: number; d: number }>();
+        for (const e of events as Array<{ event_type: string; source: string; utm_source?: string | null; utm_medium?: string | null; utm_campaign?: string | null }>) {
+          if (e.event_type !== "signup" && e.event_type !== "download") continue;
+          const key = e.utm_source
+            ? [e.utm_source, e.utm_medium, e.utm_campaign].filter(Boolean).join(" / ")
+            : e.source === "instagram" ? "instagram / (untagged)" : "website (no campaign)";
+          const row = m.get(key) ?? { s: 0, d: 0 };
+          if (e.event_type === "signup") row.s++;
+          else row.d++;
+          m.set(key, row);
+        }
+        return [...m.entries()].sort((a, b) => b[1].s - a[1].s);
+      })(),
     };
   }, [q.data, range]);
 
@@ -232,6 +246,36 @@ function Overview() {
           <span>{stats.series.at(-1)?.day}</span>
         </div>
         <p className="mt-4 text-xs text-foreground/60">Counts only. No visitor emails or details are stored for checklist and booking activity.</p>
+      </Card>
+      <Card>
+        <h3 className="text-lg font-extrabold">Checklist sign-ups by campaign</h3>
+        <p className="mt-1 text-xs text-foreground/60">Source / medium / campaign from the link's UTM tags.</p>
+        {stats.campaigns.length === 0 ? (
+          <p className="mt-4 text-sm text-foreground/70">No checklist activity in this range yet.</p>
+        ) : (
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs uppercase tracking-wider text-foreground/60">
+                  <th className="py-2 pr-4">Campaign</th>
+                  <th className="py-2 pr-4 text-right">Sign-ups</th>
+                  <th className="py-2 pr-4 text-right">Downloads</th>
+                  <th className="py-2 text-right">Download rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.campaigns.map(([name, v]) => (
+                  <tr key={name} className="border-t border-border">
+                    <td className="py-2 pr-4 font-semibold">{name}</td>
+                    <td className="py-2 pr-4 text-right">{v.s}</td>
+                    <td className="py-2 pr-4 text-right">{v.d}</td>
+                    <td className="py-2 text-right">{v.s ? `${Math.round((v.d / v.s) * 100)}%` : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </Card>
     </div>
   );

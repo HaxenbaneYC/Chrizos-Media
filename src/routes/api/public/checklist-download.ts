@@ -14,7 +14,11 @@ export const Route = createFileRoute("/api/public/checklist-download")({
           | "email"
           | "instagram"
           | "page";
-        await recordChecklistEvent("download", source);
+        await recordChecklistEvent("download", source, {
+          source: url.searchParams.get("utm_source") ?? undefined,
+          medium: url.searchParams.get("utm_medium") ?? undefined,
+          campaign: url.searchParams.get("utm_campaign") ?? undefined,
+        });
         return new Response(null, {
           status: 302,
           headers: { Location: PDF_PATH, "Cache-Control": "no-store" },

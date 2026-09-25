@@ -54,7 +54,7 @@ export const getOverview = createServerFn({ method: "GET" })
     const admin = await getAdmin();
     const since = data.days ? new Date(Date.now() - data.days * 86400000).toISOString() : "1970-01-01";
     const [events, inquiries] = await Promise.all([
-      admin.from("checklist_events").select("event_type, source, created_at").gte("created_at", since).order("created_at").limit(20000),
+      admin.from("checklist_events").select("event_type, source, utm_source, utm_medium, utm_campaign, created_at").gte("created_at", since).order("created_at").limit(20000),
       admin.from("inquiries").select("created_at").gte("created_at", since).order("created_at").limit(20000),
     ]);
     return {
