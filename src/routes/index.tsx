@@ -160,7 +160,7 @@ export const Route = createFileRoute("/")({
             containedInPlace: { "@type": "Country", name: "United Arab Emirates" },
           },
           knowsAbout: ["Marketing", "Advertising", "Paid Advertising", "Content Strategy", "Brand Strategy", "SEO"],
-          serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Market Insights", "SEO"],
+          serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Consulting", "SEO"],
           sameAs: [INSTAGRAM_URL],
         }),
       },

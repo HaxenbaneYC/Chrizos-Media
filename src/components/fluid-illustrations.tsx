@@ -188,7 +188,7 @@ export function ContentFlow({ className = "" }: { className?: string }) {
   );
 }
 
-/** 03 — Brand Strategy & Market Insights: research, positioning and action plan. */
+/** 03 — Brand Consulting: research, positioning and action plan. */
 export function StrategyFlow({ className = "" }: { className?: string }) {
   return (
     <div className={className} aria-label="Brand strategy workspace showing a competitor market map and audience, offer, and message research priorities" role="img">
@@ -315,7 +315,7 @@ export function SearchFlow({ className = "" }: { className?: string }) {
               {rankingRows.map((row) => (
                 <div key={row.keyword} className="flex items-center justify-between gap-3 rounded-lg bg-foreground/10 px-3 py-2">
                   <span className="truncate text-[9px] font-bold text-foreground/75">{row.keyword}</span>
-                  <span className="shrink-0 text-[9px] font-extrabold text-foreground">↑ {row.position}</span>
+                  <span className="shrink-0 text-[9px] font-extrabold text-foreground">{row.position}</span>
                 </div>
               ))}
             </div>
