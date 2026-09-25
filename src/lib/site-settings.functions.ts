@@ -10,7 +10,7 @@ export const DEFAULT_SETTINGS = {
   calendly_url: "https://calendly.com/chrizosmedia/youssef",
   hero_headline: "More sales. More revenue. More recognition.",
   hero_subheading:
-    "Chrizos Media helps Dubai businesses turn attention into paying customers, with strategy, campaigns, and content built around your local market, not generic playbooks.",
+    "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.",
   scarcity_enabled: true,
   scarcity_text: "We're currently taking on our first 5 clients: limited spots, and each one gets full focus.",
   checklist_enabled: true,

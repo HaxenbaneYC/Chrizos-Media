@@ -22,6 +22,9 @@ import {
 
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_TEXT = "?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
+const REMAINING_CLIENT_SPOTS = 2;
+const HERO_SUBHEADING =
+  "Paid ads, content and SEO for Dubai businesses — run personally by the founder, not handed to a junior.";
 const SITE_DESCRIPTION =
   "Chrizos Media helps Dubai local businesses turn attention into paying customers through market-aware strategy, paid advertising, content, brand consulting, and SEO.";
 const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
@@ -415,19 +418,24 @@ function Index() {
         </h1>
 
         <p className="relative z-10 mt-5 max-w-2xl text-center text-base leading-7 text-foreground/80 sm:text-lg">
-          {settings.hero_subheading}
+          {HERO_SUBHEADING}
         </p>
 
-        <a
-          href="#work-with-us"
-          className="lift relative z-10 mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-primary px-7 text-sm font-semibold text-primary-foreground shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
-        >
-          Book Your Free Brand Audit
-        </a>
+        <div className="relative z-10 mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+          <Button asChild size="lg" className="lift min-h-12 rounded-xl px-7 font-extrabold">
+            <a href="#work-with-us">Book Your Free Brand Audit</a>
+          </Button>
+          <a
+            href="#services"
+            className="text-sm font-bold text-foreground/80 underline decoration-foreground/35 underline-offset-4 transition-colors hover:text-foreground"
+          >
+            See how we work ↓
+          </a>
+        </div>
 
-        {settings.scarcity_enabled && settings.scarcity_text ? (
-<p className="relative z-10 mt-4 max-w-xl text-center text-sm font-semibold leading-6 text-foreground/75">{settings.scarcity_text}</p>
-) : null}
+        <p className="relative z-10 mt-4 max-w-xl text-center text-xs font-semibold leading-5 text-foreground/60 sm:text-sm">
+          Currently onboarding 5 Dubai clients · {REMAINING_CLIENT_SPOTS} spots left
+        </p>
 
 
         <div className="relative z-10 mt-8 grid w-full max-w-3xl gap-2.5 sm:mt-10 sm:grid-cols-3 sm:gap-3">
@@ -576,29 +584,6 @@ function Index() {
         </div>
       </section>
 
-      {/* ============ Post-services booking CTA ============ */}
-      <section className="border-y border-border bg-section-electric px-4 py-16 sm:px-6 sm:py-20" aria-labelledby="services-booking-title">
-        <Reveal>
-          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-7 sm:flex-row sm:items-center">
-            <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Ready for a clearer growth plan?</p>
-              <h2 id="services-booking-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-                Book your free brand audit.
-              </h2>
-              <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/75 sm:text-base">
-                Get an honest read on how your brand compares, how clearly it communicates, and how well your website turns interest into enquiries.
-              </p>
-              {settings.scarcity_enabled && settings.scarcity_text ? (
-<p className="mt-3 text-sm font-bold leading-6 text-foreground/85">{settings.scarcity_text}</p>
-) : null}
-            </div>
-            <Button asChild size="lg" className="lift min-h-12 shrink-0 rounded-xl px-7 font-extrabold">
-              <a href="#work-with-us">See Live Availability</a>
-            </Button>
-          </div>
-        </Reveal>
-      </section>
-
       {/* ============ Lead magnet ============ */}
       {settings.checklist_enabled ? (
       <section className="bg-section-navy px-4 py-16 sm:px-6 sm:py-24" aria-labelledby="checklist-title">
@@ -724,6 +709,13 @@ function Index() {
               </div>
             </Reveal>
           </div>
+          <Reveal delay={100}>
+            <div className="mt-10 flex justify-center sm:mt-12">
+              <Button asChild size="lg" className="lift min-h-12 rounded-xl px-7 font-extrabold">
+                <a href="#work-with-us">Get the same plan for your business</a>
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -764,7 +756,7 @@ function Index() {
               Contact
             </p>
             <h2 className="mt-4 text-3xl font-extrabold leading-tight sm:text-5xl">
-              Book Your Free 30-Minute Brand Audit
+              Claim one of the remaining spots
             </h2>
             <p className="mt-5 leading-7 text-foreground/80">
                A quick, honest read on how your brand compares, how clearly it communicates, and how well your
@@ -777,9 +769,9 @@ function Index() {
                <p className="text-sm font-semibold leading-6 text-foreground/75">
                  You&apos;ll also get a written 1-page summary of the audit: yours to keep and act on, whether we work together or not.
                </p>
-               {settings.scarcity_enabled && settings.scarcity_text ? (
-<p className="text-sm font-semibold leading-6 text-foreground/75">{settings.scarcity_text}</p>
-) : null}
+               <p className="text-sm font-semibold leading-6 text-foreground/75">
+                 Currently onboarding 5 Dubai clients · {REMAINING_CLIENT_SPOTS} spots left
+               </p>
              </div>
             <p className="mt-3 text-sm font-semibold leading-6 text-foreground/65">
               Book below, ask a quick question on WhatsApp, or send a written enquiry.
@@ -862,9 +854,6 @@ function Index() {
                   </a>
                 </div>
 
-                <p className="mt-8 text-sm font-semibold leading-6 text-foreground/65">
-                  Prefer to talk it through? Book your free 30-minute audit above.
-                </p>
               </div>
             </Reveal>
 
