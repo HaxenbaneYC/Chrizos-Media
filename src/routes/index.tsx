@@ -49,6 +49,35 @@ function WhatsAppIcon({ className = "" }: { className?: string }) {
 }
 
 
+// ---- Glaucia case study content — edit the numbers and quote here ----
+const CASE_STUDY = {
+  client: "Glaucia",
+  industry: "Fashion brand launch",
+  location: "Dubai",
+  problem:
+    "A single-product fashion brand with no identity, no content and no audience — starting from zero before its first campaign.",
+  deliverables: [
+    "Full brand identity",
+    "Product production",
+    "Campaign photography",
+    "Product images",
+    "Social reels",
+    "Paid marketing",
+  ],
+  result:
+    "From zero to a launched brand with a running paid campaign — reaching break-even in 3 months.",
+  stats: [
+    { value: "32%", label: "Increase in 6 weeks" },
+    { value: "400", label: "New followers in [period]" },
+    { value: "3", label: "Months to break-even" },
+  ],
+  quote: {
+    text: "[Client quote goes here — ask Glaucia for one line about working with us.]",
+    name: "[Client name]",
+    role: "Founder, Glaucia",
+  },
+};
+
 const RESULT_STAGES = [
   { label: "Brand built", detail: "Identity" },
   { label: "Content ready", detail: "Production" },
