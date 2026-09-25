@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Homepage booking actions are intentionally limited to three moments: hero, after the case study, and final contact; this keeps the conversion path focused.
