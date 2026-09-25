@@ -606,7 +606,7 @@ function Index() {
             <div className="glass-panel mx-auto max-w-4xl p-5 sm:p-10">
             <div className="grid items-start gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free Dubai marketing checklist</p>
+                <p className="text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">Free marketing checklist</p>
                 <h2 id="checklist-title" className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
                   Free Checklist: 5 Marketing Mistakes Costing Dubai Businesses Clients
                 </h2>

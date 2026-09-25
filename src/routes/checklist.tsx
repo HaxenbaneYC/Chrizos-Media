@@ -85,7 +85,7 @@ function ChecklistPage() {
         </a>
 
         <p className="mt-6 text-xs font-bold uppercase tracking-[0.25em] text-foreground/60">
-          Free Dubai marketing checklist
+          Free marketing checklist
         </p>
         <h1 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
           5 Marketing Mistakes Costing Dubai Businesses Clients
