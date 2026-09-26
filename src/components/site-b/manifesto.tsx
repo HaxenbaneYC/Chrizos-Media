@@ -1,38 +1,35 @@
-import { Fragment } from "react";
-
 import { usePinProgress } from "./motion-b";
 
 /**
- * The manifesto: one giant statement on Deep Navy that charges up word by
- * word as the reader scrolls, with the key words taking the white highlight
- * as they light. Screen readers get the sentence as plain text.
+ * The manifesto: one short line, then three giant words that light one by
+ * one as the reader scrolls; the last takes the white highlight. Screen
+ * readers get it as plain text.
  */
-export function Manifesto({ text, charged }: { text: string; charged: string[] }) {
-  const words = text.split(" ");
-  // a key word takes the highlight once it has fully lit
+export function Manifesto({ lead, beats }: { lead: string; beats: string[] }) {
+  const total = beats.length + 1;
   const ref = usePinProgress<HTMLElement>((p, el) => {
-    el.querySelectorAll<HTMLElement>(".b-word.is-key").forEach((w) => {
-      const i = Number(w.style.getPropertyValue("--i"));
-      w.classList.toggle("is-lit", p * 1.25 * words.length - i >= 1.4);
-    });
+    const last = el.querySelector<HTMLElement>(".b-beat.is-key");
+    last?.classList.toggle("is-lit", p * 1.2 * total - (total - 1) >= 1);
   });
-  const keep = new Set(charged.map((w) => w.toLowerCase()));
   return (
-    <section ref={ref} aria-label="What we believe" className="b-manifesto" style={{ ["--n" as string]: words.length }}>
+    <section ref={ref} aria-label="What we believe" className="b-manifesto" style={{ ["--n" as string]: total }}>
       <div className="b-manifesto-stage">
         <div className="d-wrap">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em]">What we believe</p>
-          <p className="sr-only">{text}</p>
-          <p aria-hidden className="d-display b-manifesto-text mt-6">
-            {words.map((w, i) => (
-              <Fragment key={i}>
-                <span className={`b-word ${keep.has(w.replace(/[^\w’']/g, "").toLowerCase()) ? "is-key" : ""}`} style={{ ["--i" as string]: i }}>
-                  {w}
-                </span>
-                {i < words.length - 1 ? " " : null}
-              </Fragment>
-            ))}
+          <p className="sr-only">
+            {lead} {beats.join(" ")}
           </p>
+          <div aria-hidden>
+            <p className="b-word b-manifesto-lead d-display" style={{ ["--i" as string]: 0 }}>
+              {lead}
+            </p>
+            <p className="d-display b-manifesto-beats mt-8">
+              {beats.map((b, i) => (
+                <span key={b} className={`b-word b-beat ${i === beats.length - 1 ? "is-key" : ""}`} style={{ ["--i" as string]: i + 1 }}>
+                  {b}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
     </section>

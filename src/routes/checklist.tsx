@@ -3,9 +3,9 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { sendChecklistRequest } from "@/lib/contact.functions";
-import { D_FONTS_HREF, LogoD, Mark, usePrintCanvas } from "@/components/site-d/brand-d";
+import { Mark } from "@/components/site-d/brand-d";
 
-const SOCIAL_SHARE_IMAGE_URL = "https://chrizosmedia.com/d/og-image.png";
+const SOCIAL_SHARE_IMAGE_URL = "https://chrizosmedia.com/b/og-image.png";
 
 export const Route = createFileRoute("/checklist")({
   staticData: { sitemap: true },
@@ -36,10 +36,6 @@ export const Route = createFileRoute("/checklist")({
     ],
     links: [
       { rel: "canonical", href: "https://chrizosmedia.com/checklist" },
-      { rel: "icon", href: "/d/favicon.svg", type: "image/svg+xml" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: D_FONTS_HREF },
     ],
   }),
 });
@@ -48,7 +44,6 @@ function ChecklistPage() {
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [message, setMessage] = useState("");
-  usePrintCanvas();
   const [utm, setUtm] = useState<{ source?: string | undefined; medium?: string | undefined; campaign?: string | undefined }>({});
 
   useEffect(() => {
@@ -101,12 +96,12 @@ function ChecklistPage() {
   }
 
   return (
-    <div className="d-root min-h-[100svh]">
+    <div className="d-root b-theme min-h-[100svh]">
       <main className="d-section">
         <div className="d-wrap grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <a href="/" className="inline-flex min-h-11 items-center text-[2rem]" aria-label="Chrizos Media home">
-              <LogoD />
+            <a href="/" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
+              <img src="/b/logo-blue.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[112px]" />
             </a>
             <p className="d-kicker mt-16">Free checklist</p>
             <h1 className="d-display d-h1 mt-4">

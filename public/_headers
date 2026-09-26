@@ -1,0 +1,14 @@
+/fonts/*
+  Cache-Control: public, max-age=31536000
+/b/*
+  Cache-Control: public, max-age=604800
+/work/*
+  Cache-Control: public, max-age=2592000
+/email/*
+  Cache-Control: public, max-age=604800
+/d/*
+  Cache-Control: public, max-age=604800
+/downloads/*
+  Cache-Control: public, max-age=86400
+/favicon.ico
+  Cache-Control: public, max-age=604800

@@ -1331,7 +1331,7 @@ main > section:not(:first-of-type) {
   /* Manifesto: words charge from dim to white as --p runs 0 to 1 */
   .b-manifesto {
     --p: 0;
-    height: 260svh;
+    height: 220svh;
     background: var(--b-navy);
     color: #fff;
   }
@@ -1343,28 +1343,34 @@ main > section:not(:first-of-type) {
     align-items: center;
     padding: 0 24px;
   }
-  .b-manifesto-text {
-    font-size: clamp(1.9rem, 4.6vw, 4rem);
-    line-height: 1.12;
+  .b-manifesto-lead {
+    font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+    line-height: 1.15;
     text-transform: uppercase;
-    max-width: 22ch;
+    max-width: 24ch;
   }
-  @media (min-width: 1024px) {
-    .b-manifesto-text {
-      max-width: 24ch;
-    }
+  .b-manifesto-beats {
+    display: grid;
+    gap: 0.05em;
+    font-size: clamp(3.5rem, 11vw, 9rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .b-manifesto-beats .b-word {
+    justify-self: start;
   }
   .b-word {
-    opacity: clamp(0.16, calc(var(--p) * 1.25 * var(--n) - var(--i)), 1);
+    opacity: clamp(0.42, calc(var(--p) * 1.2 * var(--n) - var(--i)), 1);
   }
-  .b-word.is-key {
-    padding: 0 0.1em;
+  .b-beat.is-key {
+    padding: 0 0.08em;
+    margin-left: -0.08em;
     background: linear-gradient(#fff, #fff) no-repeat 0 100% / 100% 0%;
     transition:
       background-size 380ms var(--d-ease),
       color 200ms var(--d-ease) 120ms;
   }
-  .b-word.is-key.is-lit {
+  .b-beat.is-key.is-lit {
     background-size: 100% 100%;
     color: var(--b-navy);
   }

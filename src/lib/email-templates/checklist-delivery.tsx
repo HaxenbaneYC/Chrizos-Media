@@ -21,14 +21,14 @@ export interface ChecklistDeliveryEmailProps {
 }
 
 const styles = {
-  body: { margin: 0, backgroundColor: '#F3EFE4', color: '#111210', fontFamily: 'Geist, "Segoe UI", Helvetica, Arial, sans-serif' },
+  body: { margin: 0, backgroundColor: '#F2F3F7', color: '#052662', fontFamily: 'Montserrat, "Segoe UI", Helvetica, Arial, sans-serif' },
   container: { margin: '0 auto', padding: '32px 20px', maxWidth: '640px' },
-  card: { backgroundColor: '#ffffff', border: '1px solid #D8D2C2', borderRadius: '4px', padding: '28px' },
-  eyebrow: { color: '#0D3B2E', fontSize: '12px', fontWeight: 800, letterSpacing: '0.18em', margin: '0 0 12px', textTransform: 'uppercase' as const },
-  heading: { color: '#111210', fontSize: '28px', lineHeight: '34px', fontWeight: 800, margin: '0 0 16px' },
+  card: { backgroundColor: '#ffffff', border: '1px solid #D5D9E3', borderRadius: '4px', padding: '28px' },
+  eyebrow: { color: '#1700FF', fontSize: '12px', fontWeight: 800, letterSpacing: '0.18em', margin: '0 0 12px', textTransform: 'uppercase' as const },
+  heading: { color: '#052662', fontSize: '28px', lineHeight: '34px', fontWeight: 800, margin: '0 0 16px' },
   text: { color: '#3A3C36', fontSize: '15px', lineHeight: '24px', fontWeight: 500, margin: '0 0 20px' },
   button: {
-    backgroundColor: '#0D3B2E',
+    backgroundColor: '#1700FF',
     borderRadius: '999px',
     color: '#ffffff',
     display: 'inline-block',
@@ -37,7 +37,7 @@ const styles = {
     padding: '14px 28px',
     textDecoration: 'none',
   },
-  link: { color: '#0D3B2E', wordBreak: 'break-all' as const },
+  link: { color: '#1700FF', wordBreak: 'break-all' as const },
   footer: { color: '#6B6D64', fontSize: '12px', lineHeight: '18px', margin: '20px 0 0' },
 }
 

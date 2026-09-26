@@ -2,7 +2,6 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState, type FormEvent } from "react";
 
-import glauciaCampaign from "../assets/glaucia-campaign-shoot.png.asset.json";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { sendContactInquiry } from "@/lib/contact.functions";
 import { Mark } from "@/components/site-d/brand-d";
@@ -89,7 +88,7 @@ const WHATSAPP_BASE = "Hi Chrizos Media, I'd like to ask about your services.";
 
 const SITE_TITLE = "Chrizos Media | More eyes. More customers.";
 const SITE_DESCRIPTION =
-  "Founder-led paid ads and content that put growing businesses in front of the right people, and turn that attention into customers. Take the free 60-second Attention Test.";
+  "Founder-led paid ads and content that put growing businesses in front of the right people and turn attention into customers. Free Attention Test.";
 const OG_IMAGE = "https://chrizosmedia.com/b/og-image.png";
 
 export const Route = createFileRoute("/")({
@@ -105,6 +104,7 @@ export const Route = createFileRoute("/")({
       { name: "theme-color", content: "#052662" },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:site_name", content: "Chrizos Media" },
+      { property: "og:locale", content: "en_US" },
       { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/" },
@@ -120,8 +120,6 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://chrizosmedia.com/" },
-      { rel: "icon", href: "/b/favicon.svg", type: "image/svg+xml" },
-      { rel: "manifest", href: "/b/site.webmanifest" },
     ],
     scripts: [
       {
@@ -250,10 +248,7 @@ function HomeB() {
         />
 
         {/* ============ Manifesto ============ */}
-        <Manifesto
-          text="Nobody buys from a business they’ve never seen. We put you in front of the right people every day, then turn that attention into customers you can count. Every week, in plain numbers."
-          charged={["seen.", "customers"]}
-        />
+        <Manifesto lead="Nobody buys from a business they’ve never seen, or don’t trust." beats={["Seen.", "Trusted.", "Chosen."]} />
 
         {/* ============ Proof ============ */}
         <section aria-label="Proof in numbers" className="d-section">
@@ -395,7 +390,9 @@ function HomeB() {
 
           <ReelPanel tone="navy">
             <img
-              src={glauciaCampaign.url}
+              src="/work/glaucia/campaign.webp"
+              width={892}
+              height={883}
               alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
               loading="lazy"
               className="b-panel-img"
@@ -577,7 +574,7 @@ function HomeB() {
                   url={settings.calendly_url}
                   notes={result?.summary}
                   colours={{ background: "ffffff", text: "052662", primary: "1700ff" }}
-                  icon={<img src="/b/favicon.svg" alt="" width={56} height={56} className="h-14 w-14" />}
+                  icon={<img src="/b/favicon.svg" alt="" width={56} height={56} loading="lazy" className="h-14 w-14" />}
                   onBooked={() => {
                     void logBooking({ data: { source: "calendly" } });
                   }}
