@@ -7,7 +7,7 @@ type Leak = { title: string; fix: string };
 type Option = { label: string; points: number };
 type Question = { q: string; options: Option[]; leak: Leak };
 
-const QUESTIONS: Question[] = [
+export const QUESTIONS: Question[] = [
   {
     q: "Are you running paid ads right now?",
     options: [
@@ -70,13 +70,13 @@ const QUESTIONS: Question[] = [
   },
 ];
 
-function bandFor(score: number) {
+export function bandFor(score: number) {
   if (score >= 80) return { name: "Loud and clear", line: "People see you and you know what it costs. Now it’s about scaling what works." };
   if (score >= 50) return { name: "Half heard", line: "Some of the right people see you, but you’re leaving attention on the table." };
   return { name: "Under the radar", line: "Most of your future customers haven’t seen you yet. The fixes below change that." };
 }
 
-function compute(ans: (number | null)[]): QuizResult {
+export function compute(ans: (number | null)[]): QuizResult {
   const pts = QUESTIONS.map((q, i) => {
     const a = ans[i];
     return a === null || a === undefined ? 0 : (q.options[a]?.points ?? 0);

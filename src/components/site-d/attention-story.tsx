@@ -1,13 +1,38 @@
 import { useEffect, useRef, useState } from "react";
 
-const INK: [number, number, number] = [17, 18, 16];
-const LIME: [number, number, number] = [210, 245, 60];
-const RULE: [number, number, number] = [216, 210, 194];
-const FOREST = "#0D3B2E";
+type RGB = [number, number, number];
+let INK: RGB = [17, 18, 16];
+let LIME: RGB = [210, 245, 60];
+let RULE: RGB = [216, 210, 194];
+let HI: RGB = [210, 245, 60];
+let FOREST = "#0D3B2E";
+let FONT = '600 13px "Geist Mono", monospace';
+
+/** Read the page theme's colour tokens, so the story follows whichever brand wraps it. */
+function readTheme(el: HTMLElement, ctx: CanvasRenderingContext2D) {
+  const cs = getComputedStyle(el);
+  const rgb = (name: string, fallback: RGB): RGB => {
+    const raw = cs.getPropertyValue(name).trim();
+    if (!raw) return fallback;
+    ctx.fillStyle = "#000";
+    ctx.fillStyle = raw;
+    const hex = String(ctx.fillStyle);
+    const m = /^#([0-9a-f]{6})$/i.exec(hex);
+    if (!m) return fallback;
+    const n = parseInt(m[1] ?? "0", 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  INK = rgb("--d-ink", INK);
+  LIME = rgb("--d-lime", LIME);
+  RULE = rgb("--d-rule", RULE);
+  HI = rgb("--d-hi", HI);
+  FOREST = `rgb(${rgb("--d-forest", [13, 59, 46]).join(",")})`;
+  FONT = el.closest(".b-theme") ? '700 13px "Montserrat", sans-serif' : '600 13px "Geist Mono", monospace';
+}
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const ease = (t: number) => 1 - (1 - clamp(t)) ** 3;
-const mix = (a: [number, number, number], b: [number, number, number], t: number) => a.map((v, i) => Math.round(v + ((b[i] ?? v) - v) * t));
+const mix = (a: RGB, b: RGB, t: number) => a.map((v, i) => Math.round(v + ((b[i] ?? v) - v) * t));
 
 type Dot = { x: number; y: number; r: number; right: boolean; jitter: number };
 
@@ -48,6 +73,7 @@ export function AttentionStory() {
     let lastRevenue = -1;
 
     const build = () => {
+      readTheme(section, ctx);
       const r = canvas.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = r.width;
@@ -107,8 +133,8 @@ export function AttentionStory() {
       ctx.beginPath();
       ctx.roundRect(box.x, box.y, box.w, box.h, 10);
       ctx.fill();
-      ctx.fillStyle = `rgb(${LIME.join(",")})`;
-      ctx.font = '600 13px "Geist Mono", monospace';
+      ctx.fillStyle = `rgb(${HI.join(",")})`;
+      ctx.font = FONT;
       ctx.textAlign = "left";
       ctx.fillText("CUSTOMERS", box.x + 14, box.y + 22);
       ctx.restore();
@@ -162,7 +188,7 @@ export function AttentionStory() {
         });
         ctx.fillStyle = `rgb(${INK.join(",")})`;
         ctx.globalAlpha = clamp(rev * 2);
-        ctx.font = '600 13px "Geist Mono", monospace';
+        ctx.font = FONT;
         ctx.textAlign = "left";
         ctx.fillText("REVENUE, MONTHS 1 TO 4", box.x, box.y - maxH * 0.84);
         ctx.restore();

@@ -1,27 +1,28 @@
-﻿import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState, type FormEvent } from "react";
 
 import glauciaCampaign from "../assets/glaucia-campaign-shoot.png.asset.json";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { sendContactInquiry } from "@/lib/contact.functions";
-import { D_FONTS_HREF, IconD, LogoD, Mark, SafeImageD, Sparkline, Ticker, usePrintCanvas } from "@/components/site-d/brand-d";
-import { LeakQuiz, type QuizResult } from "@/components/site-d/leak-quiz";
-import { GrowthCalc } from "@/components/site-d/growth-calc";
+import { Mark } from "@/components/site-d/brand-d";
+import { type QuizResult } from "@/components/site-d/leak-quiz";
 import { CalendlyD } from "@/components/site-d/calendly-d";
 import { HOMEPAGE } from "@/lib/homepage";
-import { AttentionStory } from "@/components/site-d/attention-story";
-import { Scribble, SlideBand } from "@/components/site-d/play-d";
-import { AdsFunnel, BrandMap, BreakEvenChart, ContentCalendar, ResultsTimeline, SearchRank, Seats } from "@/components/site-d/infographics-d";
+import { StrikeHero } from "@/components/site-b/strike-hero";
+import { Manifesto } from "@/components/site-b/manifesto";
+import { BoltIcon, BoltSeats, ProofNumbers, Switchboard, type Service } from "@/components/site-b/pieces-b";
+import { AttentionTest } from "@/components/site-b/attention-test";
+import { MoneyDial } from "@/components/site-b/money-dial";
+import { ReelPanel, WorkReel } from "@/components/site-b/work-reel";
 
 const REMAINING_SPOTS = 2;
 
-const SERVICES = [
+const SERVICES: Service[] = [
   {
-    section: "Attention you buy",
     name: "Ads",
+    line: "Attention you buy",
     headline: "Put your business in front of thousands of the right people. Every day.",
-    standfirst: "Meta and Google campaigns with new hooks tested every month, reported in customers, not clicks.",
     points: [
       "Meta and Google campaigns, set up and managed",
       "New hooks tested every month, winners scaled",
@@ -31,26 +32,23 @@ const SERVICES = [
     first: "2 to 4 weeks",
   },
   {
-    section: "Attention you earn",
     name: "Content",
+    line: "Attention you earn",
     headline: "Posts people stop for, then act on.",
-    standfirst: "Build attention and trust before you ever ask for the sale.",
     points: ["A monthly content calendar", "Hooks, captions and ideas written to prompt action", "Launches planned around your key dates"],
     first: "4 to 6 weeks",
   },
   {
-    section: "Attention you’re found by",
     name: "SEO",
+    line: "Attention you’re found by",
     headline: "Found on Google by people ready to buy.",
-    standfirst: "Show up when customers search for exactly what you sell.",
     points: ["Website health fixes: speed, access, structure", "Pages built around real searches", "Content that ranks and brings free traffic"],
     first: "2 to 3 months",
   },
   {
-    section: "Attention that sticks",
     name: "Brand",
+    line: "Attention that sticks",
     headline: "Know what to say, and why you win.",
-    standfirst: "Positioning and messaging that make you the easy choice.",
     points: ["Audience, competitor and market research", "A clear message framework", "A step-by-step 90-day growth plan"],
     first: "2 to 3 weeks",
   },
@@ -79,62 +77,32 @@ const FAQ = [
   { q: "How fast will I see results?", a: "Ads usually show first results in 2 to 4 weeks, content in 4 to 6 weeks, SEO in 2 to 3 months. You get numbers every week." },
 ];
 
-const RIVAGE_DELIVERABLES = ["Brand identity", "Vision and mission", "Campaign shoot", "Product photography", "Packaging", "Print pieces"];
-
 const RIVAGE_SHOTS = [
   { file: "campaign-man", caption: "Campaign · the R5", alt: "Man wearing Rivage R5 sunglasses in the campaign shoot" },
   { file: "swan", caption: "Campaign · the R5 in Sage", alt: "A white swan wearing Rivage sunglasses with green lenses" },
-  { file: "campaign-woman", caption: "Campaign", alt: "Woman wearing Rivage sunglasses in the campaign shoot" },
-  { file: "product-black", caption: "Product · matte black", alt: "Close-up of matte black Rivage sunglasses" },
-  { file: "product-green", caption: "Product · grey with green lenses", alt: "Rivage sunglasses with a grey frame and green lenses" },
+  { file: "product-green", caption: "Product photography", alt: "Rivage sunglasses with a grey frame and green lenses" },
   { file: "leather-case", caption: "Packaging · leather case", alt: "Rivage premium green leather glasses case" },
-  { file: "bags", caption: "Packaging · shopping bags", alt: "Stack of green Rivage shopping bags" },
   { file: "welcome-card", caption: "Print · welcome card", alt: "Rivage welcome card that reads You're in" },
-  { file: "lens-cloth", caption: "Packaging · lens cloth", alt: "Cream Rivage lens cleaning cloth" },
 ];
 
 const WHATSAPP_BASE = "Hi Chrizos Media, I'd like to ask about your services.";
 
-function StepIcon({ index }: { index: number }) {
-  const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  return (
-    <svg viewBox="0 0 24 24" className="h-7 w-7" {...common}>
-      {index === 0 ? (
-        <>
-          <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
-          <path d="M11 18.5h2" />
-        </>
-      ) : index === 1 ? (
-        <>
-          <rect x="5" y="3.5" width="14" height="17" rx="2.5" />
-          <path d="M8.5 9h7M8.5 12.5h7M8.5 16h4" />
-        </>
-      ) : (
-        <>
-          <path d="M4 20h16" />
-          <path d="M6 16v-3M10 16v-6M14 16v-4M18 16V6" />
-        </>
-      )}
-    </svg>
-  );
-}
-
 const SITE_TITLE = "Chrizos Media | More eyes. More customers.";
 const SITE_DESCRIPTION =
-  "Most businesses don't have a product problem. They have an attention problem. Founder-led paid ads, content and SEO for growing businesses. Get your free Attention Score in 60 seconds.";
-const OG_IMAGE = "https://chrizosmedia.com/d/og-image.png";
+  "Founder-led paid ads and content that put growing businesses in front of the right people, and turn that attention into customers. Take the free 60-second Attention Test.";
+const OG_IMAGE = "https://chrizosmedia.com/b/og-image.png";
 
 export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
+  loader: () => getSiteSettings(),
   beforeLoad: () => {
     if (HOMEPAGE === "classic") throw redirect({ to: "/classic" });
   },
-  loader: () => getSiteSettings(),
   head: () => ({
     meta: [
       { title: SITE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
-      { name: "theme-color", content: "#0D3B2E" },
+      { name: "theme-color", content: "#052662" },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:site_name", content: "Chrizos Media" },
       { property: "og:description", content: SITE_DESCRIPTION },
@@ -143,7 +111,7 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Great businesses don't have a product problem. They have an attention problem." },
+      { property: "og:image:alt", content: "More eyes. More customers. Chrizos Media." },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
@@ -152,11 +120,8 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://chrizosmedia.com/" },
-      { rel: "icon", href: "/d/favicon.svg", type: "image/svg+xml" },
-      { rel: "manifest", href: "/d/site.webmanifest" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: D_FONTS_HREF },
+      { rel: "icon", href: "/b/favicon.svg", type: "image/svg+xml" },
+      { rel: "manifest", href: "/b/site.webmanifest" },
     ],
     scripts: [
       {
@@ -167,8 +132,10 @@ export const Route = createFileRoute("/")({
           name: "Chrizos Media",
           description: SITE_DESCRIPTION,
           url: "https://chrizosmedia.com",
-          logo: "https://chrizosmedia.com/d/icon-512.png",
+          logo: "https://chrizosmedia.com/b/icon-512.png",
           image: OG_IMAGE,
+          founder: { "@type": "Person", name: "Youssef Christofides" },
+          telephone: "+971504254366",
           knowsAbout: ["Paid Advertising", "Meta Ads", "Google Ads", "Content Strategy", "Brand Strategy", "SEO"],
           serviceType: ["Paid Advertising", "Content Strategy", "Brand Strategy & Consulting", "SEO"],
           sameAs: ["https://www.instagram.com/chrizosmedia/"],
@@ -176,10 +143,10 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: OptionD,
+  component: HomeB,
 });
 
-function OptionD() {
+function HomeB() {
   const settings = Route.useLoaderData() ?? DEFAULT_SETTINGS;
   const CONTACT_EMAIL = settings.contact_email;
   const logBooking = useServerFn(trackBookingClick);
@@ -187,9 +154,8 @@ function OptionD() {
   const [result, setResult] = useState<QuizResult | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [copied, setCopied] = useState(false);
-  usePrintCanvas();
 
-  const waText = result ? `${WHATSAPP_BASE}\n\nI took the Attention Score test.\n${result.summary}` : WHATSAPP_BASE;
+  const waText = result ? `${WHATSAPP_BASE}\n\nI took the Attention Test.\n${result.summary}` : WHATSAPP_BASE;
   const WHATSAPP_URL = `https://wa.me/${settings.whatsapp_number}?text=${encodeURIComponent(waText)}`;
   const trackWhatsApp = () => void logBooking({ data: { source: "whatsapp" } });
 
@@ -225,360 +191,266 @@ function OptionD() {
     }
   };
 
-  const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
-
   return (
-    <div className="d-root overflow-x-clip">
-      <a href="#main-d" className="d-skip">
+    <div className="d-root b-theme overflow-x-clip">
+      <a href="#main-b" className="d-skip">
         Skip to content
       </a>
 
-      {/* ============ Masthead ============ */}
-      <div className="border-b border-[var(--d-rule)] px-6 lg:px-12">
-        <div className="d-mono d-wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-2 text-xs sm:text-sm">
-          <span suppressHydrationWarning>The Growth Report · Issue 01 · {today}</span>
-          <span className="flex items-center gap-2 font-semibold">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-[var(--d-moss)]" />
-            Onboarding 5 clients · {REMAINING_SPOTS} spots left
-          </span>
-        </div>
-      </div>
-      <header className="sticky top-0 z-50 border-b-2 border-[var(--d-ink)] bg-[var(--d-print)] px-6 lg:px-12">
-        <div className="d-wrap flex items-center justify-between gap-6 py-4">
-          <a href="#top" className="inline-flex min-h-11 items-center text-[1.75rem] sm:text-[2.1rem]" aria-label="Chrizos Media home">
-            <LogoD />
+      <header className="b-bar sticky top-0 z-50 px-6 lg:px-12">
+        <div className="d-wrap flex h-16 items-center justify-between gap-6">
+          <a href="#top" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
+            <img src="/b/logo-white.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[92px] sm:w-[100px]" />
           </a>
           <nav aria-label="Primary" className="flex items-center gap-6">
-            <a href="#attention-score" className="d-link hidden min-h-11 items-center text-base no-underline lg:inline-flex">
-              Attention Score
+            <a href="#attention-test" className="d-link hidden min-h-11 items-center text-base font-semibold no-underline lg:inline-flex">
+              Attention Test
             </a>
-            <a href="#services" className="d-link hidden min-h-11 items-center text-base no-underline md:inline-flex">
+            <a href="#services" className="d-link hidden min-h-11 items-center text-base font-semibold no-underline md:inline-flex">
               Services
             </a>
-            <a href="#results" className="d-link hidden min-h-11 items-center text-base no-underline md:inline-flex">
+            <a href="#results" className="d-link hidden min-h-11 items-center text-base font-semibold no-underline md:inline-flex">
               Results
             </a>
-            <a href="#faq" className="d-link hidden min-h-11 min-w-11 items-center justify-center text-base no-underline lg:inline-flex">
+            <a href="#faq" className="d-link hidden min-h-11 min-w-11 items-center justify-center text-base font-semibold no-underline lg:inline-flex">
               FAQ
             </a>
-            <a href="#book" className="d-btn d-btn-forest min-h-11 px-5 text-sm">
+            <a href="#book" className="d-btn min-h-11 bg-white px-5 text-sm text-[#1700FF]">
               Book a free audit
             </a>
           </nav>
         </div>
       </header>
 
-      <main id="main-d">
-        {/* ============ Front page ============ */}
-        <section id="top" className="d-section !pt-16 lg:!pt-24">
-          <div className="d-wrap grid grid-cols-1 gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <p className="d-kicker">Front page · For growing businesses</p>
-              <h1 className="d-display d-h1 mt-4">
-                Great businesses don’t have a <Scribble kind="strike">product problem.</Scribble> They have an{" "}
-                <Mark>attention problem.</Mark>
-              </h1>
-              <p className="d-lead">
-                We run the paid ads and content that put you in front of the right people every day, and turn that attention into
-                customers. Run personally by the founder.
-              </p>
-              <div className="mt-12 flex flex-wrap items-center gap-4">
-                <a href="#attention-score" className="d-btn d-btn-forest min-h-14 px-7 text-base">
-                  Get my Attention Score
+      <main id="main-b">
+        {/* ============ The Strike: scroll-scrubbed opening ============ */}
+        <StrikeHero
+          lead={
+            <p>
+              We run the paid ads and content that put you in front of the right people every day, and turn that attention into
+              customers. Run personally by the founder.
+            </p>
+          }
+          actions={
+            <>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href="#attention-test" className="d-btn min-h-12 bg-white px-6 text-base text-[#1700FF] sm:min-h-14 sm:px-7">
+                  Take the Attention Test
                 </a>
-                <a href="#book" className="d-btn d-btn-line min-h-14 px-7 text-base">
+                <a href="#book" className="d-btn min-h-12 border-2 border-white px-6 text-base text-white sm:min-h-14 sm:px-7">
                   Book a free audit
                 </a>
               </div>
-              <div className="mt-8 flex items-center gap-3">
-                <Seats open={REMAINING_SPOTS} size="sm" />
-                <p className="text-sm font-semibold">
-                  We take 5 clients at a time. {REMAINING_SPOTS} spots open.
-                </p>
+              <div className="mt-6 flex items-center gap-3">
+                <BoltSeats open={REMAINING_SPOTS} className="h-6" />
+                <p className="text-sm font-semibold">We take 5 clients at a time. {REMAINING_SPOTS} spots open.</p>
               </div>
-            </div>
-
-            <aside aria-label="Case study" className="d-card self-end p-8 lg:col-span-4">
-              <p className="d-kicker">Case study · Glaucia</p>
-              <p className="d-display mt-3 text-6xl leading-none">
-                3 <span className="text-2xl">months</span>
-              </p>
-              <p className="mt-1 text-base font-semibold">from launch to break-even</p>
-              <Sparkline points={[2, 3, 2.6, 4, 5.2, 4.8, 7, 8.4, 10]} className="mt-4 h-16 w-full" label="Rising revenue after launch" />
-              <p className="mt-4 text-sm">Brand, campaign shoot, launch content and paid ads, from zero.</p>
-              <a href="#results" className="d-link mt-2 inline-flex min-h-11 items-center text-sm">
-                Read the story
-              </a>
-            </aside>
-          </div>
-        </section>
-
-        <Ticker
-          items={[
-            { label: "GLAUCIA", value: "break-even in month 3" },
-            { label: "ADS", value: "first results in 2 to 4 weeks" },
-            { label: "HOOKS", value: "new tests every month" },
-            { label: "CONTENT", value: "4 to 6 weeks" },
-            { label: "SEO", value: "2 to 3 months" },
-            { label: "AUDIT", value: "written plan in 48 hours" },
-            { label: "REPLIES", value: "within 6 to 12 hours" },
-          ]}
+            </>
+          }
         />
 
-        <AttentionStory />
+        {/* ============ Manifesto ============ */}
+        <Manifesto
+          text="Nobody buys from a business they’ve never seen. We put you in front of the right people every day, then turn that attention into customers you can count. Every week, in plain numbers."
+          charged={["seen.", "customers"]}
+        />
 
-        {/* ============ Attention Score ============ */}
-        <section id="attention-score" aria-labelledby="leak-title" className="scroll-mt-24 d-section">
+        {/* ============ Proof ============ */}
+        <section aria-label="Proof in numbers" className="d-section">
           <div className="d-wrap">
-            <p className="d-kicker">The Attention Score</p>
-            <h2 id="leak-title" className="d-display d-h2">
-              How many of your future customers have actually seen you?
-            </h2>
-            <p className="d-lead">
-              Five questions about your ads and your reach. You get a score out of 100 and the three biggest attention gaps, each with a
-              fix you can start on today.
-            </p>
-            <div className="mt-12 max-w-4xl">
-              <LeakQuiz onResult={setResult} />
-            </div>
-
-            {result ? (
-              <div className="mt-12 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
-                <div className="d-rule-top grid content-start gap-3 pt-4">
-                  <p className="text-lg font-semibold">Fix it with us</p>
-                  <p>Book the free audit. Your answers go with your booking, so we start with your biggest gap.</p>
-                  <a href="#book" className="d-btn d-btn-forest min-h-12 justify-self-start px-6 text-base">
-                    Book with my answers
-                  </a>
-                </div>
-                <div className="d-rule-top grid content-start gap-3 pt-4">
-                  <p className="text-lg font-semibold">Ask a quick question</p>
-                  <p>Send your score on WhatsApp. We reply within 6 to 12 hours.</p>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" onClick={trackWhatsApp} className="d-btn d-btn-line min-h-12 justify-self-start px-6 text-base">
-                    Send on WhatsApp
-                  </a>
-                </div>
-                <div className="d-rule-top grid content-start gap-3 pt-4">
-                  <p className="text-lg font-semibold">Get the full report</p>
-                  {sendState === "sent" ? (
-                    <p role="status" className="font-semibold">
-                      Got it. Your report and three next steps are on their way within 12 hours.
-                    </p>
-                  ) : (
-                    <form onSubmit={sendReport} className="grid gap-3">
-                      <label className="sr-only" htmlFor="rep-name">
-                        Your name
-                      </label>
-                      <input id="rep-name" name="name" required autoComplete="name" placeholder="Your name" className="d-input" />
-                      <label className="sr-only" htmlFor="rep-email">
-                        Your email
-                      </label>
-                      <input id="rep-email" name="email" type="email" required autoComplete="email" placeholder="you@company.com" className="d-input" />
-                      <button type="submit" disabled={sendState === "sending"} className="d-btn d-btn-lime min-h-12 justify-self-start px-6 text-base">
-                        {sendState === "sending" ? "Sending…" : "Email me the report"}
-                      </button>
-                      {sendState === "not_sent" ? (
-                        <p role="alert" className="text-sm font-semibold">
-                          That didn’t send. Write to {CONTACT_EMAIL} and we’ll reply the same day.
-                        </p>
-                      ) : null}
-                    </form>
-                  )}
-                </div>
-              </div>
-            ) : null}
+            <ProofNumbers
+              stats={[
+                { value: 3, unit: "months", label: "Glaucia, from launch to break-even." },
+                { value: 48, unit: "hours", label: "From your free audit to a written growth plan." },
+                { value: 5, unit: "clients", label: "At a time, so the founder runs every account." },
+              ]}
+            />
           </div>
         </section>
 
-        {/* ============ Calculator ============ */}
-        <section id="calculator" aria-labelledby="calc-title" className="scroll-mt-24 border-t-2 border-[var(--d-ink)] d-section">
+        {/* ============ Services: the switchboard ============ */}
+        <section id="services" aria-labelledby="services-title" className="scroll-mt-16 d-section !pt-0">
           <div className="d-wrap">
-            <p className="d-kicker">The ad calculator</p>
-            <h2 id="calc-title" className="d-display d-h2">
-              Same budget. <Mark>Better hooks.</Mark> More customers.
-            </h2>
-            <p className="d-lead">
-              Paid attention is bought by the thousand views. The hook decides how many of those people stop. See what that’s worth.
-            </p>
-            <div className="mt-12">
-              <GrowthCalc />
-            </div>
-          </div>
-        </section>
-
-        <SlideBand top="ATTENTION IN ▲ " bottom="CUSTOMERS OUT ▲" />
-
-        {/* ============ Services ============ */}
-        <section id="services" aria-labelledby="services-title" className="scroll-mt-24 border-t-2 border-[var(--d-ink)] d-section">
-          <div className="d-wrap">
-            <p className="d-kicker">In this issue</p>
+            <p className="d-kicker">What we do</p>
             <h2 id="services-title" className="d-display d-h2">
               Every kind of attention, <Mark>working for you.</Mark>
             </h2>
-            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-              {SERVICES.map((s, i) =>
-                i === 0 ? (
-                  <article key={s.name} className="d-lift grid gap-12 border-2 border-[var(--d-ink)] bg-[var(--d-lime)] p-8 md:col-span-3 md:grid-cols-2 lg:p-12">
-                    <div className="grid content-start gap-4">
-                      <p className="d-kicker text-[var(--d-ink)]">
-                        Lead story · {s.section} · {s.name}
+            <div className="mt-12">
+              <Switchboard services={SERVICES} />
+            </div>
+          </div>
+        </section>
+
+        {/* ============ The Attention Test ============ */}
+        <section id="attention-test" aria-labelledby="test-title" className="b-takeover scroll-mt-16 d-section">
+          <div className="d-wrap grid gap-12">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.14em]">The Attention Test · 60 seconds</p>
+              <h2 id="test-title" className="d-display d-h2 mt-4">
+                How many of your future customers have actually seen you?
+              </h2>
+            </div>
+            <AttentionTest
+              onResult={setResult}
+              next={(r) => (
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                  <div className="grid content-start gap-3">
+                    <p className="text-lg font-bold">Fix it with us</p>
+                    <p>Book the free audit. Your answers go with your booking, so we start with your biggest gap.</p>
+                    <a href="#book" className="d-btn min-h-12 justify-self-start bg-white px-6 text-base text-[#1700FF]">
+                      Book with my answers
+                    </a>
+                  </div>
+                  <div className="grid content-start gap-3">
+                    <p className="text-lg font-bold">Ask a quick question</p>
+                    <p>Send your score of {r.score} on WhatsApp. We reply within 6 to 12 hours.</p>
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={trackWhatsApp}
+                      className="d-btn min-h-12 justify-self-start border-2 border-white px-6 text-base text-white"
+                    >
+                      Send on WhatsApp
+                    </a>
+                  </div>
+                  <div className="grid content-start gap-3">
+                    <p className="text-lg font-bold">Get the full report</p>
+                    {sendState === "sent" ? (
+                      <p role="status" className="font-semibold">
+                        Got it. Your report and three next steps are on their way within 12 hours.
                       </p>
-                      <h3 className="d-display d-h2 !mt-0">{s.headline}</h3>
-                      <ul className="grid gap-2 text-lg">
-                        {s.points.map((pt) => (
-                          <li key={pt} className="flex gap-3">
-                            <span aria-hidden className="mt-2 h-2.5 w-2.5 shrink-0 bg-[var(--d-ink)]" />
-                            {pt}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="self-center">
-                      <AdsFunnel />
-                    </div>
-                  </article>
-                ) : (
-                  <article key={s.name} className="d-lift grid content-start gap-6 border-2 border-[var(--d-ink)] bg-[var(--d-print)] p-8">
-                    <p className="d-kicker text-[var(--d-ink)]">
-                      {s.section} · {s.name}
-                    </p>
-                    <h3 className="d-display d-h3">{s.headline}</h3>
-                    <div className="py-2">{s.name === "Content" ? <ContentCalendar /> : s.name === "SEO" ? <SearchRank /> : <BrandMap />}</div>
-                    <ul className="grid gap-2">
-                      {s.points.map((pt) => (
-                        <li key={pt} className="flex gap-3">
-                          <span aria-hidden className="mt-2 h-2.5 w-2.5 shrink-0 bg-[var(--d-lime)] ring-1 ring-[var(--d-ink)]" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  </article>
-                ),
+                    ) : (
+                      <form onSubmit={sendReport} className="grid gap-3">
+                        <label className="sr-only" htmlFor="rep-name">
+                          Your name
+                        </label>
+                        <input id="rep-name" name="name" required autoComplete="name" placeholder="Your name" className="b-input" />
+                        <label className="sr-only" htmlFor="rep-email">
+                          Your email
+                        </label>
+                        <input id="rep-email" name="email" type="email" required autoComplete="email" placeholder="you@company.com" className="b-input" />
+                        <button
+                          type="submit"
+                          disabled={sendState === "sending"}
+                          className="d-btn min-h-12 justify-self-start bg-white px-6 text-base text-[#1700FF]"
+                        >
+                          {sendState === "sending" ? "Sending…" : "Email me the report"}
+                        </button>
+                        {sendState === "not_sent" ? (
+                          <p role="alert" className="text-sm font-semibold">
+                            That didn’t send. Write to {CONTACT_EMAIL} and we’ll reply the same day.
+                          </p>
+                        ) : null}
+                      </form>
+                    )}
+                  </div>
+                </div>
               )}
-            </div>
-
-            <div className="mt-32">
-              <p className="d-kicker">Timing</p>
-              <h3 className="d-display d-h2">When you’ll see first results.</h3>
-              <div className="mt-12">
-                <ResultsTimeline />
-              </div>
-            </div>
+            />
           </div>
         </section>
 
-        {/* ============ Feature: Glaucia ============ */}
-        <section id="results" aria-labelledby="results-title" className="d-forest scroll-mt-24 d-section">
-          <div className="d-wrap">
-            <p className="d-kicker">Feature · Fashion brand launch</p>
-            <h2 id="results-title" className="d-display d-h2">
-              How Glaucia went from zero to <Mark>break-even in 3 months.</Mark>
+        {/* ============ The money dial ============ */}
+        <section id="calculator" aria-labelledby="calc-title" className="b-night scroll-mt-16 d-section">
+          <div className="d-wrap grid gap-12">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.14em]">The money dial</p>
+              <h2 id="calc-title" className="d-display d-h2 mt-4">
+                What is a better hook worth?
+              </h2>
+              <p className="d-lead">Same budget, same people. The hook decides how many of them stop, click and buy.</p>
+            </div>
+            <MoneyDial />
+          </div>
+        </section>
+
+        {/* ============ The work reel ============ */}
+        <WorkReel label="Results: Glaucia and Rivage">
+          <ReelPanel tone="white" wide>
+            <p className="d-kicker">Results</p>
+            <h2 className="d-display d-h2">
+              Brands we put <Mark>in front of people.</Mark>
             </h2>
-            <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
-              <figure className="lg:col-span-5">
-                <div className="d-taped mx-2 mt-4">
-                  <SafeImageD
-                    src={glauciaCampaign.url}
-                    alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
-                    className="aspect-[4/5] w-full object-cover"
-                  />
-                </div>
-                <figcaption className="d-mono mt-6 text-sm text-[var(--d-muted)]">Campaign shoot produced for the launch.</figcaption>
+            <p className="d-lead">A fashion launch that broke even in three months, and an eyewear brand built to be noticed.</p>
+            <a href="#book" className="d-btn d-btn-forest mt-12 min-h-14 justify-self-start px-7 text-base">
+              Get a plan like this, free
+            </a>
+          </ReelPanel>
+
+          <ReelPanel tone="navy" wide>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em]">Case study · Glaucia · fashion launch</p>
+            <p className="d-display mt-6 flex items-baseline gap-4 leading-none">
+              <span className="text-[clamp(6rem,14vw,11rem)]">3</span>
+              <span className="text-3xl uppercase">months</span>
+            </p>
+            <p className="d-display mt-2 text-2xl uppercase">
+              <span className="bg-white px-[0.12em] text-[#052662]">From launch to break-even.</span>
+            </p>
+            <p className="mt-8 max-w-[30rem] text-lg">
+              A single-product fashion brand with no identity, content or audience. We built the brand, shot the campaign and ran the paid
+              launch.
+            </p>
+          </ReelPanel>
+
+          <ReelPanel tone="navy">
+            <img
+              src={glauciaCampaign.url}
+              alt="Glaucia fashion campaign featuring two models wearing the branded clothing produced for the launch"
+              loading="lazy"
+              className="b-panel-img"
+            />
+          </ReelPanel>
+
+          <ReelPanel tone="blue" wide>
+            <BoltIcon className="h-12 w-auto" />
+            <blockquote className="d-display mt-8 text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight">
+              “They never promised overnight miracles. We got an honest plan, weekly updates, and the brand paid for itself by month three,
+              exactly as they said it would.”
+              <footer className="mt-6 text-sm font-semibold uppercase tracking-[0.14em]">Amr, founder of Glaucia</footer>
+            </blockquote>
+          </ReelPanel>
+
+          <ReelPanel tone="white" wide>
+            <p className="d-kicker">Case study · Rivage · premium eyewear</p>
+            <h3 className="d-display d-h2">
+              An eyewear brand <Mark>built to be noticed.</Mark>
+            </h3>
+            <p className="d-lead">
+              Italian craftsmanship with Mediterranean and Middle Eastern sensibility. Identity, campaign, product photography and every
+              piece the customer touches.
+            </p>
+            <p className="d-display mt-8 text-2xl">“Vision beyond sight.”</p>
+          </ReelPanel>
+
+          {RIVAGE_SHOTS.map((s) => (
+            <ReelPanel key={s.file} tone="white">
+              <figure className="grid h-full content-center gap-3">
+                <img src={`/work/rivage/${s.file}.webp`} alt={s.alt} width={900} height={1124} loading="lazy" className="b-panel-img" />
+                <figcaption className="text-sm font-semibold">{s.caption}</figcaption>
               </figure>
-              <div className="grid content-start gap-8 lg:col-span-7">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <p className="d-kicker">The problem</p>
-                    <p className="mt-2 text-lg">A single-product fashion brand with no identity, no content and no audience, starting from zero before its first campaign.</p>
-                  </div>
-                  <div>
-                    <p className="d-kicker">What we did</p>
-                    <ul className="mt-2 flex flex-wrap gap-2">
-                      {["Brand identity", "Product production", "Campaign shoot", "Product images", "Social reels", "Paid launch"].map((d) => (
-                        <li key={d} className="rounded-full border border-[var(--d-print)] px-3 py-1 text-sm">
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <blockquote className="d-display d-h3 border-l-4 border-[var(--d-lime)] pl-6">
-                  “They never promised overnight miracles. We got an honest plan, weekly updates, and the brand paid for itself by month three,
-                  exactly as they said it would.”
-                  <footer className="d-kicker mt-4 not-italic">Amr, founder of Glaucia</footer>
-                </blockquote>
-                <div className="border-t border-[var(--d-rule)] pt-6">
-                  <p className="d-kicker">Revenue against spend, first 5 months</p>
-                  <BreakEvenChart />
-                </div>
-              </div>
-            </div>
+            </ReelPanel>
+          ))}
 
-            {/* ---------- Feature 2: Rivage ---------- */}
-            <div className="mt-32 border-t border-[var(--d-rule)] pt-16">
-              <p className="d-kicker">Also in this issue · Premium eyewear</p>
-              <h3 className="d-display d-h2">
-                Rivage: an eyewear brand <Mark>built to be noticed.</Mark>
-              </h3>
-              <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12">
-                <div className="grid content-start gap-6 lg:col-span-4">
-                  <p className="text-lg">
-                    Italian craftsmanship meets Mediterranean and Middle Eastern sensibility. The brand was built from its story out: identity,
-                    campaign, product photography and every piece the customer touches.
-                  </p>
-                  <p className="d-display border-l-4 border-[var(--d-lime)] pl-5 text-2xl">“Vision beyond sight.”</p>
-                  <div>
-                    <p className="d-kicker">What we made</p>
-                    <ul className="mt-2 flex flex-wrap gap-2">
-                      {RIVAGE_DELIVERABLES.map((d) => (
-                        <li key={d} className="rounded-full border border-[var(--d-print)] px-3 py-1 text-sm">
-                          {d}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="min-w-0 lg:col-span-8">
-                  <ul aria-label="Rivage brand work" className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 lg:mx-0 lg:px-0">
-                    {RIVAGE_SHOTS.map((shot) => (
-                      <li key={shot.file} className="w-[62vw] max-w-[18rem] shrink-0 snap-start sm:w-[16rem]">
-                        <figure>
-                          <img
-                            src={`/work/rivage/${shot.file}.webp`}
-                            alt={shot.alt}
-                            width={900}
-                            height={1124}
-                            loading="lazy"
-                            className="aspect-[4/5] w-full bg-[var(--d-print)] object-cover"
-                          />
-                          <figcaption className="d-mono mt-2 text-xs text-[var(--d-muted)]">{shot.caption}</figcaption>
-                        </figure>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-16 flex flex-wrap items-center gap-4">
-              <a href="#book" className="d-btn d-btn-lime min-h-14 px-8 text-base">
-                Get a plan like this, free
-              </a>
-              <p className="d-mono text-sm">30-minute audit · plan within 48 hours</p>
-            </div>
-          </div>
-        </section>
+          <ReelPanel tone="blue" wide>
+            <h3 className="d-display d-h2">Your brand next?</h3>
+            <p className="d-lead">A 30-minute audit and a written plan within 48 hours. Free.</p>
+            <a href="#book" className="d-btn mt-12 min-h-14 justify-self-start bg-white px-7 text-base text-[#1700FF]">
+              Book a free audit
+            </a>
+          </ReelPanel>
+        </WorkReel>
 
         {/* ============ Letter from the founder ============ */}
-        <section id="about" aria-labelledby="about-title" className="scroll-mt-24 d-section">
+        <section id="about" aria-labelledby="about-title" className="scroll-mt-16 d-section">
           <div className="d-wrap grid grid-cols-1 gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-5">
               <p className="d-kicker">Letter from the founder</p>
               <h2 id="about-title" className="d-display d-h2">
                 Not a big agency. <Mark>That’s the point.</Mark>
               </h2>
             </div>
-            <div className="grid max-w-[36rem] gap-6 text-lg lg:col-span-7 lg:col-start-6">
+            <div className="grid max-w-[36rem] gap-6 text-lg lg:col-span-6 lg:col-start-7">
               <p>
                 I started Chrizos Media after seeing how large agencies treat growing businesses: one account among hundreds, generic
                 playbooks, and results nobody is truly accountable for.
@@ -588,35 +460,27 @@ function OptionD() {
                 at a time, so each one gets full attention instead of being passed down a chain.
               </p>
               <p>You talk to the person doing the work, every time. And every week you see the numbers, good or bad.</p>
-              <p className="d-mono text-sm">Youssef Christofides · Founder, Chrizos Media</p>
+              <p className="font-semibold">Youssef Christofides · Founder, Chrizos Media</p>
             </div>
           </div>
         </section>
 
         {/* ============ How it works ============ */}
-        <section id="how" aria-labelledby="how-title" className="scroll-mt-24 border-t-2 border-[var(--d-ink)] d-section">
+        <section id="how" aria-labelledby="how-title" className="b-grey scroll-mt-16 d-section">
           <div className="d-wrap">
             <p className="d-kicker">How it works</p>
             <h2 id="how-title" className="d-display d-h2">
               From first call to first results.
             </h2>
-            <ol className="relative mt-12 grid grid-cols-1 gap-12 md:grid-cols-3">
-              <span aria-hidden className="absolute left-8 top-8 hidden h-0.5 w-[calc(100%-4rem)] bg-[var(--d-ink)] md:block" />
+            <ol className="mt-12 border-t-2 border-[var(--d-ink)]">
               {STEPS.map((s, i) => (
-                <li key={s.title} className="relative grid content-start gap-3">
-                  <span
-                    aria-hidden
-                    className={`grid h-16 w-16 place-items-center rounded-full border-2 border-[var(--d-ink)] ${
-                      i === STEPS.length - 1 ? "bg-[var(--d-lime)]" : "bg-[var(--d-print)]"
-                    }`}
-                  >
-                    <StepIcon index={i} />
-                  </span>
-                  <p className="d-mono text-sm">
-                    Step {i + 1} · {s.when}
-                  </p>
-                  <h3 className="d-display d-h3">{s.title}</h3>
-                  <p className="text-lg">{s.body}</p>
+                <li key={s.title} className="grid grid-cols-[4rem_1fr] gap-4 border-b-2 border-[var(--d-ink)] py-8 sm:grid-cols-[8rem_1fr_1fr] sm:gap-8">
+                  <span className="d-display text-5xl leading-none text-[var(--d-lime)] sm:text-7xl">0{i + 1}</span>
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.14em]">{s.when}</p>
+                    <h3 className="d-display mt-2 text-3xl uppercase">{s.title}</h3>
+                  </div>
+                  <p className="col-start-2 max-w-[30rem] text-lg sm:col-start-3 sm:self-end">{s.body}</p>
                 </li>
               ))}
             </ol>
@@ -624,7 +488,7 @@ function OptionD() {
         </section>
 
         {/* ============ FAQ ============ */}
-        <section id="faq" aria-labelledby="faq-title" className="scroll-mt-24 border-t-2 border-[var(--d-ink)] d-section">
+        <section id="faq" aria-labelledby="faq-title" className="scroll-mt-16 d-section">
           <div className="d-wrap grid grid-cols-1 gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <p className="d-kicker">Questions</p>
@@ -634,10 +498,10 @@ function OptionD() {
             </div>
             <div className="lg:col-span-8">
               {FAQ.map((f) => (
-                <details key={f.q} className="group border-b border-[var(--d-ink)]">
-                  <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold">
+                <details key={f.q} className="group border-b-2 border-[var(--d-ink)]">
+                  <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-bold">
                     {f.q}
-                    <span aria-hidden className="d-display text-3xl transition-transform group-open:rotate-45">
+                    <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-[var(--d-ink)] text-2xl transition-transform group-open:rotate-45">
                       +
                     </span>
                   </summary>
@@ -649,61 +513,71 @@ function OptionD() {
         </section>
 
         {/* ============ The offer + booking ============ */}
-        <section id="book" aria-labelledby="book-title" className="d-forest scroll-mt-24 d-section">
+        <section id="book" aria-labelledby="book-title" className="b-takeover scroll-mt-16 d-section">
           <div className="d-wrap">
-            <p className="d-kicker">Claim one of the {REMAINING_SPOTS} remaining spots</p>
-            <h2 id="book-title" className="d-display d-h2">
-              The free audit. <Mark>Zero pitch.</Mark>
+            <p className="text-sm font-semibold uppercase tracking-[0.14em]">Claim one of the {REMAINING_SPOTS} remaining spots</p>
+            <h2 id="book-title" className="d-display d-h2 mt-4">
+              The free audit. <span className="bg-white px-[0.12em] text-[#052662]">Zero pitch.</span>
             </h2>
-            <div className="mt-12 flex flex-col gap-8 rounded-sm bg-[var(--d-print)] p-8 text-[var(--d-ink)] sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-12 flex flex-col gap-8 bg-white p-8 text-[#052662] sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="d-display d-h3">We only take 5 clients at a time.</p>
+                <p className="d-display text-2xl uppercase">We only take 5 clients at a time.</p>
                 <p className="mt-2 text-lg">So the founder runs every account. Right now {REMAINING_SPOTS} spots are open.</p>
               </div>
-              <Seats open={REMAINING_SPOTS} />
+              <span className="text-[#1700FF]">
+                <BoltSeats open={REMAINING_SPOTS} className="h-14" />
+              </span>
             </div>
             <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-12">
               <div className="grid content-start gap-8 lg:col-span-5">
-                <div className="border-4 border-double border-[var(--d-print)] p-8">
-                  <p className="d-kicker">Your audit includes</p>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.14em]">Your audit includes</p>
                   <ul className="mt-4 grid gap-4">
                     {OFFER.map((o) => (
                       <li key={o.title} className="flex gap-3">
-                        <span aria-hidden className="d-mono text-[var(--d-lime)]">▲</span>
+                        <BoltIcon className="mt-1 h-5 w-auto shrink-0" />
                         <span>
-                          <b>{o.title}.</b> <span className="text-[var(--d-muted)]">{o.body}</span>
+                          <b>{o.title}.</b> <span className="opacity-85">{o.body}</span>
                         </span>
                       </li>
                     ))}
                   </ul>
-                  <p className="d-mono mt-6 border-t border-[var(--d-rule)] pt-4 text-sm">Price: free · 30 minutes · no obligation</p>
+                  <p className="mt-6 border-t border-white/30 pt-4 text-sm font-semibold">Price: free · 30 minutes · no obligation</p>
                 </div>
                 <div className="grid gap-2">
-                  <p className="text-lg font-semibold">Our promise</p>
+                  <p className="text-lg font-bold">Our promise</p>
                   <p>If you don’t leave with at least one clear idea you can use, we’ll do a second audit, free.</p>
                 </div>
                 <div className="grid gap-3">
-                  <p className="text-lg font-semibold">Prefer to talk first?</p>
+                  <p className="text-lg font-bold">Prefer to talk first?</p>
                   <div className="flex flex-wrap gap-3">
-                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" onClick={trackWhatsApp} className="d-btn d-btn-line min-h-12 px-6 text-base">
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={trackWhatsApp}
+                      className="d-btn min-h-12 border-2 border-white px-6 text-base text-white"
+                    >
                       Ask on WhatsApp
                     </a>
-                    <button type="button" onClick={copyEmail} className="d-btn d-btn-line min-h-12 px-6 text-base">
+                    <button type="button" onClick={copyEmail} className="d-btn min-h-12 border-2 border-white px-6 text-base text-white">
                       {copied ? "Email copied" : CONTACT_EMAIL}
                     </button>
                   </div>
-                  <p className="text-sm text-[var(--d-muted)]">We reply to every message within 6 to 12 hours.</p>
+                  <p className="text-sm opacity-85">We reply to every message within 6 to 12 hours.</p>
                 </div>
               </div>
               <div className="lg:col-span-7">
                 {result ? (
-                  <p className="d-mono mb-3 text-sm">
-                    <span className="bg-[var(--d-lime)] px-1 text-[var(--d-ink)]">Your Attention Score answers are attached ({result.score}/100).</span>
+                  <p className="mb-3 text-sm font-semibold">
+                    <span className="bg-white px-1 text-[#052662]">Your Attention Test answers are attached ({result.score}/100).</span>
                   </p>
                 ) : null}
                 <CalendlyD
                   url={settings.calendly_url}
                   notes={result?.summary}
+                  colours={{ background: "ffffff", text: "052662", primary: "1700ff" }}
+                  icon={<img src="/b/favicon.svg" alt="" width={56} height={56} className="h-14 w-14" />}
                   onBooked={() => {
                     void logBooking({ data: { source: "calendly" } });
                   }}
@@ -714,25 +588,25 @@ function OptionD() {
         </section>
       </main>
 
-      {/* ============ Footer ============ */}
-      <footer className="bg-[var(--d-forest-deep)] px-6 pb-12 pt-24 text-[var(--d-print)] lg:px-12">
-        <div className="d-wrap grid gap-12">
-          <span className="block text-[clamp(3rem,11vw,9rem)] leading-none">
-            <LogoD tone="forest" />
-          </span>
-          <div className="flex flex-wrap items-center justify-between gap-6 border-t border-[rgba(243,239,228,0.2)] pt-6 text-sm">
-            <p className="d-mono flex items-center gap-3">
-              <IconD tone="forest" className="h-6 w-6" />
-              Growth you can measure. © {new Date().getFullYear()} Chrizos Media
-            </p>
+      {/* ============ Footer: the logo, edge to edge ============ */}
+      <footer className="bg-[#031A45] px-6 pb-12 pt-24 text-white lg:px-12">
+        <div className="d-wrap grid gap-16">
+          <p className="d-display text-[clamp(2rem,5vw,4rem)] uppercase leading-none">
+            More eyes.
+            <br />
+            <span className="bg-white px-[0.12em] text-[#052662]">More customers.</span>
+          </p>
+          <img src="/b/logo-white.svg" alt="Chrizos Media" width={952} height={386} loading="lazy" className="h-auto w-full" />
+          <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/20 pt-6 text-sm">
+            <p className="font-semibold">© {new Date().getFullYear()} Chrizos Media</p>
             <div className="flex flex-wrap gap-x-6">
-              <a href={settings.instagram_url} target="_blank" rel="noreferrer" className="d-link inline-flex min-h-11 items-center">
+              <a href={settings.instagram_url} target="_blank" rel="noreferrer" className="d-link inline-flex min-h-11 items-center text-white">
                 Instagram
               </a>
-              <a href="#attention-score" className="d-link inline-flex min-h-11 items-center">
-                Attention Score
+              <a href="#attention-test" className="d-link inline-flex min-h-11 items-center text-white">
+                Attention Test
               </a>
-              <a href="#book" className="d-link inline-flex min-h-11 items-center">
+              <a href="#book" className="d-link inline-flex min-h-11 items-center text-white">
                 Book a free audit
               </a>
             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { IconD } from "./brand-d";
 
@@ -9,7 +9,24 @@ const DEFAULT_URL = "https://calendly.com/chrizosmedia/youssef";
  * (e.g. the Attention Score summary) is passed as Calendly's first custom answer,
  * so the answers arrive with the booking when the event asks a question.
  */
-export function CalendlyD({ url, notes, onBooked }: { url?: string | undefined; notes?: string | undefined; onBooked?: () => void }) {
+type Colours = { background: string; text: string; primary: string };
+const D_COLOURS: Colours = { background: "f3efe4", text: "111210", primary: "0d3b2e" };
+
+export function CalendlyD({
+  url,
+  notes,
+  onBooked,
+  colours = D_COLOURS,
+  icon,
+}: {
+  url?: string | undefined;
+  notes?: string | undefined;
+  onBooked?: () => void;
+  /** Calendly's embed colours, hex without # */
+  colours?: Colours;
+  /** Brand icon for the loading and booked states */
+  icon?: ReactNode;
+}) {
   const base = url || DEFAULT_URL;
   const booked = useRef(onBooked);
   booked.current = onBooked;
@@ -37,17 +54,17 @@ export function CalendlyD({ url, notes, onBooked }: { url?: string | undefined; 
     embed_domain: "chrizosmedia.com",
     embed_type: "Inline",
     hide_gdpr_banner: "1",
-    background_color: "f3efe4",
-    text_color: "111210",
-    primary_color: "0d3b2e",
+    background_color: colours.background,
+    text_color: colours.text,
+    primary_color: colours.primary,
   });
   if (notes) params.set("a1", notes.slice(0, 900));
   const src = `${base}?${params.toString()}`;
 
   if (confirmed) {
     return (
-      <div role="status" className="flex min-h-80 flex-col items-center justify-center gap-5 border-2 border-[var(--d-ink)] bg-[var(--d-print)] p-10 text-center">
-        <IconD className="h-16 w-16" />
+      <div role="status" className="flex min-h-80 flex-col items-center justify-center gap-5 border-2 border-[var(--d-ink)] bg-[var(--d-print)] p-10 text-center text-[var(--d-ink)]">
+        {icon ?? <IconD className="h-16 w-16" />}
         <p className="d-display text-5xl">Booked.</p>
         <p className="max-w-sm text-lg">Calendly has emailed you the details. Talk soon.</p>
       </div>
@@ -55,10 +72,10 @@ export function CalendlyD({ url, notes, onBooked }: { url?: string | undefined; 
   }
 
   return (
-    <div className="relative border-2 border-[var(--d-ink)] bg-[var(--d-print)]">
+    <div className="relative border-2 border-[var(--d-ink)] bg-[var(--d-print)] text-[var(--d-ink)]">
       {!loaded && !timedOut ? (
         <div role="status" className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4">
-          <IconD className="h-12 w-12 animate-pulse" />
+          <span className="animate-pulse">{icon ?? <IconD className="h-12 w-12" />}</span>
           <p className="d-mono text-sm">Loading available times</p>
         </div>
       ) : null}

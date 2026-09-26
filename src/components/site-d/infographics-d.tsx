@@ -24,7 +24,7 @@ export function AdsFunnel() {
         return (
           <g key={r.label} transform={`translate(${(420 - w) / 2} ${i * 62})`}>
             <rect width={w} height="50" className={`d-ig-grow ${i === 2 ? "fill-[var(--d-forest)]" : "fill-[var(--d-ink)]"}`} style={v({ "--i": i })} />
-            <text x={w / 2} y="22" textAnchor="middle" className="d-ig-num fill-[var(--d-lime)]">
+            <text x={w / 2} y="22" textAnchor="middle" className="d-ig-num fill-[var(--d-hi)]">
               {r.value}
             </text>
             <text x={w / 2} y="40" textAnchor="middle" className="d-ig-label fill-[var(--d-print)]">
@@ -88,9 +88,9 @@ export function SearchRank() {
       ))}
       <g className="d-ig-climb">
         <rect x="-4" y="-6" width="288" height="34" rx="3" className="fill-[var(--d-lime)] stroke-[var(--d-ink)]" strokeWidth="1.5" />
-        <rect x="6" y="2" width="170" height="8" rx="2" className="fill-[var(--d-ink)]" />
-        <rect x="6" y="16" width="110" height="6" rx="2" className="fill-[var(--d-forest)]" />
-        <text x="270" y="16" textAnchor="end" className="d-ig-num fill-[var(--d-ink)]">
+        <rect x="6" y="2" width="170" height="8" rx="2" className="fill-[var(--d-on-lime)]" />
+        <rect x="6" y="16" width="110" height="6" rx="2" className="fill-[var(--d-on-lime)] opacity-60" />
+        <text x="270" y="16" textAnchor="end" className="d-ig-num fill-[var(--d-on-lime)]">
           #1
         </text>
       </g>
@@ -122,7 +122,7 @@ export function BrandMap() {
       ))}
       <g className="d-ig-move">
         <circle cx="228" cy="34" r="14" className="fill-[var(--d-lime)] stroke-[var(--d-ink)]" strokeWidth="2" />
-        <text x="228" y="38" textAnchor="middle" className="d-ig-num fill-[var(--d-ink)]" style={{ fontSize: 11 }}>
+        <text x="228" y="38" textAnchor="middle" className="d-ig-num fill-[var(--d-on-lime)]" style={{ fontSize: 11 }}>
           you
         </text>
       </g>
@@ -169,7 +169,7 @@ export function Seats({ open, size = "lg" }: { open: number; size?: "sm" | "lg" 
         return (
           <span
             key={i}
-            className={`${dim} rounded-full border-2 ${
+            className={`${dim} shrink-0 rounded-full border-2 ${
               taken ? "border-[var(--d-ink)] bg-[var(--d-ink)]" : "border-[var(--d-ink)] bg-[var(--d-lime)]"
             }`}
           />

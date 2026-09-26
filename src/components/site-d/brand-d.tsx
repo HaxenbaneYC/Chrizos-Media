@@ -102,13 +102,13 @@ export function Sparkline({ points, className = "", label }: { points: number[];
 }
 
 /** Market-style ticker band. Content is duplicated for a seamless loop and hidden from screen readers. */
-export function Ticker({ items }: { items: { label: string; value: string }[] }) {
+export function Ticker({ items, sep = "▲" }: { items: { label: string; value: string }[]; sep?: string }) {
   const row = (copy: number) => (
     <span key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
       {items.map((it) => (
         <span key={it.label + copy} className="flex items-center gap-2 px-6">
           <span className="font-semibold">{it.label}</span>
-          <span className="text-[var(--d-lime)]">▲</span>
+          <span className="text-[var(--d-hi)]">{sep}</span>
           <span className="opacity-80">{it.value}</span>
         </span>
       ))}
