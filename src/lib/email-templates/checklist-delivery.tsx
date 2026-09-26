@@ -21,15 +21,15 @@ export interface ChecklistDeliveryEmailProps {
 }
 
 const styles = {
-  body: { margin: 0, backgroundColor: '#f4f7fb', color: '#052662', fontFamily: 'Montserrat, Arial, sans-serif' },
+  body: { margin: 0, backgroundColor: '#F3EFE4', color: '#111210', fontFamily: 'Geist, "Segoe UI", Helvetica, Arial, sans-serif' },
   container: { margin: '0 auto', padding: '32px 20px', maxWidth: '640px' },
-  card: { backgroundColor: '#ffffff', border: '1px solid #dbe5f2', borderRadius: '18px', padding: '28px' },
-  eyebrow: { color: '#1700FF', fontSize: '12px', fontWeight: 800, letterSpacing: '0.18em', margin: '0 0 12px', textTransform: 'uppercase' as const },
-  heading: { color: '#052662', fontSize: '28px', lineHeight: '34px', fontWeight: 800, margin: '0 0 16px' },
-  text: { color: '#42536F', fontSize: '15px', lineHeight: '24px', fontWeight: 500, margin: '0 0 20px' },
+  card: { backgroundColor: '#ffffff', border: '1px solid #D8D2C2', borderRadius: '4px', padding: '28px' },
+  eyebrow: { color: '#0D3B2E', fontSize: '12px', fontWeight: 800, letterSpacing: '0.18em', margin: '0 0 12px', textTransform: 'uppercase' as const },
+  heading: { color: '#111210', fontSize: '28px', lineHeight: '34px', fontWeight: 800, margin: '0 0 16px' },
+  text: { color: '#3A3C36', fontSize: '15px', lineHeight: '24px', fontWeight: 500, margin: '0 0 20px' },
   button: {
-    backgroundColor: '#1700FF',
-    borderRadius: '12px',
+    backgroundColor: '#0D3B2E',
+    borderRadius: '999px',
     color: '#ffffff',
     display: 'inline-block',
     fontSize: '15px',
@@ -37,8 +37,8 @@ const styles = {
     padding: '14px 28px',
     textDecoration: 'none',
   },
-  link: { color: '#1700FF', wordBreak: 'break-all' as const },
-  footer: { color: '#6f7f9d', fontSize: '12px', lineHeight: '18px', margin: '20px 0 0' },
+  link: { color: '#0D3B2E', wordBreak: 'break-all' as const },
+  footer: { color: '#6B6D64', fontSize: '12px', lineHeight: '18px', margin: '20px 0 0' },
 }
 
 export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
@@ -52,8 +52,8 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
             <Text style={styles.eyebrow}>Chrizos Media</Text>
             <Heading style={styles.heading}>Your checklist is ready</Heading>
             <Text style={styles.text}>
-              Here is your free guide: &ldquo;5 Marketing Mistakes Costing Businesses Clients&rdquo;.
-              Inside you&rsquo;ll find the 10-minute leak check, five mistakes to fix first, and a 30-day action plan.
+              Here is your free guide: &ldquo;5 marketing mistakes costing you customers&rdquo;.
+              Five common mistakes, and the simple fix for each. A 10-minute read.
             </Text>
             <Button href={DOWNLOAD_URL} style={styles.button}>
               Download the checklist (PDF)

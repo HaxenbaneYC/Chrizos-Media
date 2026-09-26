@@ -2,12 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 
-import logoWhite from "../assets/chrizos-logo-white.webp";
-import socialShareImage from "../assets/chrizos-media-social-share.jpg.asset.json";
-import { Button } from "@/components/ui/button";
 import { sendChecklistRequest } from "@/lib/contact.functions";
+import { D_FONTS_HREF, LogoD, Mark, usePrintCanvas } from "@/components/site-d/brand-d";
 
-const SOCIAL_SHARE_IMAGE_URL = `https://chrizosmedia.com${socialShareImage.url}`;
+const SOCIAL_SHARE_IMAGE_URL = "https://chrizosmedia.com/d/og-image.png";
 
 export const Route = createFileRoute("/checklist")({
   staticData: { sitemap: true },
@@ -15,28 +13,34 @@ export const Route = createFileRoute("/checklist")({
   head: () => ({
     meta: [
       {
-        title: "Free Checklist: 5 Marketing Mistakes Costing Businesses Clients | Chrizos Media",
+        title: "Free Checklist: 5 Marketing Mistakes Costing You Customers | Chrizos Media",
         description:
-          "Get the free marketing checklist: the 5 mistakes that quietly cost businesses clients, plus a 30-day fix plan. Enter your email and it lands in your inbox instantly.",
+          "The 5 marketing mistakes that quietly cost businesses customers, and the simple fix for each. Free PDF, sent to your inbox instantly.",
       },
       {
         property: "og:title",
-        content: "Free Checklist: 5 Marketing Mistakes Costing Businesses Clients",
+        content: "Free Checklist: 5 Marketing Mistakes Costing You Customers",
       },
       {
         property: "og:description",
         content:
-          "The 5 marketing mistakes we see most often in businesses, and how to fix them. Free PDF, sent instantly.",
+          "The 5 marketing mistakes we see most often, and the simple fix for each. Free PDF, sent instantly.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/checklist" },
       { property: "og:image", content: SOCIAL_SHARE_IMAGE_URL },
-      { property: "og:image:alt", content: "Chrizos Media logo on an electric blue background" },
+      { property: "og:image:alt", content: "Chrizos Media: great businesses don't have a product problem, they have an attention problem" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: SOCIAL_SHARE_IMAGE_URL },
-      { name: "twitter:image:alt", content: "Chrizos Media logo on an electric blue background" },
+      { name: "twitter:image:alt", content: "Chrizos Media: great businesses don't have a product problem, they have an attention problem" },
     ],
-    links: [{ rel: "canonical", href: "https://chrizosmedia.com/checklist" }],
+    links: [
+      { rel: "canonical", href: "https://chrizosmedia.com/checklist" },
+      { rel: "icon", href: "/d/favicon.svg", type: "image/svg+xml" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: D_FONTS_HREF },
+    ],
   }),
 });
 
@@ -44,6 +48,7 @@ function ChecklistPage() {
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [message, setMessage] = useState("");
+  usePrintCanvas();
   const [utm, setUtm] = useState<{ source?: string | undefined; medium?: string | undefined; campaign?: string | undefined }>({});
 
   useEffect(() => {
@@ -96,71 +101,59 @@ function ChecklistPage() {
   }
 
   return (
-    <main className="flex min-h-[100svh] flex-col items-center justify-center bg-background px-4 py-12 text-foreground sm:py-16">
-      <div className="glass-panel w-full max-w-xl p-6 sm:p-10">
-        <a href="/" className="flex items-center justify-center" aria-label="Chrizos Media home">
-          <img src={logoWhite} alt="Chrizos Media lightning bolt logo" decoding="async" className="h-auto w-24 sm:w-28" />
-        </a>
-
-        <p className="mt-6 text-xs font-bold uppercase text-foreground/60">
-          Free marketing checklist
-        </p>
-        <h1 className="mt-3 text-2xl font-extrabold leading-tight sm:text-4xl">
-          5 Marketing Mistakes Costing Businesses Clients
-        </h1>
-        <p className="mt-4 text-sm leading-6 text-foreground/75 sm:text-base">
-          The exact issues we see most often in businesses&apos; ads and content, plus a
-          simple 30-day plan to fix them. Enter your email and the PDF lands in your inbox
-          instantly.
-        </p>
-
-        <form onSubmit={handleSubmit} className="mt-6 grid gap-3">
-          <label htmlFor="checklistEmail" className="sr-only">
-            Email address
-          </label>
-          <input
-            id="checklistEmail"
-            name="checklistEmail"
-            type="email"
-            required
-            autoComplete="email"
-            inputMode="email"
-            placeholder="Enter your email and we'll send it instantly"
-            className="min-h-12 w-full rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground outline-none transition-colors placeholder:text-foreground/45 focus:border-foreground"
-          />
-          <Button
-            type="submit"
-            disabled={status === "sending"}
-            className="lift min-h-12 w-full font-extrabold"
-          >
-            {status === "sending" ? "Saving..." : "Send Me the Free Checklist"}
-          </Button>
-          {message ? (
-            <p
-              className="text-sm font-semibold leading-6 text-foreground/75"
-              role={status === "not_sent" ? "alert" : "status"}
-            >
-              {message}
-            </p>
-          ) : null}
-          {status === "sent" ? (
-            <a
-              href={downloadHref}
-              className="lift inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-foreground px-4 font-extrabold text-background"
-            >
-              Download the Checklist (PDF)
+    <div className="d-root min-h-[100svh]">
+      <main className="d-section">
+        <div className="d-wrap grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <a href="/" className="inline-flex min-h-11 items-center text-[2rem]" aria-label="Chrizos Media home">
+              <LogoD />
             </a>
-          ) : null}
-        </form>
+            <p className="d-kicker mt-16">Free checklist</p>
+            <h1 className="d-display d-h1 mt-4">
+              5 marketing mistakes costing <Mark>you customers.</Mark>
+            </h1>
+            <p className="d-lead">The mistakes we see most often in businesses’ ads and content, and the simple fix for each. A 10-minute read.</p>
+          </div>
 
-        <p className="mt-6 text-xs leading-5 text-foreground/55">
-          No spam. Just the checklist and the occasional useful note. Want to talk instead?{" "}
-          <a href="/" className="font-bold underline underline-offset-4">
-            Book a free audit call
-          </a>
-          .
-        </p>
-      </div>
-    </main>
+          <div className="lg:col-span-5 lg:self-end">
+            <form onSubmit={handleSubmit} className="d-card grid gap-6 p-8">
+              <label htmlFor="checklistEmail" className="text-lg font-semibold">
+                Where should we send it?
+              </label>
+              <input
+                id="checklistEmail"
+                name="checklistEmail"
+                type="email"
+                required
+                autoComplete="email"
+                inputMode="email"
+                placeholder="you@company.com"
+                className="d-input"
+              />
+              <button type="submit" disabled={status === "sending"} className="d-btn d-btn-forest min-h-14 px-7 text-base">
+                {status === "sending" ? "Sending…" : "Send me the free checklist"}
+              </button>
+              {message ? (
+                <p className="text-base font-semibold" role={status === "not_sent" ? "alert" : "status"}>
+                  {message}
+                </p>
+              ) : null}
+              {status === "sent" ? (
+                <a href={downloadHref} className="d-btn d-btn-lime min-h-14 px-7 text-base">
+                  Download the checklist (PDF)
+                </a>
+              ) : null}
+              <p className="text-sm text-[var(--d-muted)]">
+                No spam. Just the checklist and the occasional useful note. Want to talk instead?{" "}
+                <a href="/#book" className="d-link">
+                  Book a free audit
+                </a>
+                .
+              </p>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }

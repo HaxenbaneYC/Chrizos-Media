@@ -27,9 +27,9 @@ export interface ContactInquiryEmailProps {
 const styles = {
   body: {
     margin: 0,
-    backgroundColor: '#f4f7fb',
-    color: '#052662',
-    fontFamily: 'Montserrat, Arial, sans-serif',
+    backgroundColor: '#F3EFE4',
+    color: '#111210',
+    fontFamily: 'Geist, "Segoe UI", Helvetica, Arial, sans-serif',
   },
   container: {
     margin: '0 auto',
@@ -38,12 +38,12 @@ const styles = {
   },
   card: {
     backgroundColor: '#ffffff',
-    border: '1px solid #dbe5f2',
-    borderRadius: '18px',
+    border: '1px solid #D8D2C2',
+    borderRadius: '4px',
     padding: '28px',
   },
   eyebrow: {
-    color: '#1700FF',
+    color: '#0D3B2E',
     fontSize: '12px',
     fontWeight: 800,
     letterSpacing: '0.18em',
@@ -51,14 +51,14 @@ const styles = {
     textTransform: 'uppercase' as const,
   },
   heading: {
-    color: '#052662',
+    color: '#111210',
     fontSize: '28px',
     lineHeight: '34px',
     fontWeight: 800,
     margin: '0 0 20px',
   },
   label: {
-    color: '#5b6f91',
+    color: '#2E6B4F',
     fontSize: '11px',
     fontWeight: 800,
     letterSpacing: '0.16em',
@@ -66,7 +66,7 @@ const styles = {
     textTransform: 'uppercase' as const,
   },
   value: {
-    color: '#052662',
+    color: '#111210',
     fontSize: '16px',
     lineHeight: '24px',
     fontWeight: 600,
@@ -76,7 +76,7 @@ const styles = {
     margin: '18px 0',
   },
   inquiry: {
-    color: '#052662',
+    color: '#111210',
     fontSize: '16px',
     lineHeight: '26px',
     fontWeight: 500,
@@ -84,7 +84,7 @@ const styles = {
     margin: '0',
   },
   footer: {
-    color: '#6f7f9d',
+    color: '#6B6D64',
     fontSize: '12px',
     lineHeight: '18px',
     margin: '20px 0 0',

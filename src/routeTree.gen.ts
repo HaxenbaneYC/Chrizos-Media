@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as ClassicRouteImport } from './routes/classic'
 import { Route as Google2046e1efb4605547DothtmlRouteImport } from './routes/google2046e1efb4605547[.]html'
 import { Route as ProductionChecklistRouteImport } from './routes/production-checklist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -39,6 +40,11 @@ const AuthRoute = AuthRouteImport.update({
 const ChecklistRoute = ChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClassicRoute = ClassicRouteImport.update({
+  id: '/classic',
+  path: '/classic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Google2046e1efb4605547DothtmlRoute =
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
+  '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/classic'
     | '/google2046e1efb4605547.html'
     | '/production-checklist'
     | '/sitemap.xml'
@@ -145,6 +155,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/checklist'
+    | '/classic'
     | '/google2046e1efb4605547.html'
     | '/production-checklist'
     | '/sitemap.xml'
@@ -159,6 +170,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/checklist'
+    | '/classic'
     | '/google2046e1efb4605547.html'
     | '/production-checklist'
     | '/sitemap.xml'
@@ -174,6 +186,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
+  ClassicRoute: typeof ClassicRoute
   Google2046e1efb4605547DothtmlRoute: typeof Google2046e1efb4605547DothtmlRoute
   ProductionChecklistRoute: typeof ProductionChecklistRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -210,6 +223,13 @@ declare module '@tanstack/react-router' {
       path: '/checklist'
       fullPath: '/checklist'
       preLoaderRoute: typeof ChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/classic': {
+      id: '/classic'
+      path: '/classic'
+      fullPath: '/classic'
+      preLoaderRoute: typeof ClassicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/google2046e1efb4605547.html': {
@@ -289,6 +309,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
+  ClassicRoute: ClassicRoute,
   Google2046e1efb4605547DothtmlRoute: Google2046e1efb4605547DothtmlRoute,
   ProductionChecklistRoute: ProductionChecklistRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
