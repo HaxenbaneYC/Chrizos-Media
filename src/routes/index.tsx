@@ -588,7 +588,7 @@ function OptionD() {
                 at a time, so each one gets full attention instead of being passed down a chain.
               </p>
               <p>You talk to the person doing the work, every time. And every week you see the numbers, good or bad.</p>
-              <p className="d-mono text-sm">Youssef · Founder, Chrizos Media</p>
+              <p className="d-mono text-sm">Youssef Christofides · Founder, Chrizos Media</p>
             </div>
           </div>
         </section>
