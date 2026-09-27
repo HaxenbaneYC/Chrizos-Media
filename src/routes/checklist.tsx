@@ -12,19 +12,19 @@ export const Route = createFileRoute("/checklist")({
   component: ChecklistPage,
   head: () => ({
     meta: [
+      { title: "Free Guide: 3 Reasons People Scroll Past Your Ads | Chrizos Media" },
       {
-        title: "Free Checklist: 5 Marketing Mistakes Costing You Customers | Chrizos Media",
-        description:
-          "The 5 marketing mistakes that quietly cost businesses customers, and the simple fix for each. Free PDF, sent to your inbox instantly.",
+        name: "description",
+        content: "Why people scroll past your ads, a quick test for each, and one fix you can try today. Free PDF from Chrizos Media, sent instantly.",
       },
       {
         property: "og:title",
-        content: "Free Checklist: 5 Marketing Mistakes Costing You Customers",
+        content: "Free Guide: 3 Reasons People Scroll Past Your Ads",
       },
       {
         property: "og:description",
         content:
-          "The 5 marketing mistakes we see most often, and the simple fix for each. Free PDF, sent instantly.",
+          "Why people scroll past your ads, a quick test for each, and one fix you can try today. Free PDF, sent instantly.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://chrizosmedia.com/checklist" },
@@ -78,7 +78,7 @@ function ChecklistPage() {
 
       if (result.status === "sent") {
         setStatus("sent");
-        setMessage("Sent. Your checklist is on its way to your inbox, or grab it right now:");
+        setMessage("Sent. Your guide is on its way to your inbox, or grab it right now:");
         form.reset();
         return;
       }
@@ -103,11 +103,11 @@ function ChecklistPage() {
             <a href="/" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
               <img src="/b/logo-blue.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[112px]" />
             </a>
-            <p className="d-kicker mt-16">Free checklist</p>
+            <p className="d-kicker mt-16">Free guide · 5-minute read</p>
             <h1 className="d-display d-h1 mt-4">
-              5 marketing mistakes costing <Mark>you customers.</Mark>
+              3 reasons people scroll past <Mark>your ads.</Mark>
             </h1>
-            <p className="d-lead">The mistakes we see most often in businesses’ ads and content, and the simple fix for each. A 10-minute read.</p>
+            <p className="d-lead">What we see in almost every ad account we audit, a quick test for each, and one fix you can try today.</p>
           </div>
 
           <div className="lg:col-span-5 lg:self-end">
@@ -126,7 +126,7 @@ function ChecklistPage() {
                 className="d-input"
               />
               <button type="submit" disabled={status === "sending"} className="d-btn d-btn-forest min-h-14 px-7 text-base">
-                {status === "sending" ? "Sending…" : "Send me the free checklist"}
+                {status === "sending" ? "Sending…" : "Send me the free guide"}
               </button>
               {message ? (
                 <p className="text-base font-semibold" role={status === "not_sent" ? "alert" : "status"}>
@@ -135,11 +135,11 @@ function ChecklistPage() {
               ) : null}
               {status === "sent" ? (
                 <a href={downloadHref} className="d-btn d-btn-lime min-h-14 px-7 text-base">
-                  Download the checklist (PDF)
+                  Download the guide (PDF)
                 </a>
               ) : null}
               <p className="text-sm text-[var(--d-muted)]">
-                No spam. Just the checklist and the occasional useful note. Want to talk instead?{" "}
+                No spam. Just the guide and the occasional useful note. Want to talk instead?{" "}
                 <a href="/#book" className="d-link">
                   Book a free audit
                 </a>

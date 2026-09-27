@@ -45,18 +45,18 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
   return (
     <Html>
       <Head />
-      <Preview>Your marketing checklist is ready</Preview>
+      <Preview>Your free ad guide is ready</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Section style={styles.card}>
             <Text style={styles.eyebrow}>Chrizos Media</Text>
-            <Heading style={styles.heading}>Your checklist is ready</Heading>
+            <Heading style={styles.heading}>Your guide is ready</Heading>
             <Text style={styles.text}>
-              Here is your free guide: &ldquo;5 marketing mistakes costing you customers&rdquo;.
-              Five common mistakes, and the simple fix for each. A 10-minute read.
+              Here is your free guide: &ldquo;3 reasons people scroll past your ads&rdquo;.
+              A quick test for each, and one fix you can try today. A 5-minute read.
             </Text>
             <Button href={DOWNLOAD_URL} style={styles.button}>
-              Download the checklist (PDF)
+              Download the guide (PDF)
             </Button>
             <Text style={styles.footer}>
               Button not working? Copy this link into your browser:{' '}
@@ -76,7 +76,7 @@ export function ChecklistDeliveryEmail({ email }: ChecklistDeliveryEmailProps) {
 export const template = {
   component: ChecklistDeliveryEmail,
   displayName: 'Checklist delivery',
-  subject: 'Your free marketing checklist (PDF)',
+  subject: 'Your free guide: 3 reasons people scroll past your ads (PDF)',
   previewData: {
     email: 'owner@example.com',
   },

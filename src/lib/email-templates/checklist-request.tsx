@@ -43,7 +43,7 @@ export function ChecklistRequestEmail({ email, submittedAt }: ChecklistRequestEm
             <Text style={styles.label}>Email</Text>
             <Text style={styles.value}>{email?.trim() || 'Not provided'}</Text>
             <Text style={styles.footer}>
-              Requested from the Chrizos Media website{submittedAt ? ` on ${submittedAt}` : ''}. Send the checklist when the PDF is ready.
+              Requested from the Chrizos Media website{submittedAt ? ` on ${submittedAt}` : ''}. They were sent the free ad guide automatically.
             </Text>
           </Section>
         </Container>
