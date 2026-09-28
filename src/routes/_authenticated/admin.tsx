@@ -309,7 +309,11 @@ function Inquiries({ isOwner }: { isOwner: boolean }) {
 
   function exportCsv() {
     const header = ["Date", "Name", "Email", "Phone", "Service", "Status", "Message"];
-    const esc = (v: string) => `"${String(v).replace(/"/g, '""')}"`;
+    const esc = (v: string | null | undefined) => {
+      let s = String(v ?? "");
+      if (/^[\s]*[=+\-@\t\r]/.test(s)) s = "'" + s;
+      return `"${s.replace(/"/g, '""')}"`;
+    };
     const lines = (q.data?.inquiries ?? []).map((r) =>
       [r.created_at, r.name, r.email, r.phone, r.service, r.status, r.message].map(esc).join(","),
     );
