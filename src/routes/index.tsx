@@ -15,7 +15,7 @@ import { AttentionTest } from "@/components/site-b/attention-test";
 import { MoneyDial } from "@/components/site-b/money-dial";
 import { ReelPanel, WorkReel } from "@/components/site-b/work-reel";
 
-const REMAINING_SPOTS = 2;
+const REMAINING_SPOTS = 3;
 
 const SERVICES: Service[] = [
   {

@@ -28,7 +28,7 @@ import {
 
 const INSTAGRAM_URL = "https://www.instagram.com/chrizosmedia/";
 const WHATSAPP_TEXT = "?text=Hi%20Chrizos%20Media%2C%20I%27d%20like%20to%20ask%20about%20your%20services.";
-const REMAINING_CLIENT_SPOTS = 2;
+const REMAINING_CLIENT_SPOTS = 3;
 const HERO_SUBHEADING =
   "Paid ads, content and SEO for growing businesses. Run personally by the founder, not handed to a junior.";
 const SITE_DESCRIPTION =
