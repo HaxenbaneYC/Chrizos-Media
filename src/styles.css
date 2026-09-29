@@ -1497,6 +1497,38 @@ main > section:not(:first-of-type) {
     background: #fff;
     color: var(--b-navy);
   }
+  /* Radio pills on light backgrounds (the /audit form) */
+  .b-choice {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 2px solid var(--d-ink);
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 160ms var(--d-ease), color 160ms var(--d-ease);
+  }
+  .b-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .b-choice:has(input:checked) {
+    background: var(--d-lime);
+    border-color: var(--d-lime);
+    color: var(--d-on-lime);
+  }
+  .b-choice:has(input:focus-visible) {
+    outline: 3px solid var(--d-lime);
+    outline-offset: 3px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .b-choice:hover {
+      border-color: var(--d-lime);
+    }
+  }
   .b-dial {
     -webkit-appearance: none;
     appearance: none;

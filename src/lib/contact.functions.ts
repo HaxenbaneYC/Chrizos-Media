@@ -38,6 +38,21 @@ const contactInquiryInput = z.object({
   message: z.string().trim().min(10).max(3000),
 })
 
+const auditRequestInput = z.object({
+  submissionId: z.string().uuid(),
+  name: z.string().trim().min(1).max(120),
+  business: z.string().trim().min(1).max(160),
+  email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
+  phone: z.string().trim().min(6).max(50),
+  link: z.string().trim().min(2).max(300),
+  industry: z.string().trim().max(80),
+  adsStatus: z.string().trim().max(80),
+  spend: z.string().trim().max(80),
+  goal: z.string().trim().max(80),
+  problem: z.string().trim().max(2000).optional().default(''),
+  source: z.string().trim().max(40).optional().default('link'),
+})
+
 export type ContactInquiryResult =
   | { status: 'sent' }
   | { status: 'not_sent'; reason: 'recipient_suppressed' | 'email_unavailable' | 'rate_limited' }
@@ -112,6 +127,60 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
       }
 
       throw error
+    }
+  })
+
+/** The /audit page: saves the lead with everything needed to prepare the audit, then emails it to Chrizos. */
+export const sendAuditRequest = createServerFn({ method: 'POST' })
+  .inputValidator((data) => auditRequestInput.parse(data))
+  .handler(async ({ data }): Promise<ContactInquiryResult> => {
+    if (!isWithinRateLimit(`audit:${data.email}`)) {
+      return { status: 'not_sent', reason: 'rate_limited' }
+    }
+
+    const message = [
+      `Business: ${data.business}`,
+      `Website / Instagram: ${data.link}`,
+      `Industry: ${data.industry || 'Not given'}`,
+      `Meta ads: ${data.adsStatus || 'Not given'}`,
+      `Monthly ad spend: ${data.spend || 'Not given'}`,
+      `Main goal: ${data.goal || 'Not given'}`,
+      `Biggest problem: ${data.problem || 'Not given'}`,
+      `Came from: ${data.source}`,
+    ].join('\n')
+
+    try {
+      const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
+      await supabaseAdmin.from('inquiries').upsert({
+        id: data.submissionId,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        service: 'Free Ad Audit',
+        message,
+      }, { onConflict: 'id', ignoreDuplicates: true })
+    } catch (error) {
+      console.error('audit request not stored', error)
+    }
+
+    try {
+      const result = await sendTemplateEmail('contact-inquiry', CONTACT_EMAIL, {
+        idempotencyKey: `audit-request-${data.submissionId}`,
+        replyTo: data.email,
+        templateData: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service: 'Free Ad Audit',
+          message,
+          submittedAt: formatSubmittedAt(),
+        },
+      })
+      return result.sent ? { status: 'sent' } : { status: 'not_sent', reason: 'recipient_suppressed' }
+    } catch (error) {
+      // The lead is already saved; a failed notification must not block booking.
+      console.error('audit request email failed', error)
+      return { status: 'sent' }
     }
   })
 

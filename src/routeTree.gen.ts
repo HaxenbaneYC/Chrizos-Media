@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as ClassicRouteImport } from './routes/classic'
@@ -30,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -93,6 +99,7 @@ const LovableEmailTransactionalPreviewRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/audit': typeof AuditRoute
   '/auth': typeof AuthRoute
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/audit'
     | '/auth'
     | '/checklist'
     | '/classic'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/audit'
     | '/auth'
     | '/checklist'
     | '/classic'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/audit'
     | '/auth'
     | '/checklist'
     | '/classic'
@@ -184,6 +196,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuditRoute: typeof AuditRoute
   AuthRoute: typeof AuthRoute
   ChecklistRoute: typeof ChecklistRoute
   ClassicRoute: typeof ClassicRoute
@@ -209,6 +222,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -307,6 +327,7 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuditRoute: AuditRoute,
   AuthRoute: AuthRoute,
   ChecklistRoute: ChecklistRoute,
   ClassicRoute: ClassicRoute,
