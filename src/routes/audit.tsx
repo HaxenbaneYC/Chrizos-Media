@@ -2,15 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 
+import { Honeypot, useSpamTraps } from "@/components/site-b/honeypot";
 import { BoltIcon } from "@/components/site-b/pieces-b";
 import { Mark } from "@/components/site-d/brand-d";
 import { CalendlyD } from "@/components/site-d/calendly-d";
 import { sendAuditRequest } from "@/lib/contact.functions";
-import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
+import { track } from "@/lib/analytics";
+import {
+  DEFAULT_SETTINGS,
+  getSiteSettings,
+  trackBookingClick,
+} from "@/lib/site-settings.functions";
 
 const SHARE_IMAGE = "https://chrizosmedia.com/b/og-image.png";
 const TITLE = "Book your free ad audit | Chrizos Media";
-const DESCRIPTION = "Tell us about your business, pick a time, and get 30 minutes on your real ads plus a written plan within 48 hours. Free.";
+const DESCRIPTION =
+  "Tell us about your business, pick a time, and get 30 minutes on your real ads plus a written plan within 48 hours. Free.";
 
 /**
  * The link sent in Instagram and WhatsApp messages: chrizosmedia.com/audit?src=instagram.
@@ -36,14 +43,38 @@ export const Route = createFileRoute("/audit")({
   }),
 });
 
-const INDUSTRIES = ["Clinic", "Beauty & skincare", "Fitness", "Restaurant or café", "Online store", "Real estate", "Other"];
+const INDUSTRIES = [
+  "Clinic",
+  "Beauty & skincare",
+  "Fitness",
+  "Restaurant or café",
+  "Online store",
+  "Real estate",
+  "Other",
+];
 const ADS_STATUS = ["Yes, running now", "Ran them before", "Not yet"];
-const SPEND = ["Under AED 2,000", "AED 2,000–5,000", "AED 5,000–15,000", "Over AED 15,000", "Not sure"];
+const SPEND = [
+  "Under AED 2,000",
+  "AED 2,000–5,000",
+  "AED 5,000–15,000",
+  "Over AED 15,000",
+  "Not sure",
+];
 const GOALS = ["More bookings or leads", "More online sales", "More people knowing us"];
 
 type Lead = { name: string; email: string; notes: string };
 
-function Choices({ name, legend, options, required = false }: { name: string; legend: string; options: string[]; required?: boolean }) {
+function Choices({
+  name,
+  legend,
+  options,
+  required = false,
+}: {
+  name: string;
+  legend: string;
+  options: string[];
+  required?: boolean;
+}) {
   return (
     <fieldset className="grid gap-3">
       <legend className="mb-3 text-lg font-semibold">{legend}</legend>
@@ -59,7 +90,17 @@ function Choices({ name, legend, options, required = false }: { name: string; le
   );
 }
 
-function Field({ id, label, hint, children }: { id: string; label: string; hint?: string; children: ReactNode }) {
+function Field({
+  id,
+  label,
+  hint,
+  children,
+}: {
+  id: string;
+  label: string;
+  hint?: string;
+  children: ReactNode;
+}) {
   return (
     <div className="grid gap-1">
       <label htmlFor={id} className="text-lg font-semibold">
@@ -78,10 +119,14 @@ function AuditPage() {
   const [source, setSource] = useState("link");
   const [sending, setSending] = useState(false);
   const [lead, setLead] = useState<Lead | null>(null);
+  const readTraps = useSpamTraps();
 
   useEffect(() => {
     const src = new URLSearchParams(window.location.search).get("src") ?? "";
-    const clean = src.toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+    const clean = src
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "")
+      .slice(0, 40);
     if (clean) setSource(clean);
   }, []);
 
@@ -102,10 +147,12 @@ function AuditPage() {
       goal: get("goal"),
       problem: get("problem"),
       source,
+      ...readTraps(f),
     };
     setSending(true);
     try {
       await submit({ data });
+      track("lead");
     } catch {
       // Still move on: the same details travel with the Calendly booking below.
     }
@@ -126,8 +173,18 @@ function AuditPage() {
         <div className="d-wrap grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-12">
-              <a href="/" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
-                <img src="/b/logo-blue.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[112px]" />
+              <a
+                href="/"
+                className="inline-flex min-h-11 items-center"
+                aria-label="Chrizos Media home"
+              >
+                <img
+                  src="/b/logo-blue.svg"
+                  alt="Chrizos Media"
+                  width={952}
+                  height={386}
+                  className="h-auto w-[112px]"
+                />
               </a>
               <p className="d-kicker mt-12">Free ad audit · 3 spots this month</p>
               <h1 className="d-display d-h1 mt-4">
@@ -147,13 +204,19 @@ function AuditPage() {
                   : "Two quick steps: tell me about your business, then pick a time. It takes about 2 minutes."}
               </p>
               <ol className="mt-8 grid gap-3 text-base font-semibold" aria-label="Steps">
-                <li className={lead ? "opacity-50" : ""}>1 · About your business</li>
-                <li className={lead ? "" : "opacity-50"}>2 · Pick a time</li>
+                <li className={lead ? "opacity-70" : ""}>1 · About your business</li>
+                <li className={lead ? "" : "opacity-70"}>2 · Pick a time</li>
               </ol>
               <ul className="mt-10 grid gap-4 border-t border-[var(--d-rule)] pt-8">
                 {[
-                  ["30 minutes on your real ads", "with me, Youssef Christofides, founder of Chrizos Media."],
-                  ["A written 1-page plan within 48 hours.", "Yours to keep, whether we work together or not."],
+                  [
+                    "30 minutes on your real ads",
+                    "with me, Youssef Christofides, founder of Chrizos Media.",
+                  ],
+                  [
+                    "A written 1-page plan within 48 hours.",
+                    "Yours to keep, whether we work together or not.",
+                  ],
                   ["Free.", "No obligation, no hard sell."],
                 ].map(([b, t]) => (
                   <li key={b} className="flex gap-3">
@@ -175,48 +238,142 @@ function AuditPage() {
                   notes={lead.notes}
                   prefill={{ name: lead.name, email: lead.email }}
                   colours={{ background: "ffffff", text: "052662", primary: "1700ff" }}
-                  icon={<img src="/b/favicon.svg" alt="" width={56} height={56} className="h-14 w-14" />}
-                  onBooked={() => void logBooking({ data: { source: "calendly" } })}
+                  icon={
+                    <img src="/b/favicon.svg" alt="" width={56} height={56} className="h-14 w-14" />
+                  }
+                  onBooked={() => {
+                    track("booking");
+                    void logBooking({ data: { source: "calendly" } });
+                  }}
                 />
                 <p className="text-sm text-[var(--d-muted)]">
                   None of the times work?{" "}
-                  <a href={whatsapp} target="_blank" rel="noreferrer" className="d-link font-semibold">
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="d-link font-semibold"
+                  >
                     Message me on WhatsApp
                   </a>{" "}
                   and we’ll find one.
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="d-card grid gap-8 p-6 sm:p-8">
+              <form onSubmit={handleSubmit} className="d-card relative grid gap-8 p-6 sm:p-8">
+                <Honeypot />
                 <div className="grid gap-6 sm:grid-cols-2">
                   <Field id="name" label="Your name">
-                    <input id="name" name="name" required autoComplete="name" maxLength={120} className="d-input" />
+                    <input
+                      id="name"
+                      name="name"
+                      required
+                      autoComplete="name"
+                      maxLength={120}
+                      className="d-input"
+                    />
                   </Field>
                   <Field id="business" label="Business name">
-                    <input id="business" name="business" required autoComplete="organization" maxLength={160} className="d-input" />
+                    <input
+                      id="business"
+                      name="business"
+                      required
+                      autoComplete="organization"
+                      maxLength={160}
+                      className="d-input"
+                    />
                   </Field>
                   <Field id="email" label="Email">
-                    <input id="email" name="email" type="email" required autoComplete="email" inputMode="email" maxLength={254} className="d-input" />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      inputMode="email"
+                      maxLength={254}
+                      className="d-input"
+                    />
                   </Field>
                   <Field id="phone" label="WhatsApp number">
-                    <input id="phone" name="phone" type="tel" required autoComplete="tel" inputMode="tel" minLength={6} maxLength={50} placeholder="+971" className="d-input" />
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      autoComplete="tel"
+                      inputMode="tel"
+                      maxLength={20}
+                      pattern="\+?[\d\s\-\(\)]{7,20}"
+                      title="Your WhatsApp number, e.g. +971 50 123 4567"
+                      placeholder="+971 50 123 4567"
+                      className="d-input"
+                    />
                   </Field>
                 </div>
-                <Field id="link" label="Website or Instagram" hint="So I can find your ads before the call.">
-                  <input id="link" name="link" required maxLength={300} placeholder="yourbusiness.com or @yourbusiness" className="d-input" />
+                <Field
+                  id="link"
+                  label="Website or Instagram"
+                  hint="So I can find your ads before the call."
+                >
+                  <input
+                    id="link"
+                    name="link"
+                    required
+                    maxLength={300}
+                    placeholder="yourbusiness.com or @yourbusiness"
+                    className="d-input"
+                  />
                 </Field>
-                <Choices name="industry" legend="What kind of business is it?" options={INDUSTRIES} required />
-                <Choices name="adsStatus" legend="Are you running Meta ads (Instagram or Facebook)?" options={ADS_STATUS} required />
-                <Choices name="spend" legend="Roughly how much do you spend on ads a month?" options={SPEND} required />
-                <Choices name="goal" legend="What do you want most from your ads?" options={GOALS} required />
+                <Choices
+                  name="industry"
+                  legend="What kind of business is it?"
+                  options={INDUSTRIES}
+                  required
+                />
+                <Choices
+                  name="adsStatus"
+                  legend="Are you running Meta ads (Instagram or Facebook)?"
+                  options={ADS_STATUS}
+                  required
+                />
+                <Choices
+                  name="spend"
+                  legend="Roughly how much do you spend on ads a month?"
+                  options={SPEND}
+                  required
+                />
+                <Choices
+                  name="goal"
+                  legend="What do you want most from your ads?"
+                  options={GOALS}
+                  required
+                />
                 <Field id="problem" label="What’s not working right now? (optional)">
-                  <textarea id="problem" name="problem" rows={3} maxLength={2000} placeholder="e.g. lots of views, few bookings" className="d-input py-3" />
+                  <textarea
+                    id="problem"
+                    name="problem"
+                    rows={3}
+                    maxLength={2000}
+                    placeholder="e.g. lots of views, few bookings"
+                    className="d-input py-3"
+                  />
                 </Field>
                 <div className="grid gap-3">
-                  <button type="submit" disabled={sending} className="d-btn d-btn-forest min-h-14 px-7 text-base">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="d-btn d-btn-forest min-h-14 px-7 text-base"
+                  >
                     {sending ? "Saving…" : "Next: pick a time"}
                   </button>
-                  <p className="text-sm text-[var(--d-muted)]">I only use this to prepare your audit. No spam, ever.</p>
+                  <p className="text-sm text-[var(--d-muted)]">
+                    I only use this to prepare your audit. No spam, ever. See the{" "}
+                    <a href="/privacy" className="d-link">
+                      privacy policy
+                    </a>
+                    .
+                  </p>
                 </div>
               </form>
             )}

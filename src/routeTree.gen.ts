@@ -16,8 +16,10 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as ClassicRouteImport } from './routes/classic'
 import { Route as Google2046e1efb4605547DothtmlRouteImport } from './routes/google2046e1efb4605547[.]html'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProductionChecklistRouteImport } from './routes/production-checklist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as ApiPublicChecklistDownloadRouteImport } from './routes/api/public/checklist-download'
@@ -59,6 +61,11 @@ const Google2046e1efb4605547DothtmlRoute =
     path: '/google2046e1efb4605547.html',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductionChecklistRoute = ProductionChecklistRouteImport.update({
   id: '/production-checklist',
   path: '/production-checklist',
@@ -67,6 +74,11 @@ const ProductionChecklistRoute = ProductionChecklistRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -104,8 +116,10 @@ export interface FileRoutesByFullPath {
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/privacy': typeof PrivacyRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
@@ -119,8 +133,10 @@ export interface FileRoutesByTo {
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/privacy': typeof PrivacyRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
@@ -136,8 +152,10 @@ export interface FileRoutesById {
   '/checklist': typeof ChecklistRoute
   '/classic': typeof ClassicRoute
   '/google2046e1efb4605547.html': typeof Google2046e1efb4605547DothtmlRoute
+  '/privacy': typeof PrivacyRoute
   '/production-checklist': typeof ProductionChecklistRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/api/public/checklist-download': typeof ApiPublicChecklistDownloadRoute
@@ -153,8 +171,10 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/classic'
     | '/google2046e1efb4605547.html'
+    | '/privacy'
     | '/production-checklist'
     | '/sitemap.xml'
+    | '/terms'
     | '/admin'
     | '/dashboard'
     | '/api/public/checklist-download'
@@ -168,8 +188,10 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/classic'
     | '/google2046e1efb4605547.html'
+    | '/privacy'
     | '/production-checklist'
     | '/sitemap.xml'
+    | '/terms'
     | '/admin'
     | '/dashboard'
     | '/api/public/checklist-download'
@@ -184,8 +206,10 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/classic'
     | '/google2046e1efb4605547.html'
+    | '/privacy'
     | '/production-checklist'
     | '/sitemap.xml'
+    | '/terms'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/api/public/checklist-download'
@@ -201,8 +225,10 @@ export interface RootRouteChildren {
   ChecklistRoute: typeof ChecklistRoute
   ClassicRoute: typeof ClassicRoute
   Google2046e1efb4605547DothtmlRoute: typeof Google2046e1efb4605547DothtmlRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProductionChecklistRoute: typeof ProductionChecklistRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   ApiPublicChecklistDownloadRoute: typeof ApiPublicChecklistDownloadRoute
   LovableEmailEventsRoute: typeof LovableEmailEventsRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -259,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Google2046e1efb4605547DothtmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/production-checklist': {
       id: '/production-checklist'
       path: '/production-checklist'
@@ -271,6 +304,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -332,8 +372,10 @@ const rootRouteChildren: RootRouteChildren = {
   ChecklistRoute: ChecklistRoute,
   ClassicRoute: ClassicRoute,
   Google2046e1efb4605547DothtmlRoute: Google2046e1efb4605547DothtmlRoute,
+  PrivacyRoute: PrivacyRoute,
   ProductionChecklistRoute: ProductionChecklistRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   ApiPublicChecklistDownloadRoute: ApiPublicChecklistDownloadRoute,
   LovableEmailEventsRoute: LovableEmailEventsRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,

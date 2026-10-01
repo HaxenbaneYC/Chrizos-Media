@@ -10,6 +10,12 @@ const MAX_SUBMISSIONS_PER_WINDOW = 3
 
 const recentSubmissions = new Map<string, number[]>()
 
+// Spam traps: a hidden field people never see, and how long the form was open.
+const spamTraps = {
+  hp: z.string().max(300).optional().default(''),
+  elapsedMs: z.number().int().nonnegative().optional(),
+}
+
 const checklistRequestInput = z.object({
   submissionId: z.string().uuid(),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
@@ -21,6 +27,7 @@ const checklistRequestInput = z.object({
       campaign: z.string().max(120).optional(),
     })
     .optional(),
+  ...spamTraps,
 })
 
 const contactInquiryInput = z.object({
@@ -36,6 +43,7 @@ const contactInquiryInput = z.object({
     'General Enquiry',
   ]),
   message: z.string().trim().min(10).max(3000),
+  ...spamTraps,
 })
 
 const auditRequestInput = z.object({
@@ -43,7 +51,7 @@ const auditRequestInput = z.object({
   name: z.string().trim().min(1).max(120),
   business: z.string().trim().min(1).max(160),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
-  phone: z.string().trim().min(6).max(50),
+  phone: z.string().trim().regex(/^\+?[0-9 ()-]{7,20}$/),
   link: z.string().trim().min(2).max(300),
   industry: z.string().trim().max(80),
   adsStatus: z.string().trim().max(80),
@@ -51,6 +59,7 @@ const auditRequestInput = z.object({
   goal: z.string().trim().max(80),
   problem: z.string().trim().max(2000).optional().default(''),
   source: z.string().trim().max(40).optional().default('link'),
+  ...spamTraps,
 })
 
 export type ContactInquiryResult =
@@ -73,6 +82,11 @@ function isWithinRateLimit(key: string) {
   return true
 }
 
+/** Bots fill hidden fields and submit instantly. Pretend success so they don't retry. */
+function looksLikeSpam(data: { hp?: string; elapsedMs?: number | undefined }) {
+  return Boolean(data.hp) || (data.elapsedMs !== undefined && data.elapsedMs < 2500)
+}
+
 function formatSubmittedAt() {
   return new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'medium',
@@ -84,6 +98,7 @@ function formatSubmittedAt() {
 export const sendContactInquiry = createServerFn({ method: 'POST' })
   .inputValidator((data) => contactInquiryInput.parse(data))
   .handler(async ({ data }): Promise<ContactInquiryResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
     if (!isWithinRateLimit(data.email)) {
       return { status: 'not_sent', reason: 'rate_limited' }
     }
@@ -134,6 +149,7 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
 export const sendAuditRequest = createServerFn({ method: 'POST' })
   .inputValidator((data) => auditRequestInput.parse(data))
   .handler(async ({ data }): Promise<ContactInquiryResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
     if (!isWithinRateLimit(`audit:${data.email}`)) {
       return { status: 'not_sent', reason: 'rate_limited' }
     }
@@ -187,6 +203,7 @@ export const sendAuditRequest = createServerFn({ method: 'POST' })
 export const sendChecklistRequest = createServerFn({ method: 'POST' })
   .inputValidator((data) => checklistRequestInput.parse(data))
   .handler(async ({ data }): Promise<ChecklistRequestResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
     if (!isWithinRateLimit(`checklist:${data.email}`)) {
       return { status: 'not_sent', reason: 'rate_limited' }
     }

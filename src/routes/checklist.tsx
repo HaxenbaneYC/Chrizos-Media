@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState, type FormEvent } from "react";
 
 import { sendChecklistRequest } from "@/lib/contact.functions";
+import { Honeypot, useSpamTraps } from "@/components/site-b/honeypot";
 import { Mark } from "@/components/site-d/brand-d";
 
 const SOCIAL_SHARE_IMAGE_URL = "https://chrizosmedia.com/b/og-image.png";
@@ -44,6 +45,7 @@ function ChecklistPage() {
   const submitChecklistRequest = useServerFn(sendChecklistRequest);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [message, setMessage] = useState("");
+  const readTraps = useSpamTraps();
   const [utm, setUtm] = useState<{ source?: string | undefined; medium?: string | undefined; campaign?: string | undefined }>({});
 
   useEffect(() => {
@@ -66,14 +68,15 @@ function ChecklistPage() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const email = String(new FormData(form).get("checklistEmail") ?? "").trim();
+    const fd = new FormData(form);
+    const email = String(fd.get("checklistEmail") ?? "").trim();
 
     setStatus("sending");
     setMessage("");
 
     try {
       const result = await submitChecklistRequest({
-        data: { submissionId: crypto.randomUUID(), email, source: "instagram", utm },
+        data: { submissionId: crypto.randomUUID(), email, source: "instagram", utm, ...readTraps(fd) },
       });
 
       if (result.status === "sent") {
@@ -111,7 +114,8 @@ function ChecklistPage() {
           </div>
 
           <div className="lg:col-span-5 lg:self-end">
-            <form onSubmit={handleSubmit} className="d-card grid gap-6 p-8">
+            <form onSubmit={handleSubmit} className="d-card relative grid gap-6 p-8">
+              <Honeypot />
               <label htmlFor="checklistEmail" className="text-lg font-semibold">
                 Where should we send it?
               </label>
@@ -139,8 +143,8 @@ function ChecklistPage() {
                 </a>
               ) : null}
               <p className="text-sm text-[var(--d-muted)]">
-                No spam. Just the guide and the occasional useful note. Want to talk instead?{" "}
-                <a href="/#book" className="d-link">
+                No spam. Just the guide and the occasional useful note (<a href="/privacy" className="d-link">privacy policy</a>). Want to talk instead?{" "}
+                <a href="/audit?src=guide" className="d-link">
                   Book a free audit
                 </a>
                 .

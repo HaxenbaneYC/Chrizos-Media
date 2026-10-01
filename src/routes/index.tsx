@@ -2,8 +2,10 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState, type FormEvent } from "react";
 
+import { ANALYTICS_ENABLED, openCookieSettings, track } from "@/lib/analytics";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { sendContactInquiry } from "@/lib/contact.functions";
+import { Honeypot, useSpamTraps } from "@/components/site-b/honeypot";
 import { Mark } from "@/components/site-d/brand-d";
 import { type QuizResult } from "@/components/site-d/leak-quiz";
 import { CalendlyD } from "@/components/site-d/calendly-d";
@@ -149,6 +151,7 @@ function HomeB() {
   const CONTACT_EMAIL = settings.contact_email;
   const logBooking = useServerFn(trackBookingClick);
   const submitInquiry = useServerFn(sendContactInquiry);
+  const readTraps = useSpamTraps();
   const [result, setResult] = useState<QuizResult | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [copied, setCopied] = useState(false);
@@ -171,6 +174,7 @@ function HomeB() {
           phone: "",
           service: "General Enquiry",
           message: `Please send my full Attention Score report.\n\n${result.summary}`,
+          ...readTraps(fd),
         },
       });
       setSendState(r.status === "sent" ? "sent" : "not_sent");
@@ -325,7 +329,8 @@ function HomeB() {
                         Got it. Your report and three next steps are on their way within 12 hours.
                       </p>
                     ) : (
-                      <form onSubmit={sendReport} className="grid gap-3">
+                      <form onSubmit={sendReport} className="relative grid gap-3">
+                        <Honeypot />
                         <label className="sr-only" htmlFor="rep-name">
                           Your name
                         </label>
@@ -594,6 +599,7 @@ function HomeB() {
                   colours={{ background: "ffffff", text: "052662", primary: "1700ff" }}
                   icon={<img src="/b/favicon.svg" alt="" width={56} height={56} loading="lazy" className="h-14 w-14" />}
                   onBooked={() => {
+                    track("booking");
                     void logBooking({ data: { source: "calendly" } });
                   }}
                 />
@@ -625,6 +631,17 @@ function HomeB() {
               <a href="#book" className="d-link inline-flex min-h-11 items-center text-white">
                 Book a free audit
               </a>
+              <a href="/privacy" className="d-link inline-flex min-h-11 items-center text-white">
+                Privacy
+              </a>
+              <a href="/terms" className="d-link inline-flex min-h-11 items-center text-white">
+                Terms
+              </a>
+              {ANALYTICS_ENABLED ? (
+                <button type="button" onClick={openCookieSettings} className="d-link inline-flex min-h-11 items-center text-white">
+                  Cookie settings
+                </button>
+              ) : null}
             </div>
           </div>
         </div>
