@@ -10,6 +10,12 @@ const MAX_SUBMISSIONS_PER_WINDOW = 3
 
 const recentSubmissions = new Map<string, number[]>()
 
+// Spam traps: a hidden field people never see, and how long the form was open.
+const spamTraps = {
+  hp: z.string().max(300).optional().default(''),
+  elapsedMs: z.number().int().nonnegative().optional(),
+}
+
 const checklistRequestInput = z.object({
   submissionId: z.string().uuid(),
   email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
@@ -21,6 +27,7 @@ const checklistRequestInput = z.object({
       campaign: z.string().max(120).optional(),
     })
     .optional(),
+  ...spamTraps,
 })
 
 const contactInquiryInput = z.object({
@@ -36,6 +43,23 @@ const contactInquiryInput = z.object({
     'General Enquiry',
   ]),
   message: z.string().trim().min(10).max(3000),
+  ...spamTraps,
+})
+
+const auditRequestInput = z.object({
+  submissionId: z.string().uuid(),
+  name: z.string().trim().min(1).max(120),
+  business: z.string().trim().min(1).max(160),
+  email: z.string().trim().email().max(254).transform((email) => email.toLowerCase()),
+  phone: z.string().trim().regex(/^\+?[0-9 ()-]{7,20}$/),
+  link: z.string().trim().min(2).max(300),
+  industry: z.string().trim().max(80),
+  adsStatus: z.string().trim().max(80),
+  spend: z.string().trim().max(80),
+  goal: z.string().trim().max(80),
+  problem: z.string().trim().max(2000).optional().default(''),
+  source: z.string().trim().max(40).optional().default('link'),
+  ...spamTraps,
 })
 
 export type ContactInquiryResult =
@@ -58,6 +82,11 @@ function isWithinRateLimit(key: string) {
   return true
 }
 
+/** Bots fill hidden fields and submit instantly. Pretend success so they don't retry. */
+function looksLikeSpam(data: { hp?: string; elapsedMs?: number | undefined }) {
+  return Boolean(data.hp) || (data.elapsedMs !== undefined && data.elapsedMs < 2500)
+}
+
 function formatSubmittedAt() {
   return new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'medium',
@@ -69,6 +98,7 @@ function formatSubmittedAt() {
 export const sendContactInquiry = createServerFn({ method: 'POST' })
   .inputValidator((data) => contactInquiryInput.parse(data))
   .handler(async ({ data }): Promise<ContactInquiryResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
     if (!isWithinRateLimit(data.email)) {
       return { status: 'not_sent', reason: 'rate_limited' }
     }
@@ -115,9 +145,65 @@ export const sendContactInquiry = createServerFn({ method: 'POST' })
     }
   })
 
+/** The /audit page: saves the lead with everything needed to prepare the audit, then emails it to Chrizos. */
+export const sendAuditRequest = createServerFn({ method: 'POST' })
+  .inputValidator((data) => auditRequestInput.parse(data))
+  .handler(async ({ data }): Promise<ContactInquiryResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
+    if (!isWithinRateLimit(`audit:${data.email}`)) {
+      return { status: 'not_sent', reason: 'rate_limited' }
+    }
+
+    const message = [
+      `Business: ${data.business}`,
+      `Website / Instagram: ${data.link}`,
+      `Industry: ${data.industry || 'Not given'}`,
+      `Meta ads: ${data.adsStatus || 'Not given'}`,
+      `Monthly ad spend: ${data.spend || 'Not given'}`,
+      `Main goal: ${data.goal || 'Not given'}`,
+      `Biggest problem: ${data.problem || 'Not given'}`,
+      `Came from: ${data.source}`,
+    ].join('\n')
+
+    try {
+      const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
+      await supabaseAdmin.from('inquiries').upsert({
+        id: data.submissionId,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        service: 'Free Ad Audit',
+        message,
+      }, { onConflict: 'id', ignoreDuplicates: true })
+    } catch (error) {
+      console.error('audit request not stored', error)
+    }
+
+    try {
+      const result = await sendTemplateEmail('contact-inquiry', CONTACT_EMAIL, {
+        idempotencyKey: `audit-request-${data.submissionId}`,
+        replyTo: data.email,
+        templateData: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          service: 'Free Ad Audit',
+          message,
+          submittedAt: formatSubmittedAt(),
+        },
+      })
+      return result.sent ? { status: 'sent' } : { status: 'not_sent', reason: 'recipient_suppressed' }
+    } catch (error) {
+      // The lead is already saved; a failed notification must not block booking.
+      console.error('audit request email failed', error)
+      return { status: 'sent' }
+    }
+  })
+
 export const sendChecklistRequest = createServerFn({ method: 'POST' })
   .inputValidator((data) => checklistRequestInput.parse(data))
   .handler(async ({ data }): Promise<ChecklistRequestResult> => {
+    if (looksLikeSpam(data)) return { status: 'sent' }
     if (!isWithinRateLimit(`checklist:${data.email}`)) {
       return { status: 'not_sent', reason: 'rate_limited' }
     }

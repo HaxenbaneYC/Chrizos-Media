@@ -5,6 +5,16 @@ import { useCount, useSeen } from "./motion-b";
 const BOLT = "M340.75 0.44 0 548.96l206.29-.24L63.13 1000l484.72-641.71-221.86-.27L505.88 0z";
 
 /** The bolt, the brand's one graphic device. */
+export function InstagramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className={className} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
 export function BoltIcon({ className = "", filled = true }: { className?: string; filled?: boolean }) {
   return (
     <svg viewBox="-20 -20 588 1040" aria-hidden className={className}>

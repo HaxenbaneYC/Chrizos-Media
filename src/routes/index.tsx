@@ -2,15 +2,17 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState, type FormEvent } from "react";
 
+import { ANALYTICS_ENABLED, openCookieSettings, track } from "@/lib/analytics";
 import { DEFAULT_SETTINGS, getSiteSettings, trackBookingClick } from "@/lib/site-settings.functions";
 import { sendContactInquiry } from "@/lib/contact.functions";
+import { Honeypot, useSpamTraps } from "@/components/site-b/honeypot";
 import { Mark } from "@/components/site-d/brand-d";
 import { type QuizResult } from "@/components/site-d/leak-quiz";
 import { CalendlyD } from "@/components/site-d/calendly-d";
 import { HOMEPAGE } from "@/lib/homepage";
 import { StrikeHero } from "@/components/site-b/strike-hero";
 import { Manifesto } from "@/components/site-b/manifesto";
-import { BoltIcon, BoltSeats, ProofNumbers, Switchboard, type Service } from "@/components/site-b/pieces-b";
+import { BoltIcon, BoltSeats, InstagramIcon, ProofNumbers, Switchboard, type Service } from "@/components/site-b/pieces-b";
 import { AttentionTest } from "@/components/site-b/attention-test";
 import { MoneyDial } from "@/components/site-b/money-dial";
 import { ReelPanel, WorkReel } from "@/components/site-b/work-reel";
@@ -149,6 +151,7 @@ function HomeB() {
   const CONTACT_EMAIL = settings.contact_email;
   const logBooking = useServerFn(trackBookingClick);
   const submitInquiry = useServerFn(sendContactInquiry);
+  const readTraps = useSpamTraps();
   const [result, setResult] = useState<QuizResult | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "not_sent">("idle");
   const [copied, setCopied] = useState(false);
@@ -171,6 +174,7 @@ function HomeB() {
           phone: "",
           service: "General Enquiry",
           message: `Please send my full Attention Score report.\n\n${result.summary}`,
+          ...readTraps(fd),
         },
       });
       setSendState(r.status === "sent" ? "sent" : "not_sent");
@@ -200,7 +204,7 @@ function HomeB() {
           <a href="#top" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
             <img src="/b/logo-white.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[92px] sm:w-[100px]" />
           </a>
-          <nav aria-label="Primary" className="flex items-center gap-6">
+          <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-6">
             <a href="#attention-test" className="d-link hidden min-h-11 items-center text-base font-semibold no-underline lg:inline-flex">
               Attention Test
             </a>
@@ -213,7 +217,16 @@ function HomeB() {
             <a href="#faq" className="d-link hidden min-h-11 min-w-11 items-center justify-center text-base font-semibold no-underline lg:inline-flex">
               FAQ
             </a>
-            <a href="#book" className="d-btn min-h-11 bg-white px-5 text-sm text-[#1700FF]">
+            <a
+              href={settings.instagram_url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Chrizos Media on Instagram"
+              className="d-link inline-flex min-h-11 min-w-11 items-center justify-center text-white"
+            >
+              <InstagramIcon className="h-6 w-6" />
+            </a>
+            <a href="#book" className="d-btn min-h-11 whitespace-nowrap bg-white px-4 text-sm text-[#1700FF] sm:px-5">
               Book a free audit
             </a>
           </nav>
@@ -316,7 +329,8 @@ function HomeB() {
                         Got it. Your report and three next steps are on their way within 12 hours.
                       </p>
                     ) : (
-                      <form onSubmit={sendReport} className="grid gap-3">
+                      <form onSubmit={sendReport} className="relative grid gap-3">
+                        <Honeypot />
                         <label className="sr-only" htmlFor="rep-name">
                           Your name
                         </label>
@@ -560,6 +574,15 @@ function HomeB() {
                     <button type="button" onClick={copyEmail} className="d-btn min-h-12 border-2 border-white px-6 text-base text-white">
                       {copied ? "Email copied" : CONTACT_EMAIL}
                     </button>
+                    <a
+                      href={settings.instagram_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="d-btn min-h-12 gap-2 border-2 border-white px-6 text-base text-white"
+                    >
+                      <InstagramIcon className="h-5 w-5" />
+                      @chrizosmedia
+                    </a>
                   </div>
                   <p className="text-sm opacity-85">We reply to every message within 6 to 12 hours.</p>
                 </div>
@@ -576,6 +599,7 @@ function HomeB() {
                   colours={{ background: "ffffff", text: "052662", primary: "1700ff" }}
                   icon={<img src="/b/favicon.svg" alt="" width={56} height={56} loading="lazy" className="h-14 w-14" />}
                   onBooked={() => {
+                    track("booking");
                     void logBooking({ data: { source: "calendly" } });
                   }}
                 />
@@ -597,8 +621,9 @@ function HomeB() {
           <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/20 pt-6 text-sm">
             <p className="font-semibold">© {new Date().getFullYear()} Chrizos Media</p>
             <div className="flex flex-wrap gap-x-6">
-              <a href={settings.instagram_url} target="_blank" rel="noreferrer" className="d-link inline-flex min-h-11 items-center text-white">
-                Instagram
+              <a href={settings.instagram_url} target="_blank" rel="noreferrer" className="d-link inline-flex min-h-11 items-center gap-2 text-white">
+                <InstagramIcon className="h-4 w-4" />
+                Instagram @chrizosmedia
               </a>
               <a href="#attention-test" className="d-link inline-flex min-h-11 items-center text-white">
                 Attention Test
@@ -606,6 +631,17 @@ function HomeB() {
               <a href="#book" className="d-link inline-flex min-h-11 items-center text-white">
                 Book a free audit
               </a>
+              <a href="/privacy" className="d-link inline-flex min-h-11 items-center text-white">
+                Privacy
+              </a>
+              <a href="/terms" className="d-link inline-flex min-h-11 items-center text-white">
+                Terms
+              </a>
+              {ANALYTICS_ENABLED ? (
+                <button type="button" onClick={openCookieSettings} className="d-link inline-flex min-h-11 items-center text-white">
+                  Cookie settings
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

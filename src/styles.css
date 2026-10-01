@@ -1497,6 +1497,67 @@ main > section:not(:first-of-type) {
     background: #fff;
     color: var(--b-navy);
   }
+  /* Privacy policy and terms */
+  .legal {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .legal h2 {
+    font-weight: 800;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin: 2.75rem 0 0.75rem;
+    scroll-margin-top: 2rem;
+  }
+  .legal p,
+  .legal ul {
+    margin: 0 0 1rem;
+  }
+  .legal ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .legal li {
+    margin: 0.4rem 0;
+  }
+  .legal a:not(.d-btn) {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  /* Radio pills on light backgrounds (the /audit form) */
+  .b-choice {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 2px solid var(--d-ink);
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 160ms var(--d-ease), color 160ms var(--d-ease);
+  }
+  .b-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .b-choice:has(input:checked) {
+    background: var(--d-lime);
+    border-color: var(--d-lime);
+    color: var(--d-on-lime);
+  }
+  .b-choice:has(input:focus-visible) {
+    outline: 3px solid var(--d-lime);
+    outline-offset: 3px;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .b-choice:hover {
+      border-color: var(--d-lime);
+    }
+  }
   .b-dial {
     -webkit-appearance: none;
     appearance: none;
