@@ -18,7 +18,6 @@ export function CalendlyD({
   onBooked,
   colours = D_COLOURS,
   icon,
-  prefill,
 }: {
   url?: string | undefined;
   notes?: string | undefined;
@@ -27,8 +26,6 @@ export function CalendlyD({
   colours?: Colours;
   /** Brand icon for the loading and booked states */
   icon?: ReactNode;
-  /** Fills Calendly's name and email fields */
-  prefill?: { name?: string; email?: string } | undefined;
 }) {
   const base = url || DEFAULT_URL;
   const booked = useRef(onBooked);
@@ -62,8 +59,6 @@ export function CalendlyD({
     primary_color: colours.primary,
   });
   if (notes) params.set("a1", notes.slice(0, 900));
-  if (prefill?.name) params.set("name", prefill.name);
-  if (prefill?.email) params.set("email", prefill.email);
   const src = `${base}?${params.toString()}`;
 
   if (confirmed) {

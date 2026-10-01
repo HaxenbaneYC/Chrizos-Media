@@ -105,7 +105,6 @@ export function ContactInquiryEmail({
   submittedAt,
 }: ContactInquiryEmailProps) {
   const displayName = display(name, 'New lead')
-  const isAudit = service === 'Free Ad Audit'
 
   return (
     <Html>
@@ -115,7 +114,7 @@ export function ContactInquiryEmail({
         <Container style={styles.container}>
           <Section style={styles.card}>
             <Text style={styles.eyebrow}>Chrizos Media</Text>
-            <Heading style={styles.heading}>{isAudit ? 'New audit request' : 'New work inquiry'}</Heading>
+            <Heading style={styles.heading}>New work inquiry</Heading>
 
             <Section style={styles.block}>
               <Text style={styles.label}>Name</Text>
@@ -159,8 +158,7 @@ export const template = {
   displayName: 'Contact inquiry',
   subject: (data) => {
     const name = typeof data['name'] === 'string' ? data['name'].trim() : ''
-    const kind = data['service'] === 'Free Ad Audit' ? 'Audit request' : 'New Chrizos Media inquiry'
-    return `${kind}${name ? `: ${name}` : ''}`
+    return `New Chrizos Media inquiry${name ? `: ${name}` : ''}`
   },
   previewData: {
     name: 'Example Client',

@@ -6,57 +6,36 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { CookieBanner } from "@/components/site-b/cookie-banner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-/** Full-screen Electric Blue message, shared by the 404 and error pages. */
-function BlueMessage({ kicker, title, children }: { kicker: string; title: ReactNode; children: ReactNode }) {
+function NotFoundComponent() {
   return (
-    <div className="d-root b-theme flex min-h-[100svh] flex-col bg-[#1700FF] px-6 py-8 text-white lg:px-12">
-      <div className="d-wrap w-full">
-        <a href="/" className="inline-flex min-h-11 items-center" aria-label="Chrizos Media home">
-          <img src="/b/logo-white.svg" alt="Chrizos Media" width={952} height={386} className="h-auto w-[104px]" />
-        </a>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-7xl font-bold text-foreground">404</h1>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div className="mt-6">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Go home
+          </Link>
+        </div>
       </div>
-      <main className="d-wrap flex w-full flex-1 flex-col justify-center py-16">
-        <p className="text-sm font-semibold uppercase tracking-[0.14em]">{kicker}</p>
-        <h1 className="d-display mt-4 text-[clamp(3rem,10vw,7.5rem)] uppercase leading-[0.95]">{title}</h1>
-        {children}
-      </main>
     </div>
   );
 }
 
-function NotFoundComponent() {
-  return (
-    <BlueMessage
-      kicker="Error 404 · Page not found"
-      title={
-        <>
-          This page
-          <br />
-          <span className="bg-white px-[0.1em] text-[#052662]">scrolled past.</span>
-        </>
-      }
-    >
-      <p className="mt-8 max-w-xl text-lg">The link may be old or mistyped. Here’s where most people are headed:</p>
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link to="/" className="d-btn min-h-12 bg-white px-6 text-base text-[#1700FF]">
-          Go to the homepage
-        </Link>
-        <a href="/audit" className="d-btn min-h-12 border-2 border-white px-6 text-base text-white">
-          Book a free ad audit
-        </a>
-      </div>
-    </BlueMessage>
-  );
-}
-
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -64,24 +43,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <BlueMessage kicker="Something went wrong" title="This page didn’t load.">
-      <p className="mt-8 max-w-xl text-lg">It’s on our side, not yours. Try again, or head back to the homepage.</p>
-      <div className="mt-8 flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={() => {
-            router.invalidate();
-            reset();
-          }}
-          className="d-btn min-h-12 bg-white px-6 text-base text-[#1700FF]"
-        >
-          Try again
-        </button>
-        <a href="/" className="d-btn min-h-12 border-2 border-white px-6 text-base text-white">
-          Go to the homepage
-        </a>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-xl font-semibold text-foreground">
+          This page didn't load
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Something went wrong on our end. You can try refreshing or head back home.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <button
+            onClick={() => {
+              router.invalidate();
+            }}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Try again
+          </button>
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            Go home
+          </a>
+        </div>
       </div>
-    </BlueMessage>
+    </div>
   );
 }
 
@@ -147,7 +134,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <CookieBanner />
     </QueryClientProvider>
   );
 }
